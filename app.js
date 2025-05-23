@@ -21,14 +21,27 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     emailjs.send('service_mk372rb', 'template_u3yoceu', templateParams)
         .then(function(response) {
             console.log('Correo enviado con éxito', response.status, response.text);
-            alert('Gracias por tu mensaje, ' + name + '! Nos pondremos en contacto contigo pronto.');
+            alert('Gracias por tu mensaje, ' + name + '! Me pondré en contacto contigo pronto.');
         }, function(error) {
             console.log('Error al enviar el correo', error);
             alert('Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.');
         });
 
-    // Opcional: Restablecer el formulario
+    // Restablecer el formulario después de enviar
     document.getElementById('contactForm').reset();
 });
 
+/* Animación en scroll: revelar secciones cuando entran en vista */
+const sections = document.querySelectorAll('.content-section');
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+            obs.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
 
+sections.forEach(section => {
+    observer.observe(section);
+});
