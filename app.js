@@ -1,37 +1,34 @@
 // Inicializa EmailJS
 (function() {
-    emailjs.init("3oVMR1BE5pKK-Hr7i"); // Reemplaza TU_USER_ID con tu User ID de EmailJS
+    emailjs.init("3oVMR1BE5pKK-Hr7i"); // Reemplaza con tu ID real si cambia
 })();
 
+// Manejador del formulario de contacto
 document.getElementById('contactForm').addEventListener('submit', function(event) {
     event.preventDefault();
-
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
-    // Parámetros para enviar el correo
     const templateParams = {
         from_name: name,
         from_email: email,
         message: message
     };
 
-    // Enviar el correo usando EmailJS
     emailjs.send('service_mk372rb', 'template_u3yoceu', templateParams)
         .then(function(response) {
             console.log('Correo enviado con éxito', response.status, response.text);
             alert('Gracias por tu mensaje, ' + name + '! Me pondré en contacto contigo pronto.');
         }, function(error) {
-            console.log('Error al enviar el correo', error);
+            console.error('Error al enviar el correo', error);
             alert('Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.');
         });
 
-    // Restablecer el formulario después de enviar
     document.getElementById('contactForm').reset();
 });
 
-/* Animación en scroll: revelar secciones cuando entran en vista */
+// Revelar secciones al hacer scroll
 const sections = document.querySelectorAll('.content-section');
 const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
@@ -41,7 +38,54 @@ const observer = new IntersectionObserver((entries, obs) => {
         }
     });
 }, { threshold: 0.1 });
+sections.forEach(section => observer.observe(section));
 
-sections.forEach(section => {
-    observer.observe(section);
-});
+// === Animación de burbujas en canvas ===
+const canvas = document.getElementById('bubbles');
+const ctx = canvas.getContext('2d');
+let bubbles = [];
+const maxBubbles = 30;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class Bubble {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * 200;
+        this.radius = Math.random() * 6 + 4;
+        this.speed = Math.random() * 1 + 0.5;
+        this.alpha = Math.random() * 0.4 + 0.1;
+    }
+    update() {
+        this.y -= this.speed;
+        if (this.y < -this.radius) this.reset();
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 204, 153, ${this.alpha})`;
+        ctx.fill();
+    }
+}
+
+for (let i = 0; i < maxBubbles; i++) {
+    bubbles.push(new Bubble());
+}
+
+function animateBubbles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let bubble of bubbles) {
+        bubble.update();
+        bubble.draw();
+    }
+    requestAnimationFrame(animateBubbles);
+}
+animateBubbles();
