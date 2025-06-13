@@ -1,7 +1,7 @@
 // Inicializa EmailJS
 (function() {
     if (window.emailjs) {
-        emailjs.init("3oVMR1BE5pKK-Hr7i"); // Reemplaza con tu ID real si cambia
+        emailjs.init("lowkfjPI5RGmYIDmM"); // Reemplaza con tu ID real si cambia
     } else {
         console.warn('EmailJS library not loaded');
     }
