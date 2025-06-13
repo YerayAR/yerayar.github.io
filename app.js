@@ -1,6 +1,10 @@
 // Inicializa EmailJS
 (function() {
-    emailjs.init("3oVMR1BE5pKK-Hr7i"); // Reemplaza con tu ID real si cambia
+    if (window.emailjs) {
+        emailjs.init("3oVMR1BE5pKK-Hr7i"); // Reemplaza con tu ID real si cambia
+    } else {
+        console.warn('EmailJS library not loaded');
+    }
 })();
 
 // Manejador del formulario de contacto
