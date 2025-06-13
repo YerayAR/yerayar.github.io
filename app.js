@@ -93,3 +93,14 @@ function animateBubbles() {
     requestAnimationFrame(animateBubbles);
 }
 animateBubbles();
+
+// === Contador de visitas local ===
+document.addEventListener('DOMContentLoaded', () => {
+    const counter = document.getElementById('visitCount');
+    if (counter) {
+        let visits = parseInt(localStorage.getItem('visitCount') || '0', 10);
+        visits += 1;
+        localStorage.setItem('visitCount', visits);
+        counter.textContent = visits;
+    }
+});
