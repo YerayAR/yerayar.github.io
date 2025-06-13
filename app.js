@@ -1,25 +1,35 @@
-document.getElementById('contactForm').addEventListener('submit', async function(event) {
+// Inicializa EmailJS
+(function() {
+    if (window.emailjs) {
+        emailjs.init("3oVMR1BE5pKK-Hr7i"); // Reemplaza con tu ID real si cambia
+    } else {
+        console.warn('EmailJS library not loaded');
+    }
+})();
+
+// Manejador del formulario de contacto
+document.getElementById('contactForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
-    try {
-        const res = await fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, message })
-        });
-        if (res.ok) {
+    const templateParams = {
+        from_name: name,
+        from_email: email,
+        message: message
+    };
+
+    emailjs.send('service_mk372rb', 'template_u3yoceu', templateParams)
+        .then(function(response) {
+            console.log('Correo enviado con éxito', response.status, response.text);
             alert('Gracias por tu mensaje, ' + name + '! Me pondré en contacto contigo pronto.');
-            document.getElementById('contactForm').reset();
-        } else {
+        }, function(error) {
+            console.error('Error al enviar el correo', error);
             alert('Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.');
-        }
-    } catch (err) {
-        console.error('Error al enviar el mensaje', err);
-        alert('Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.');
-    }
+        });
+
+    document.getElementById('contactForm').reset();
 });
 
 // Revelar secciones al hacer scroll
