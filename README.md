@@ -16,7 +16,7 @@ Soy una persona **proactiva y organizada**, con una gran capacidad de aprendizaj
 ## 🚀 **Portfolio & Contacto**  
 📌 **Portafolio:** [Visítalo aquí](https://yerayar.github.io)  
 💼 **LinkedIn:** [Perfil Profesional](https://www.linkedin.com/in/yeray-alonso-reyes-ii/)  
-🐙 **GitHub:** [Mis Proyectos]([https://yerayar.github.io/#projects](https://github.com/YerayAR))  
+🐙 **GitHub:** [Mis Proyectos](https://github.com/YerayAR)
 
 ---
 
