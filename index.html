@@ -10,20 +10,26 @@
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <script defer src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
   <header>
     <div class="dev-banner">Sitio en desarrollo</div>
-    <nav>
+    <button id="menu-toggle" aria-label="Abrir menú" class="menu-toggle">
+      <i class="bi bi-list"></i>
+    </button>
+    <nav id="main-nav" class="hidden">
       <ul>
         <li><a href="#about">Sobre Mí</a></li>
         <li><a href="#experience">Experiencia</a></li>
         <li><a href="#technologies">Tecnologías</a></li>
         <li><a href="#services">Servicios</a></li>
         <li><a href="#projects">Proyectos</a></li>
+        <li><a href="#stats">Estadísticas</a></li>
+        <li><a href="#testimonials">Testimonios</a></li>
         <li><a href="#contact">Contacto</a></li>
       </ul>
     </nav>
@@ -39,8 +45,8 @@
       <div class="icon-container animate__animated animate__pulse animate__infinite">
         <div class="atom"></div>
       </div>
-      <h1 class="animate__animated animate__fadeInDown">Hola, soy Yeray</h1>
-      <p class="animate__animated animate__fadeInDown animate__delay-1s">Ingeniero Informático enfocado en automatización, desarrollo web y análisis de datos.</p>
+      <h1 class="animate__animated animate__fadeInDown">¡Hola! Soy Yeray</h1>
+      <p class="animate__animated animate__fadeInDown animate__delay-1s">Me dedico a automatizar procesos y crear soluciones web basadas en datos.</p>
     </div>
   </section>
 
@@ -78,18 +84,18 @@
     <h2>Tecnologías y Herramientas</h2>
     <p>Estas son algunas de las tecnologías y herramientas con las que he trabajado:</p>
     <div class="tech-list">
-      <span class="tech-item">HTML5</span>
-      <span class="tech-item">CSS3</span>
-      <span class="tech-item">JavaScript (ES6+)</span>
-      <span class="tech-item">Python</span>
-      <span class="tech-item">Java</span>
-      <span class="tech-item">React</span>
-      <span class="tech-item">Docker</span>
-      <span class="tech-item">Git</span>
-      <span class="tech-item">Firebase</span>
-      <span class="tech-item">SQL</span>
-      <span class="tech-item">Sage</span>
-      <span class="tech-item">Power BI</span>
+      <span class="tech-item">🔵 HTML5</span>
+      <span class="tech-item">🎨 CSS3</span>
+      <span class="tech-item">✨ JavaScript (ES6+)</span>
+      <span class="tech-item">🐍 Python</span>
+      <span class="tech-item">☕ Java</span>
+      <span class="tech-item">⚛️ React</span>
+      <span class="tech-item">🐳 Docker</span>
+      <span class="tech-item">🔧 Git</span>
+      <span class="tech-item">🔥 Firebase</span>
+      <span class="tech-item">🗄️ SQL</span>
+      <span class="tech-item">📊 Sage</span>
+      <span class="tech-item">📈 Power BI</span>
     </div>
   </section>
 
@@ -139,7 +145,41 @@
 
   <div class="neon-separator"></div>
 
-  <section id="contact" class="content-section contact-section" style="width: 60%; max-width: none;">  
+  <section id="stats" class="content-section" style="width: 70%; max-width: none;">
+    <h2>Estadísticas</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-number">10+</span>
+        <p>Proyectos completados</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">5</span>
+        <p>Años de experiencia</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">100%</span>
+        <p>Clientes satisfechos</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-separator"></div>
+
+  <section id="testimonials" class="content-section" style="width: 70%; max-width: none;">
+    <h2>Testimonios</h2>
+    <div class="testimonial-item">
+      <p>"Yeray automatizó nuestros procesos y ahora ahorramos horas de trabajo cada semana."</p>
+      <p><strong>- Cliente satisfecho</strong></p>
+    </div>
+    <div class="testimonial-item">
+      <p>"Excelente capacidad para analizar datos y presentarlos de forma clara y útil."</p>
+      <p><strong>- Socio tecnológico</strong></p>
+    </div>
+  </section>
+
+  <div class="neon-separator"></div>
+
+  <section id="contact" class="content-section contact-section" style="width: 60%; max-width: none;">
     <h2>Contacto</h2>
     <form id="contactForm">
       <label for="name">Nombre:</label>

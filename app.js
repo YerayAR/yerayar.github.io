@@ -103,4 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('visitCount', visits);
         counter.textContent = visits;
     }
+
+    const menuBtn = document.getElementById('menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    if (menuBtn && mainNav) {
+        menuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mainNav.classList.toggle('hidden');
+        });
+    }
 });
