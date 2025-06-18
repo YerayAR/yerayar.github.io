@@ -103,4 +103,27 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('visitCount', visits);
         counter.textContent = visits;
     }
+
+    const menuBtn = document.getElementById('menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    if (menuBtn && mainNav) {
+        menuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mainNav.classList.toggle('hidden');
+        });
+        if (window.innerWidth > 768) {
+            mainNav.classList.remove('hidden');
+        }
+    }
+
+    const devBanner = document.querySelector('.dev-banner');
+    const introSection = document.getElementById('intro');
+    const header = document.querySelector('header');
+    if (devBanner && introSection && header) {
+        devBanner.addEventListener('click', () => {
+            const offset = header.offsetHeight;
+            const targetPos = introSection.offsetTop - offset;
+            window.scrollTo({ top: targetPos, behavior: 'smooth' });
+        });
+    }
 });
