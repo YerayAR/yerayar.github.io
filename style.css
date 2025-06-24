@@ -290,6 +290,11 @@ footer {
   fill: var(--accent-color);
 }
 
+.footer-logo {
+  width: 40px;
+  height: auto;
+}
+
 .footer-center {
   text-align: center;
   flex: 1 0 auto;
