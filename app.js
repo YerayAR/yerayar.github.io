@@ -94,6 +94,38 @@ function animateBubbles() {
 }
 animateBubbles();
 
+async function fetchRepos() {
+    const username = 'YerayAR';
+    const container = document.getElementById('repo-list');
+    if (!container) return;
+    try {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+        if (!res.ok) throw new Error('request failed');
+        const repos = await res.json();
+        for (const repo of repos) {
+            let desc = repo.description || '';
+            try {
+                const readmeRes = await fetch(`https://api.github.com/repos/${username}/${repo.name}/readme`, {
+                    headers: { 'Accept': 'application/vnd.github.v3.raw' }
+                });
+                if (readmeRes.ok) {
+                    const text = await readmeRes.text();
+                    const first = text.split('\n')[0];
+                    if (first) desc = first;
+                }
+            } catch (e) {
+                console.error(e);
+            }
+            const div = document.createElement('div');
+            div.className = 'repo-item';
+            div.innerHTML = `<h3><a href="${repo.html_url}" target="_blank" rel="noopener">${repo.name}</a></h3><p>${desc}</p>`;
+            container.appendChild(div);
+        }
+    } catch (e) {
+        container.textContent = 'No se pudieron cargar los repositorios.';
+    }
+}
+
 // === Contador de visitas local ===
 document.addEventListener('DOMContentLoaded', () => {
     const counter = document.getElementById('visitCount');
@@ -112,4 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.classList.toggle('hidden');
         });
     }
+
+    fetchRepos();
 });

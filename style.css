@@ -453,3 +453,30 @@ footer {
   display: block;
   font-family: var(--font-headings);
 }
+
+/* === Repositorios de GitHub === */
+#repo-list {
+  margin-top: 1rem;
+}
+
+.repo-item {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.repo-item h3 {
+  margin: 0 0 0.5rem;
+  color: var(--accent-color);
+}
+
+.repo-item a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.repo-item a:hover {
+  text-decoration: underline;
+}
