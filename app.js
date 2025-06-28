@@ -1,6 +1,37 @@
-// Inicializar EmailJS cuando el DOM esté listo
+/* ====================================================================
+   PORTAFOLIO PERSONAL - ARCHIVO JAVASCRIPT PRINCIPAL
+   ====================================================================
+   
+   DESCRIPCIÓN:
+   Script principal para el portafolio personal que maneja:
+   - Funcionalidad de contacto con EmailJS
+   - Animaciones de burbujas con Canvas API
+   - Navegación responsive con menú hamburguesa
+   - Carga dinámica de repositorios de GitHub
+   - Contador de visitas local
+   - Efectos de scroll y animaciones de entrada
+   
+   TECNOLOGÍAS UTILIZADAS:
+   - JavaScript ES6+ (vanilla)
+   - EmailJS para envío de correos
+   - Canvas API para animaciones
+   - Intersection Observer API para scroll
+   - GitHub API para repositorios
+   - LocalStorage para persistencia
+   
+   AUTOR: Yeray Alonso Reyes
+   FECHA: 2024-2025
+   VERSIÓN: 2.0
+   ==================================================================== */
+
+/* ====================================
+   INICIALIZACIÓN DE EMAILJS
+   ====================================
+   Configura EmailJS para el formulario de contacto
+   usando la versión 4 de la biblioteca
+*/
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar EmailJS v4
+    // Inicializar EmailJS v4 con clave pública
     if (typeof emailjs !== 'undefined') {
         emailjs.init({
             publicKey: "lowkfjPI5RGmYIDmM",
@@ -10,28 +41,35 @@ document.addEventListener('DOMContentLoaded', function() {
         console.warn('EmailJS library not loaded');
     }
 
-    // Manejador del formulario de contacto
+    /* ====================================
+       MANEJADOR DEL FORMULARIO DE CONTACTO
+       ====================================
+       Procesa el envío del formulario usando EmailJS v4
+       con validación y feedback al usuario
+    */
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevenir envío tradicional del formulario
             
+            // Obtener datos del formulario
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
 
+            // Preparar parámetros para la plantilla de EmailJS
             const templateParams = {
                 from_name: name,
                 from_email: email,
                 message: message
             };
 
-            // Usar la nueva sintaxis de EmailJS v4
+            // Enviar correo usando EmailJS v4 API
             emailjs.send('service_mk372rb', 'template_u3yoceu', templateParams)
                 .then(function(response) {
                     console.log('Correo enviado con éxito', response.status, response.text);
                     alert('Gracias por tu mensaje, ' + name + '! Me pondré en contacto contigo pronto.');
-                    contactForm.reset();
+                    contactForm.reset(); // Limpiar formulario
                 })
                 .catch(function(error) {
                     console.error('Error al enviar el correo', error);
@@ -41,16 +79,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Revelar secciones al hacer scroll
+/* ====================================
+   ANIMACIONES DE SCROLL CON INTERSECTION OBSERVER
+   ====================================
+   Detecta cuando las secciones entran en el viewport
+   y aplica animaciones de entrada usando Animate.css
+*/
 const sections = document.querySelectorAll('.content-section');
 const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            // Añadir animación de entrada cuando la sección es visible
             entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-            obs.unobserve(entry.target);
+            obs.unobserve(entry.target); // Dejar de observar una vez animado
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.1 }); // Activar cuando el 10% de la sección es visible
 sections.forEach(section => observer.observe(section));
 
 // === Animación de burbujas en canvas principal (intro) ===
