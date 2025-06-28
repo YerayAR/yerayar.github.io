@@ -17,10 +17,8 @@
 ## 🎯 **OBJETIVO Y PROPÓSITO**
 
 Este proyecto es un **portafolio web personal** diseñado para mostrar mis habilidades como **Ingeniero Informático** especializado en:
-- **Automatización con Python**
 - **Desarrollo Web Frontend/Backend**
-- **Análisis de datos**
-- **Aplicaciones móviles**
+
 
 El sitio sirve como **tarjeta de presentación digital** para potenciales empleadores, clientes y colaboradores.
 
