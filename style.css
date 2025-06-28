@@ -271,17 +271,392 @@ nav ul li a:hover {
   transform: translateY(-10px);
 }
 
+/* Separadores con efecto de columna jónica */
 .neon-separator {
-  height: 4px;
+  position: relative;
+  height: 60px;
   width: 100%;
-  background: linear-gradient(to right, #ff00ff, #00ccff, #ff00ff);
-  animation: neon-separator 3s linear infinite;
-  box-shadow: 0 0 20px #00ccff;
+  margin: 2rem 0;
+  overflow: hidden;
 }
 
-@keyframes neon-separator {
-  0% { background-position: 0% }
-  100% { background-position: 100% }
+.neon-separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #ff00ff, #00ccff, #ff00ff);
+  background-size: 200% 100%;
+  animation: neon-flow 3s linear infinite;
+  box-shadow: 0 0 20px #00ccff;
+  border-radius: 2px;
+  transform: translateY(-50%);
+}
+
+/* === Bombillas neón con forma real === */
+
+/* Bombilla superior izquierda */
+.neon-separator::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 8%;
+  width: 20px;
+  height: 25px;
+  background: radial-gradient(ellipse, #ffffff 20%, var(--accent-color) 50%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 
+    0 0 8px #ffffff,
+    0 0 15px var(--accent-color),
+    0 0 25px var(--accent-color),
+    0 0 30px var(--accent-color);
+  animation: super-neon-bulb 1.5s ease-in-out infinite alternate;
+  z-index: 15;
+}
+
+/* Separador con bombilla invertida (derecha) */
+.neon-separator.reverse::after {
+  left: auto;
+  right: 8%;
+}
+
+/* Bombilla inferior derecha */
+.neon-separator .bottom-spiral {
+  position: absolute;
+  bottom: 5px;
+  right: 8%;
+  width: 20px;
+  height: 25px;
+  background: radial-gradient(ellipse, #ffffff 20%, #ff1aff 50%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 
+    0 0 8px #ffffff,
+    0 0 15px #ff1aff,
+    0 0 25px #ff1aff,
+    0 0 30px #ff1aff;
+  animation: super-neon-bulb-pink 1.7s ease-in-out infinite alternate;
+  z-index: 15;
+  border: none;
+}
+
+.neon-separator.reverse .bottom-spiral {
+  right: auto;
+  left: 8%;
+}
+
+/* === Cables neón conectores flexibles === */
+
+/* Contenedor SVG para cables curvos */
+.neon-separator svg.cable-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Estilos para los paths de cables curvos */
+.cable-path {
+  fill: none;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px currentColor);
+  animation: cable-wave 4s ease-in-out infinite;
+}
+
+.cable-path.cable-top {
+  stroke: var(--accent-color);
+  animation: cable-wave-top 3s ease-in-out infinite;
+}
+
+.cable-path.cable-bottom {
+  stroke: #ff1aff;
+  animation: cable-wave-bottom 3.5s ease-in-out infinite;
+}
+
+.cable-path.cable-vertical {
+  stroke: #00ccff;
+  animation: cable-wave-vertical 4s ease-in-out infinite;
+}
+
+/* Contenedor de cables flexibles */
+.flexible-cables {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+/* Cable curvo superior */
+.cable-curve-top {
+  position: absolute;
+  top: 10px;
+  left: calc(8% + 20px);
+  right: calc(8% + 20px);
+  height: 20px;
+  background: none;
+  z-index: 5;
+}
+
+/* Cable curvo inferior */
+.cable-curve-bottom {
+  position: absolute;
+  bottom: 10px;
+  left: calc(8% + 20px);
+  right: calc(8% + 20px);
+  height: 20px;
+  background: none;
+  z-index: 5;
+}
+
+/* Cables verticales curvos */
+.cable-curve-left {
+  position: absolute;
+  left: calc(8% + 10px);
+  top: 10px;
+  bottom: 10px;
+  width: 20px;
+  background: none;
+  z-index: 5;
+}
+
+.cable-curve-right {
+  position: absolute;
+  right: calc(8% + 10px);
+  top: 10px;
+  bottom: 10px;
+  width: 20px;
+  background: none;
+  z-index: 5;
+}
+
+/* === Ajustes para secciones medianas (70%) === */
+.section-70 + .neon-separator::after,
+.section-70 ~ .neon-separator::after {
+  left: 12%;
+}
+
+.section-70 + .neon-separator::before,
+.section-70 ~ .neon-separator::before {
+  left: calc(12% + 6px);
+}
+
+.section-70 + .neon-separator.reverse::after,
+.section-70 ~ .neon-separator.reverse::after {
+  right: 12%;
+}
+
+.section-70 + .neon-separator.reverse::before,
+.section-70 ~ .neon-separator.reverse::before {
+  right: calc(12% + 6px);
+}
+
+.section-70 + .neon-separator .bottom-spiral,
+.section-70 ~ .neon-separator .bottom-spiral {
+  right: 12%;
+}
+
+.section-70 + .neon-separator.reverse .bottom-spiral,
+.section-70 ~ .neon-separator.reverse .bottom-spiral {
+  left: 12%;
+}
+
+/* Cables para secciones 70% */
+.section-70 + .neon-separator .cable-left,
+.section-70 ~ .neon-separator .cable-left {
+  left: calc(12% + 10px);
+}
+
+.section-70 + .neon-separator .cable-right,
+.section-70 ~ .neon-separator .cable-right {
+  right: calc(12% + 10px);
+}
+
+.section-70 + .neon-separator .cable-top,
+.section-70 ~ .neon-separator .cable-top {
+  left: calc(12% + 20px);
+  right: calc(12% + 20px);
+}
+
+.section-70 + .neon-separator .cable-bottom,
+.section-70 ~ .neon-separator .cable-bottom {
+  left: calc(12% + 20px);
+  right: calc(12% + 20px);
+}
+
+/* === Ajustes para secciones pequeñas (60%) === */
+.section-60 + .neon-separator::after,
+.section-60 ~ .neon-separator::after {
+  left: 16%;
+}
+
+.section-60 + .neon-separator::before,
+.section-60 ~ .neon-separator::before {
+  left: calc(16% + 6px);
+}
+
+.section-60 + .neon-separator.reverse::after,
+.section-60 ~ .neon-separator.reverse::after {
+  right: 16%;
+}
+
+.section-60 + .neon-separator.reverse::before,
+.section-60 ~ .neon-separator.reverse::before {
+  right: calc(16% + 6px);
+}
+
+.section-60 + .neon-separator .bottom-spiral,
+.section-60 ~ .neon-separator .bottom-spiral {
+  right: 16%;
+}
+
+.section-60 + .neon-separator.reverse .bottom-spiral,
+.section-60 ~ .neon-separator.reverse .bottom-spiral {
+  left: 16%;
+}
+
+/* Cables para secciones 60% */
+.section-60 + .neon-separator .cable-left,
+.section-60 ~ .neon-separator .cable-left {
+  left: calc(16% + 10px);
+}
+
+.section-60 + .neon-separator .cable-right,
+.section-60 ~ .neon-separator .cable-right {
+  right: calc(16% + 10px);
+}
+
+.section-60 + .neon-separator .cable-top,
+.section-60 ~ .neon-separator .cable-top {
+  left: calc(16% + 20px);
+  right: calc(16% + 20px);
+}
+
+.section-60 + .neon-separator .cable-bottom,
+.section-60 ~ .neon-separator .cable-bottom {
+  left: calc(16% + 20px);
+  right: calc(16% + 20px);
+}
+
+/* === Ajustes para secciones muy pequeñas (40%) === */
+.section-40 + .neon-separator::after,
+.section-40 ~ .neon-separator::after {
+  left: 20%;
+}
+
+.section-40 + .neon-separator::before,
+.section-40 ~ .neon-separator::before {
+  left: calc(20% + 6px);
+}
+
+.section-40 + .neon-separator.reverse::after,
+.section-40 ~ .neon-separator.reverse::after {
+  right: 20%;
+}
+
+.section-40 + .neon-separator.reverse::before,
+.section-40 ~ .neon-separator.reverse::before {
+  right: calc(20% + 6px);
+}
+
+.section-40 + .neon-separator .bottom-spiral,
+.section-40 ~ .neon-separator .bottom-spiral {
+  right: 20%;
+}
+
+.section-40 + .neon-separator.reverse .bottom-spiral,
+.section-40 ~ .neon-separator.reverse .bottom-spiral {
+  left: 20%;
+}
+
+/* Cables para secciones 40% */
+.section-40 + .neon-separator .cable-left,
+.section-40 ~ .neon-separator .cable-left {
+  left: calc(20% + 10px);
+}
+
+.section-40 + .neon-separator .cable-right,
+.section-40 ~ .neon-separator .cable-right {
+  right: calc(20% + 10px);
+}
+
+.section-40 + .neon-separator .cable-top,
+.section-40 ~ .neon-separator .cable-top {
+  left: calc(20% + 20px);
+  right: calc(20% + 20px);
+}
+
+.section-40 + .neon-separator .cable-bottom,
+.section-40 ~ .neon-separator .cable-bottom {
+  left: calc(20% + 20px);
+  right: calc(20% + 20px);
+}
+
+/* Decoraciones adicionales de columna */
+.neon-separator .column-detail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #00ccff, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ccff;
+  animation: pulse-detail 1.5s ease-in-out infinite;
+}
+
+.neon-separator .column-detail:nth-child(3) {
+  left: 30%;
+  animation-delay: 0.5s;
+}
+
+.neon-separator .column-detail:nth-child(4) {
+  left: 70%;
+  animation-delay: 1s;
+}
+
+@keyframes neon-flow {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spiral-glow {
+  0% {
+    box-shadow: 0 0 15px var(--accent-color);
+    border-color: var(--accent-color);
+  }
+  100% {
+    box-shadow: 0 0 25px var(--accent-color), 0 0 35px var(--accent-color);
+    border-color: #00ccff;
+  }
+}
+
+@keyframes spiral-glow-pink {
+  0% {
+    box-shadow: 0 0 15px #ff1aff;
+    border-color: #ff1aff;
+  }
+  100% {
+    box-shadow: 0 0 25px #ff1aff, 0 0 35px #ff1aff;
+    border-color: #ff6bcb;
+  }
+}
+
+@keyframes pulse-detail {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
 }
 
 h2 {
@@ -363,12 +738,16 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 #contactForm label {
   font-weight: bold;
   color: var(--accent-color);
   text-shadow: 0 0 5px var(--accent-color);
+  text-align: left;
 }
 
 #contactForm input,
@@ -380,6 +759,7 @@ h2 {
   width: 100%;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
+  box-sizing: border-box;
 }
 
 #contactForm input:focus,
@@ -665,6 +1045,200 @@ footer {
 @keyframes counter-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(-360deg); }
+}
+
+@keyframes super-neon-bulb {
+  0% {
+    box-shadow: 
+      0 0 5px #ffffff,
+      0 0 10px var(--accent-color),
+      0 0 15px var(--accent-color),
+      0 0 20px var(--accent-color),
+      0 0 25px var(--accent-color);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 
+      0 0 8px #ffffff,
+      0 0 15px var(--accent-color),
+      0 0 25px var(--accent-color),
+      0 0 30px var(--accent-color),
+      0 0 35px var(--accent-color),
+      0 0 40px var(--accent-color);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes super-neon-bulb-pink {
+  0% {
+    box-shadow: 
+      0 0 5px #ffffff,
+      0 0 10px #ff1aff,
+      0 0 15px #ff1aff,
+      0 0 20px #ff1aff,
+      0 0 25px #ff1aff,
+      0 0 30px #ff1aff;
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 
+      0 0 8px #ffffff,
+      0 0 15px #ff1aff,
+      0 0 25px #ff1aff,
+      0 0 30px #ff1aff,
+      0 0 35px #ff1aff,
+      0 0 40px #ff1aff;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes cable-flow {
+  0% {
+    background-position: 0% 0%;
+    box-shadow: 0 0 5px var(--accent-color);
+  }
+  50% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 8px var(--accent-color), 0 0 15px var(--accent-color);
+  }
+  100% {
+    background-position: 0% 100%;
+    box-shadow: 0 0 5px var(--accent-color);
+  }
+}
+
+@keyframes cable-flow-reverse {
+  0% {
+    background-position: 0% 100%;
+    box-shadow: 0 0 5px #ff1aff;
+  }
+  50% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 8px #ff1aff, 0 0 15px #ff1aff;
+  }
+  100% {
+    background-position: 0% 0%;
+    box-shadow: 0 0 5px #ff1aff;
+  }
+}
+
+@keyframes cable-pulse {
+  0%, 100% {
+    opacity: 0.7;
+    box-shadow: 0 0 5px var(--accent-color);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+  }
+}
+
+@keyframes cable-pulse-pink {
+  0%, 100% {
+    opacity: 0.7;
+    box-shadow: 0 0 5px #ff1aff;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 10px #ff1aff, 0 0 20px #ff1aff;
+  }
+}
+
+/* === Animaciones de cables curvos flexibles === */
+@keyframes cable-wave {
+  0%, 100% {
+    stroke-dasharray: 5, 5;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 10, 5;
+    stroke-dashoffset: -15;
+  }
+}
+
+@keyframes cable-wave-top {
+  0% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  33% {
+    stroke-dashoffset: -10;
+    filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 15px currentColor);
+  }
+  66% {
+    stroke-dashoffset: -20;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    stroke-dashoffset: -30;
+    filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 12px currentColor);
+  }
+}
+
+@keyframes cable-wave-bottom {
+  0% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  25% {
+    stroke-dashoffset: 5;
+    filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 15px currentColor);
+  }
+  50% {
+    stroke-dashoffset: 10;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  75% {
+    stroke-dashoffset: 15;
+    filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 18px currentColor);
+  }
+  100% {
+    stroke-dashoffset: 20;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+}
+
+@keyframes cable-wave-vertical {
+  0% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  20% {
+    stroke-dashoffset: -8;
+    filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 20px currentColor);
+  }
+  40% {
+    stroke-dashoffset: -16;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  60% {
+    stroke-dashoffset: -24;
+    filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 15px currentColor);
+  }
+  80% {
+    stroke-dashoffset: -32;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    stroke-dashoffset: -40;
+    filter: drop-shadow(0 0 12px currentColor) drop-shadow(0 0 25px currentColor);
+  }
+}
+
+/* Animación que responde al scroll */
+@keyframes cable-wave-scroll {
+  0% {
+    stroke-dasharray: 5, 10;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 10, 5;
+    stroke-dashoffset: -25;
+  }
+  100% {
+    stroke-dasharray: 5, 10;
+    stroke-dashoffset: -50;
+  }
 }
 
 /* === Navegación responsiva === */
