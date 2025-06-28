@@ -44,55 +44,152 @@ const observer = new IntersectionObserver((entries, obs) => {
 }, { threshold: 0.1 });
 sections.forEach(section => observer.observe(section));
 
-// === Animación de burbujas en canvas ===
+// === Animación de burbujas en canvas principal (intro) ===
 const canvas = document.getElementById('bubbles');
-const ctx = canvas.getContext('2d');
-let bubbles = [];
-const maxBubbles = 30;
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let introBubbles = [];
+    const maxIntroBubbles = 15; // Más burbujas para el intro
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Usar la misma clase SectionBubble para consistencia
+    class IntroBubble {
+        constructor(canvas) {
+            this.canvas = canvas;
+            this.ctx = canvas.getContext('2d');
+            this.reset();
+        }
+        
+        reset() {
+            this.x = Math.random() * this.canvas.width;
+            this.y = this.canvas.height + Math.random() * 100;
+            this.radius = Math.random() * 5 + 3; // Ligeramente más grandes para el intro
+            this.speed = Math.random() * 1 + 0.4;
+            this.alpha = Math.random() * 0.4 + 0.1;
+            this.hue = Math.random() * 60 + 160; // Tonos azul-verde
+        }
+        
+        update() {
+            this.y -= this.speed;
+            this.x += Math.sin(this.y * 0.01) * 0.8; // Movimiento ondulante
+            if (this.y < -this.radius) this.reset();
+        }
+        
+        draw() {
+            this.ctx.beginPath();
+            this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            this.ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.alpha})`;
+            this.ctx.fill();
+            
+            // Efecto de brillo
+            this.ctx.beginPath();
+            this.ctx.arc(this.x, this.y, this.radius * 0.6, 0, Math.PI * 2);
+            this.ctx.fillStyle = `hsla(${this.hue}, 100%, 80%, ${this.alpha * 0.5})`;
+            this.ctx.fill();
+        }
+    }
+
+    // Crear burbujas para el intro
+    for (let i = 0; i < maxIntroBubbles; i++) {
+        introBubbles.push(new IntroBubble(canvas));
+    }
+
+    function animateIntroBubbles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let bubble of introBubbles) {
+            bubble.update();
+            bubble.draw();
+        }
+        requestAnimationFrame(animateIntroBubbles);
+    }
+    animateIntroBubbles();
 }
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
 
-class Bubble {
-    constructor() {
+// === Animación de burbujas en las secciones ===
+class SectionBubble {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
         this.reset();
     }
+    
     reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = canvas.height + Math.random() * 200;
-        this.radius = Math.random() * 6 + 4;
-        this.speed = Math.random() * 1 + 0.5;
-        this.alpha = Math.random() * 0.4 + 0.1;
+        this.x = Math.random() * this.canvas.width;
+        this.y = this.canvas.height + Math.random() * 100;
+        this.radius = Math.random() * 4 + 2;
+        this.speed = Math.random() * 0.8 + 0.3;
+        this.alpha = Math.random() * 0.3 + 0.1;
+        this.hue = Math.random() * 60 + 160; // Tonos azul-verde
     }
+    
     update() {
         this.y -= this.speed;
+        this.x += Math.sin(this.y * 0.01) * 0.5; // Movimiento ondulante
         if (this.y < -this.radius) this.reset();
     }
+    
     draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 204, 153, ${this.alpha})`;
-        ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        this.ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.alpha})`;
+        this.ctx.fill();
+        
+        // Efecto de brillo
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius * 0.6, 0, Math.PI * 2);
+        this.ctx.fillStyle = `hsla(${this.hue}, 100%, 80%, ${this.alpha * 0.5})`;
+        this.ctx.fill();
     }
 }
 
-for (let i = 0; i < maxBubbles; i++) {
-    bubbles.push(new Bubble());
+// Inicializar burbujas para cada sección
+function initSectionBubbles() {
+    const sectionCanvases = document.querySelectorAll('.section-bubbles');
+    
+    sectionCanvases.forEach(canvas => {
+        const section = canvas.parentElement;
+        const sectionBubbles = [];
+        const maxSectionBubbles = 8; // Menos burbujas para las secciones
+        
+        function resizeSectionCanvas() {
+            const rect = section.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            // Asegurar que el canvas mantenga la resolución correcta
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+        }
+        
+        window.addEventListener('resize', resizeSectionCanvas);
+        resizeSectionCanvas();
+        
+        // Crear burbujas para esta sección
+        for (let i = 0; i < maxSectionBubbles; i++) {
+            sectionBubbles.push(new SectionBubble(canvas));
+        }
+        
+        // Animar burbujas de esta sección
+        function animateSectionBubbles() {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let bubble of sectionBubbles) {
+                bubble.update();
+                bubble.draw();
+            }
+            
+            requestAnimationFrame(animateSectionBubbles);
+        }
+        
+        animateSectionBubbles();
+    });
 }
-
-function animateBubbles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let bubble of bubbles) {
-        bubble.update();
-        bubble.draw();
-    }
-    requestAnimationFrame(animateBubbles);
-}
-animateBubbles();
 
 async function fetchRepos() {
     const username = 'YerayAR';
@@ -136,14 +233,57 @@ document.addEventListener('DOMContentLoaded', () => {
         counter.textContent = visits;
     }
 
-    const menuBtn = document.getElementById('menu-toggle');
-    const mainNav = document.getElementById('main-nav');
-    if (menuBtn && mainNav) {
-        menuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            mainNav.classList.toggle('hidden');
+    // Toggle menu en móviles - Nuevo banner de navegación
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    
+        // Cerrar menú al hacer clic en un enlace
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+    
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    
+        // Smooth scroll para los enlaces de navegación con offset para mostrar títulos
+        const navLinksAll = document.querySelectorAll('.nav-link');
+        navLinksAll.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    // Calcular offset para compensar el header sticky
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const elementPosition = targetSection.offsetTop;
+                    const offsetPosition = elementPosition - headerHeight - 20; // 20px de margen extra
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     }
 
     fetchRepos();
+    
+    // Inicializar burbujas en las secciones
+    initSectionBubbles();
 });
