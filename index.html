@@ -18,19 +18,29 @@
 <body>
   <header>
     <div class="dev-banner">Sitio en desarrollo</div>
-    <button id="menu-toggle" aria-label="Abrir menú" class="menu-toggle">
-      <i class="bi bi-list"></i>
-    </button>
-    <nav id="main-nav" class="hidden">
-      <ul>
-        <li><a href="#about">Sobre Mí</a></li>
-        <li><a href="#experience">Experiencia</a></li>
-        <li><a href="#technologies">Tecnologías</a></li>
-        <li><a href="#services">Servicios</a></li>
-        <li><a href="#projects">Proyectos</a></li>
-        <li><a href="#stats">Estadísticas</a></li>
-        <li><a href="#contact">Contacto</a></li>
-      </ul>
+    <!-- Banner de navegación superior -->
+    <nav class="top-navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <img src="features/logo.png" alt="Logo Yeray" class="logo-img">
+          <span class="logo-text">Yeray AR</span>
+        </div>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#about" class="nav-link">Sobre Mí</a></li>
+          <li class="nav-item"><a href="#experience" class="nav-link">Experiencia</a></li>
+          <li class="nav-item"><a href="#technologies" class="nav-link">Tecnologías</a></li>
+          <li class="nav-item"><a href="#services" class="nav-link">Servicios</a></li>
+          <li class="nav-item"><a href="#projects" class="nav-link">Proyectos</a></li>
+          <li class="nav-item"><a href="#stats" class="nav-link">Estadísticas</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Contacto</a></li>
+          <li class="nav-item"><a href="#cv" class="nav-link">Descargar CV</a></li>
+        </ul>
+        <button id="menu-toggle" aria-label="Abrir menú" class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
     </nav>
   </header>
 
@@ -41,27 +51,40 @@
     </video>
     <canvas id="bubbles"></canvas>
     <div class="intro-content">
-      <div class="icon-container animate__animated animate__pulse animate__infinite">
-        <div class="atom"></div>
+      <div class="intro-layout">
+        <div class="intro-text">
+          <h1 class="animate__animated animate__fadeInLeft">¡Hola! Soy Yeray</h1>
+          <p class="animate__animated animate__fadeInLeft animate__delay-1s">Me dedico a automatizar procesos con Python y al desarrollo web.</p>
+        </div>
+        <div class="intro-avatar">
+          <div class="avatar-container">
+            <div class="atom">
+              <img src="features/profile.jpg" alt="Foto de Yeray" class="profile-photo">
+            </div>
+          </div>
+        </div>
       </div>
-      <h1 class="animate__animated animate__fadeInDown">¡Hola! Soy Yeray</h1>
-      <p class="animate__animated animate__fadeInDown animate__delay-1s">Me dedico a automatizar procesos con Python y al desarrollo web.</p>
     </div>
   </section>
 
   <div class="neon-separator"></div>
 
   <section id="about" class="content-section" style="width: 90%; max-width: none;">
+    <canvas class="section-bubbles"></canvas>
+    <div class="section-content">
     <h2>Sobre Mí</h2>
     <p>¡Hola! Soy Yeray Alonso Reyes, un Ingeniero Informático apasionado por la tecnología y la programación. He finalizado mi grado en Ingeniería Informática en la Universitat Oberta de Catalunya (UOC), donde me especialicé en el desarrollo de aplicaciones web y móviles. Durante mi formación trabajé con diversas tecnologías como HTML, CSS, JavaScript, React, Python y Docker.</p>
     <p>Actualmente me desarrollo profesionalmente en las áreas de automatización con Python, desarrollo web y análisis de datos, aplicando mis conocimientos para crear soluciones eficientes y basadas en datos.</p>
     <p>Me considero una persona adaptable y con gran capacidad de aprendizaje. He aprendido rápidamente a manejar nuevas tecnologías y frameworks, aplicando metodologías ágiles (Scrum, Kanban) en proyectos colaborativos. Gran parte de mi experiencia proviene de proyectos personales y académicos que me han permitido mejorar en trabajo en equipo, resolución de problemas y gestión de proyectos.</p>
     <p>Estoy entusiasmado por seguir creciendo como desarrollador y contribuir a proyectos innovadores que generen un impacto positivo. Busco activamente oportunidades para aplicar mis habilidades en entornos profesionales. ¡No dudes en contactarme si deseas saber más o colaborar en algún proyecto!</p>
+    </div>
   </section>
 
   <div class="neon-separator"></div>
 
-  <section id="experience" class="content-section" style="width: 70%; max-width: none;">
+  <section id="experience" class="content-section" style="width: 80%; max-width: none;">
+    <canvas class="section-bubbles"></canvas>
+    <div class="section-content">
     <h2>Experiencia Académica</h2>
     <div class="experience-item">
       <h3>2020 - 2024: Grado en Ingeniería Informática (UOC)</h3>
@@ -75,11 +98,14 @@
       <h3>2024 - Presente: Proyectos Personales</h3>
       <p>Desarrollo de proyectos propios enfocados en automatización de tareas con Python (scripts para agilizar procesos repetitivos) y en análisis de datos (exploración y visualización de datasets) para seguir fortaleciendo mis habilidades en estas áreas.</p>
     </div>
+    </div>
   </section>
 
   <div class="neon-separator"></div>
 
   <section id="technologies" class="content-section" style="width: 80%; max-width: none;">
+    <canvas class="section-bubbles"></canvas>
+    <div class="section-content">
     <h2>Tecnologías y Herramientas</h2>
     <p>Estas son algunas de las tecnologías y herramientas con las que he trabajado:</p>
     <div class="tech-list">
@@ -96,11 +122,14 @@
       <span class="tech-item">📊 Sage</span>
       <span class="tech-item">📈 Power BI</span>
     </div>
+    </div>
   </section>
 
   <div class="neon-separator"></div>
 
   <section id="services" class="content-section" style="width: 90%; max-width: none;">
+    <canvas class="section-bubbles"></canvas>
+    <div class="section-content">
     <h2>Servicios</h2>
     <div class="service-item">
       <h3>Automatización con Python</h3>
@@ -114,11 +143,14 @@
       <h3>Análisis de Datos</h3>
       <p>Procesamiento y análisis de datos para extraer insights accionables, acompañados de visualizaciones claras que apoyan la toma de decisiones.</p>
     </div>
+    </div>
   </section>
 
   <div class="neon-separator"></div>
 
   <section id="projects" class="content-section" style="width: 80%; max-width: none;">
+    <canvas class="section-bubbles"></canvas>
+    <div class="section-content">
     <h2>Proyectos</h2>
     <div class="project">
       <h3>Proyecto de análisis de datos de ventas</h3>
@@ -143,11 +175,14 @@
 
     <h3>Repositorios en GitHub</h3>
     <div id="repo-list"></div>
+    </div>
   </section>
 
   <div class="neon-separator"></div>
 
   <section id="stats" class="content-section" style="width: 70%; max-width: none;">
+    <canvas class="section-bubbles"></canvas>
+    <div class="section-content">
     <h2>Estadísticas</h2>
     <div class="stats-grid">
       <div class="stat-card">
@@ -163,11 +198,14 @@
         <p>Éxito en los proyectos</p>
       </div>
     </div>
+    </div>
   </section>
 
   <div class="neon-separator"></div>
 
   <section id="contact" class="content-section contact-section" style="width: 60%; max-width: none;">
+    <canvas class="section-bubbles"></canvas>
+    <div class="section-content">
     <h2>Contacto</h2>
     <form id="contactForm">
       <label for="name">Nombre:</label>
@@ -181,11 +219,53 @@
 
       <button type="submit">Enviar</button>
     </form>
+    </div>
+  </section>
+
+  <div class="neon-separator"></div>
+
+  <section id="cv" class="content-section" style="width: 40%; max-width: none;">
+    <canvas class="section-bubbles"></canvas>
+    <div class="section-content">
+    <h2>Descargar CV</h2>
+    <p>Descarga mi currículum vitae en el idioma de tu preferencia:</p>
+    <div class="cv-download-container">
+      <div class="cv-option">
+        <div class="cv-card">
+          <div class="cv-icon">ES</div>
+          <h3>CV en Español</h3>
+          <p>Currículum completo en español con toda mi experiencia.</p>
+          <a href="features/cv_spanish.pdf" download="Yeray_Alonso_CV_Español.pdf" class="cv-download-btn">
+            <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7,10 12,15 17,10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Descargar PDF
+          </a>
+        </div>
+      </div>
+      <div class="cv-option">
+        <div class="cv-card">
+          <div class="cv-icon">EN</div>
+          <h3>CV in English</h3>
+          <p>Complete resume in English with all my experience and skills.</p>
+          <a href="features/cv_english.pdf" download="Yeray_Alonso_CV_English.pdf" class="cv-download-btn">
+            <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7,10 12,15 17,10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download PDF
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
   </section>
 
   <footer>
     <div class="footer-left">
-      <img src="features/logo.png" alt="Logo" class="footer-logo">
       <a href="https://github.com/YerayAR" aria-label="GitHub" class="social-link">
         <svg class="social-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
       </a>
