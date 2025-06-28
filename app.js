@@ -135,16 +135,21 @@ if (canvas) {
         }
         
         draw() {
+            // Dibuja la burbuja principal
             this.ctx.beginPath();
             this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             this.ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.alpha})`;
+            this.ctx.shadowColor = `hsla(${this.hue}, 80%, 60%, 0.5)`;
+            this.ctx.shadowBlur = 8; // Sombra suave para diferenciar
             this.ctx.fill();
-            
-            // Efecto de brillo
+            this.ctx.shadowBlur = 0; // Restablecer sombra
+    
+            // Efecto de contorno sutil
             this.ctx.beginPath();
-            this.ctx.arc(this.x, this.y, this.radius * 0.6, 0, Math.PI * 2);
-            this.ctx.fillStyle = `hsla(${this.hue}, 100%, 80%, ${this.alpha * 0.5})`;
-            this.ctx.fill();
+            this.ctx.arc(this.x, this.y, this.radius + 1, 0, Math.PI * 2);
+            this.ctx.strokeStyle = `hsla(${this.hue}, 80%, 80%, ${this.alpha * 0.4})`;
+            this.ctx.lineWidth = 1;
+            this.ctx.stroke();
         }
     }
 
@@ -166,9 +171,10 @@ if (canvas) {
 
 // === Animación de burbujas en las secciones ===
 class SectionBubble {
-    constructor(canvas) {
+    constructor(canvas, customColor = null) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
+        this.customColor = customColor; // Diferencia: permite color personalizado
         this.reset();
     }
     
@@ -178,7 +184,7 @@ class SectionBubble {
         this.radius = Math.random() * 4 + 2;
         this.speed = Math.random() * 0.8 + 0.3;
         this.alpha = Math.random() * 0.3 + 0.1;
-        this.hue = Math.random() * 60 + 160; // Tonos azul-verde
+        this.hue = this.customColor !== null ? this.customColor : Math.random() * 60 + 160; // Tonos azul-verde o personalizado
     }
     
     update() {
@@ -272,12 +278,72 @@ async function fetchRepos() {
             container.appendChild(div);
         }
     } catch (e) {
+        console.error('Error al cargar los repositorios:', e);
         container.textContent = 'No se pudieron cargar los repositorios.';
     }
 }
-
 // === Contador de visitas local ===
 document.addEventListener('DOMContentLoaded', () => {
+    // === Cambiar tema oscuro/claro ===
+    function initThemeToggle() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        console.log('🔍 Theme toggle element:', themeToggle);
+        console.log('🔍 Theme icon element:', themeIcon);
+
+        if (!themeToggle) {
+            console.error('❌ No se encontró el botón de cambio de tema');
+            return;
+        }
+
+        if (!themeIcon) {
+            console.error('❌ No se encontró el icono del tema');
+            return;
+        }
+
+        function setTheme(theme) {
+            console.log('🎨 Cambiando tema a:', theme);
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            // Cambiar el icono
+            if (theme === 'light') {
+                themeIcon.className = 'bi bi-sun-fill';
+                console.log('☀️ Tema claro activado');
+            } else {
+                themeIcon.className = 'bi bi-moon-fill';
+                console.log('🌙 Tema oscuro activado');
+            }
+        }
+
+        // Establecer tema inicial
+        const savedTheme = localStorage.getItem('theme');
+        const initialTheme = savedTheme || 'dark';
+        console.log('📂 Tema guardado:', savedTheme, '| Tema inicial:', initialTheme);
+        setTheme(initialTheme);
+
+        // Event listener para el botón
+        themeToggle.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            console.log('🖱️ ¡Botón de tema clickeado!');
+            
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            console.log('🔄 Cambiando de', currentTheme, 'a', newTheme);
+            setTheme(newTheme);
+        });
+
+        console.log('✅ Sistema de temas inicializado correctamente');
+    }
+
+    // Inicializar el sistema de temas
+    initThemeToggle();
+
+    // Contador de visitas
     const counter = document.getElementById('visitCount');
     if (counter) {
         let visits = parseInt(localStorage.getItem('visitCount') || '0', 10);
