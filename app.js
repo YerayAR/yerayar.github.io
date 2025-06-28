@@ -116,6 +116,7 @@ if (canvas) {
         constructor(canvas) {
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
+            this.isSectionBubble = true; // Distinción específica para SectionBubble
             this.reset();
         }
         
@@ -135,15 +136,26 @@ if (canvas) {
         }
         
         draw() {
+            // Dibuja la burbuja principal
             this.ctx.beginPath();
             this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             this.ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.alpha})`;
+            this.ctx.shadowColor = `hsla(${this.hue}, 100%, 80%, 0.6)`;
+            this.ctx.shadowBlur = 8; // Sombra suave para diferenciar
             this.ctx.fill();
-            
-            // Efecto de brillo
+            this.ctx.shadowBlur = 0; // Restablecer sombra
+    
+            // Añade un contorno sutil para diferenciar de IntroBubble
             this.ctx.beginPath();
-            this.ctx.arc(this.x, this.y, this.radius * 0.6, 0, Math.PI * 2);
-            this.ctx.fillStyle = `hsla(${this.hue}, 100%, 80%, ${this.alpha * 0.5})`;
+            this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            this.ctx.strokeStyle = `hsla(${this.hue}, 100%, 95%, ${this.alpha * 0.7})`;
+            this.ctx.lineWidth = 1;
+            this.ctx.stroke();
+    
+            // Pequeño destello en la parte superior izquierda
+            this.ctx.beginPath();
+            this.ctx.arc(this.x - this.radius * 0.3, this.y - this.radius * 0.3, this.radius * 0.2, 0, Math.PI * 2);
+            this.ctx.fillStyle = `rgba(255,255,255,${this.alpha * 0.7})`;
             this.ctx.fill();
         }
     }
@@ -272,6 +284,7 @@ async function fetchRepos() {
             container.appendChild(div);
         }
     } catch (e) {
+        console.error('Error al cargar los repositorios:', e);
         container.textContent = 'No se pudieron cargar los repositorios.';
     }
 }
