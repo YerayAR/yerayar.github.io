@@ -333,12 +333,6 @@ El sitio se despliega automáticamente en **GitHub Pages**:
 2. **GitHub Actions** (opcional para CI/CD)
 3. **Disponible en:** `https://yerayar.github.io`
 
-### **Configuración DNS** (Opcional)
-Para dominio personalizado:
-1. Añadir archivo `CNAME` con el dominio
-2. Configurar DNS en el proveedor
-3. Habilitar HTTPS en GitHub Pages
-
 ---
 
 ## 📚 **RECURSOS Y REFERENCIAS**
