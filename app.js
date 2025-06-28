@@ -1,35 +1,44 @@
-// Inicializa EmailJS
-(function() {
-    if (window.emailjs) {
-        emailjs.init("lowkfjPI5RGmYIDmM"); // Reemplaza con tu ID real si cambia
+// Inicializar EmailJS cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar EmailJS v4
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init({
+            publicKey: "lowkfjPI5RGmYIDmM",
+        });
+        console.log('EmailJS v4 initialized successfully');
     } else {
         console.warn('EmailJS library not loaded');
     }
-})();
 
-// Manejador del formulario de contacto
-document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+    // Manejador del formulario de contacto
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
 
-    const templateParams = {
-        from_name: name,
-        from_email: email,
-        message: message
-    };
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message
+            };
 
-    emailjs.send('service_mk372rb', 'template_u3yoceu', templateParams)
-        .then(function(response) {
-            console.log('Correo enviado con éxito', response.status, response.text);
-            alert('Gracias por tu mensaje, ' + name + '! Me pondré en contacto contigo pronto.');
-        }, function(error) {
-            console.error('Error al enviar el correo', error);
-            alert('Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.');
+            // Usar la nueva sintaxis de EmailJS v4
+            emailjs.send('service_mk372rb', 'template_u3yoceu', templateParams)
+                .then(function(response) {
+                    console.log('Correo enviado con éxito', response.status, response.text);
+                    alert('Gracias por tu mensaje, ' + name + '! Me pondré en contacto contigo pronto.');
+                    contactForm.reset();
+                })
+                .catch(function(error) {
+                    console.error('Error al enviar el correo', error);
+                    alert('Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.');
+                });
         });
-
-    document.getElementById('contactForm').reset();
+    }
 });
 
 // Revelar secciones al hacer scroll
@@ -286,4 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Inicializar burbujas en las secciones
     initSectionBubbles();
+    
 });
+
