@@ -1,4 +1,35 @@
-/* === ESTILOS ORIGINALES DE YERAY + MEJORAS === */
+/* ====================================================================
+   PORTAFOLIO PERSONAL - YERAY ALONSO REYES
+   ====================================================================
+   
+   DESCRIPCIÓN:
+   Hoja de estilos principal para el sitio web personal/portafolio.
+   Implementa un diseño moderno con efectos neón, animaciones fluidas
+   y sistema de burbujas animadas usando CSS3 y efectos visuales avanzados.
+   
+   CARACTERÍSTICAS PRINCIPALES:
+   - Diseño responsivo con mobile-first approach
+   - Sistema de colores neón con variables CSS
+   - Animaciones complejas con keyframes
+   - Efectos de burbujas y partículas
+   - Navegación sticky con glassmorphism
+   - Separadores decorativos con bombillas neón
+   - Sistema de grid adaptativo
+   
+   TECNOLOGÍAS:
+   - CSS3 con Custom Properties (variables)
+   - Flexbox y CSS Grid
+   - Animaciones con @keyframes
+   - Efectos de filtro y backdrop-filter
+   - Transformaciones 3D
+   - Media queries para responsive design
+   
+   AUTOR: Yeray Alonso Reyes
+   FECHA: 2024-2025
+   VERSIÓN: 2.0
+   ==================================================================== */
+
+/* === VARIABLES GLOBALES Y CONFIGURACIÓN BASE === */
 
 :root {
   --background-gradient: linear-gradient(130deg, #0f0c29 30%, #302b63 70%);
@@ -712,27 +743,13 @@ h2 {
   text-shadow: 0 0 5px var(--accent-color);
 }
 
-.testimonial-item {
-  background: rgba(138, 43, 226, 0.7);
-  padding: 1rem;
-  margin: 1rem 0;
-  border-left: 5px solid var(--accent-secondary);
-  border-right: 5px solid var(--accent-secondary);
-  border-radius: 5px;
-}
-
-.testimonial-item p:first-child {
-  font-style: italic;
-}
-
-.testimonial-item strong {
-  color: var(--accent-secondary);
-  text-shadow: 0 0 5px var(--accent-secondary);
-}
-
-.testimonial-item:hover {
-  box-shadow: 0 0 15px var(--accent-secondary);
-}
+/* ====================================
+   ESTILOS DE TESTIMONIALES ELIMINADOS
+   ====================================
+   Se han eliminado los estilos de testimoniales porque
+   no se usan en la versión actual del portafolio.
+   Si se necesitan en el futuro, se pueden re-implementar.
+*/
 
 #contactForm {
   display: flex;
