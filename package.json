@@ -1,0 +1,17 @@
+{
+  "name": "yerayar-portfolio",
+  "version": "1.0.0",
+  "description": "Portafolio profesional de Yeray Alonso Reyes con componentes estáticos y build script ligero.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "keywords": [
+    "portfolio",
+    "automation",
+    "static-site",
+    "github-pages"
+  ],
+  "author": "Yeray Alonso Reyes",
+  "license": "Apache-2.0"
+}
