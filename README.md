@@ -1,70 +1,23 @@
-# Yeray Alonso Reyes · Portfolio
+# ¡Hola, soy Yeray! 👋  
+### Ingeniero Informático | Especialista en Automatización  
 
-Portafolio profesional orientado a automatización con Python, desarrollo web accesible y analítica de datos. El proyecto está estructurado en componentes reutilizables y se compila a HTML estático, listo para desplegarse en GitHub Pages o Vercel sin dependencias complejas.
+[![CoverPage](./features/CoverPage.png)](https://yerayar.github.io)  
 
-## 🧱 Estructura del proyecto
+Soy **Yeray Alonso Reyes**, ingeniero informático con experiencia en **automatización de procesos administrativos** y desarrollo web. Me especializo en la optimización de flujos de trabajo mediante **Python, HTML, CSS, JavaScript, frameworks modernos y CMS como WordPress**.  
 
-```
-├── components/         # Fragmentos HTML comentados para cada sección del sitio
-│   ├── Header.jsx
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── Skills.jsx
-│   ├── Projects.jsx
-│   ├── Articles.jsx
-│   ├── Contact.jsx
-│   └── Footer.jsx
-├── pages/
-│   └── index.html      # Plantilla principal con marcadores {{Componente}}
-├── styles/
-│   └── main.css        # Hoja de estilos unificada y documentada
-├── scripts/
-│   └── main.js         # Lógica ligera (tema, menú, formulario)
-├── assets/
-│   ├── documents/      # CV y otros PDF
-│   ├── icons/          # Favicon y pictogramas
-│   └── images/         # Imágenes optimizadas para el sitio
-├── build.mjs           # Script que ensambla los componentes en index.html
-├── index.html          # Salida compilada lista para producción
-├── LICENSE             # Licencia MIT
-└── package.json        # Scripts de automatización
-```
+A lo largo de mi trayectoria, he trabajado en **automatización de tareas**, incluyendo la generación automática de catálogos, la gestión de asignaciones y la lectura de facturas mediante OCR. También cuento con conocimientos sólidos en bases de datos (**SQL, MySQL, PostgreSQL, Firestore**) y en tecnologías como **Docker, React y Bootstrap**.  
 
-## 🚀 Uso rápido
+Uno de mis proyectos más destacados es **ShieldLink: Secure Connection Against Bullying**, una aplicación diseñada para apoyar a víctimas de acoso con recomendaciones personalizadas.  
 
-1. **Instalar dependencias** (solo necesitas Node.js ≥ 18):
-   ```bash
-   npm install
-   ```
-2. **Generar la versión estática**:
-   ```bash
-    npm run build
-   ```
-   Esto toma `pages/index.html`, inserta los componentes desde `components/` y escribe el resultado en `index.html`.
-3. **Previsualizar localmente** (opcional):
-   ```bash
-   npx serve .
-   ```
-   Luego abre `http://localhost:3000`.
-
-## 🧩 Personalización
-
-- Edita cualquier componente en `components/*.jsx`. Cada bloque incluye comentarios describiendo su propósito.
-- Ajusta estilos globales en `styles/main.css`, donde cada sección está documentada con comentarios `/* ... */`.
-- El script `scripts/main.js` controla el menú móvil, el selector de tema y el formulario; todos los bloques están comentados.
-
-Tras realizar cambios, ejecuta `npm run build` para regenerar `index.html`.
-
-## 📦 Despliegue en GitHub Pages
-
-1. Asegúrate de que `index.html`, `assets/`, `styles/` y `scripts/` estén versionados.
-2. Ejecuta `npm run build` antes de hacer commit.
-3. Sube la rama a GitHub y habilita Pages desde `Settings → Pages`, apuntando a la rama principal (carpeta `/`).
-
-## 📄 Licencia
-
-Código disponible bajo licencia [MIT](./LICENSE). Puedes usarlo y adaptarlo, manteniendo el aviso de copyright.
+Soy una persona **proactiva y organizada**, con una gran capacidad de aprendizaje, siempre dispuesto a afrontar nuevos retos en entornos dinámicos. Me interesa especialmente el **trabajo remoto**, ya que permite aplicar mis conocimientos en automatización y atención al cliente en un entorno flexible y eficiente.  
 
 ---
 
-**Autor:** Yeray Alonso Reyes — Automatización, desarrollo web y analítica de datos. Detalles de contacto y CV en [index.html](./index.html). 
+## 🚀 **Portfolio & Contacto**  
+📌 **Portafolio:** [Visítalo aquí](https://yerayar.github.io)  
+💼 **LinkedIn:** [Perfil Profesional](https://www.linkedin.com/in/yeray-alonso-reyes-ii/)  
+🐙 **GitHub:** [Mis Proyectos](https://github.com/YerayAR)
+
+---
+
+Si quieres saber más sobre mí, no dudes en echar un vistazo a mi portafolio o contactar conmigo.  
