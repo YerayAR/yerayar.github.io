@@ -1,314 +1,383 @@
 <!DOCTYPE html>
-<!-- 
-    PORTAFOLIO PERSONAL DE YERAY ALONSO REYES
-    ==========================================
-    
-    Descripción: Sitio web personal que presenta mi experiencia profesional,
-    proyectos y habilidades como Ingeniero Informático especializado en
-    automatización con Python, desarrollo web y análisis de datos.
-    
-    Tecnologías utilizadas:
-    - HTML5 semántico con estructura moderna
-    - CSS3 con animaciones y efectos visuales avanzados
-    - JavaScript vanilla para interactividad
-    - EmailJS para funcionalidad de contacto
-    - Bootstrap Icons para iconografía
-    - Animate.css para animaciones de entrada
-    - Canvas API para efectos de burbujas animadas
-    
-    Autor: Yeray Alonso Reyes
-    Fecha: 2024-2025
-    Versión: 2.0
--->
-<html lang="es" data-theme="dark">
+<html lang="es" data-theme="light">
 <head>
-  <!-- Configuración básica del documento -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Meta tags para SEO -->
-  <meta name="description" content="Portafolio de Yeray Alonso Reyes, Ingeniero Informático especializado en automatización con Python, desarrollo web y análisis de datos.">
-  <meta name="keywords" content="portafolio, Yeray, desarrollador, ingeniería informática, python, web, datos">
-  <title>Yeray | Portfolio</title>
-
+  <meta name="description" content="Portafolio de Yeray Alonso Reyes, ingeniero inform&aacute;tico especializado en automatizaci&oacute;n con Python, desarrollo web y an&aacute;lisis de datos.">
+  <meta name="keywords" content="Yeray Alonso Reyes, portafolio, ingeniero inform&aacute;tico, automatizaci&oacute;n, Python, desarrollo web, datos">
+  <meta name="author" content="Yeray Alonso Reyes">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Yeray Alonso Reyes | Ingeniero Inform&aacute;tico">
+  <meta property="og:description" content="Automatizo procesos con Python, construyo experiencias web eficientes y colaboro en proyectos de ingenier&iacute;a inform&aacute;tica. Descubre mis servicios, proyectos y art&iacute;culos.">
+  <meta property="og:url" content="https://yerayar.github.io/">
+  <meta property="og:image" content="https://yerayar.github.io/features/CoverPage.png">
+  <meta property="og:image:alt" content="Mockup del portafolio de Yeray Alonso Reyes">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Yeray Alonso Reyes | Ingeniero Inform&aacute;tico">
+  <meta name="twitter:description" content="Portafolio profesional con proyectos de automatizaci&oacute;n, desarrollo web y an&aacute;lisis de datos.">
+  <meta name="twitter:image" content="https://yerayar.github.io/features/CoverPage.png">
+  <title>Yeray Alonso Reyes | Portfolio</title>
   <link rel="icon" type="image/png" href="features/logo.png">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="app.min.js"></script>
 </head>
 <body>
-  <header>
-    <div class="dev-banner">Sitio en desarrollo</div>
-    <!-- Banner de navegación superior -->
-    <nav class="top-navbar">
+  <a class="skip-to-content" href="#hero">Saltar al contenido principal</a>
+  <header class="site-header" role="banner">
+    <div class="top-navbar">
       <div class="nav-container">
-        <div class="nav-logo">
-          <img src="features/logo.png" alt="Logo Yeray" class="logo-img">
+        <a class="nav-logo" href="#hero" aria-label="Inicio Yeray Alonso Reyes">
+          <img src="features/logo.png" alt="Logotipo con las iniciales YA" class="logo-img" width="48" height="48" loading="eager" decoding="async">
           <span class="logo-text">Yeray AR</span>
-        </div>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
-          <i class="bi bi-moon-fill" id="theme-icon"></i>
+        </a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar a tema oscuro">
+          <span class="theme-toggle-icon" id="theme-icon" aria-hidden="true"></span>
         </button>
-        <ul class="nav-menu">
-          <li class="nav-item"><a href="#about" class="nav-link">Sobre Mí</a></li>
-          <li class="nav-item"><a href="#experience" class="nav-link">Experiencia</a></li>
-          <li class="nav-item"><a href="#technologies" class="nav-link">Tecnologías</a></li>
-          <li class="nav-item"><a href="#services" class="nav-link">Servicios</a></li>
-          <li class="nav-item"><a href="#projects" class="nav-link">Proyectos</a></li>
-          <li class="nav-item"><a href="#stats" class="nav-link">Estadísticas</a></li>
-          <li class="nav-item"><a href="#contact" class="nav-link">Contacto</a></li>
-          <li class="nav-item"><a href="#cv" class="nav-link">Descargar CV</a></li>
-        </ul>
-        <button id="menu-toggle" aria-label="Abrir menú" class="hamburger">
+        <button id="menu-toggle" class="hamburger" aria-label="Abrir men&uacute;">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
         </button>
+        <nav aria-label="Navegaci&oacute;n principal">
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="#about" class="nav-link">Sobre m&iacute;</a></li>
+            <li class="nav-item"><a href="#services" class="nav-link">Servicios</a></li>
+            <li class="nav-item"><a href="#projects" class="nav-link">Proyectos</a></li>
+            <li class="nav-item"><a href="#gallery" class="nav-link">Galer&iacute;a</a></li>
+            <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonios</a></li>
+            <li class="nav-item"><a href="#blog" class="nav-link">Art&iacute;culos</a></li>
+            <li class="nav-item"><a href="#cv" class="nav-link">CV</a></li>
+            <li class="nav-item"><a href="#contact" class="nav-link">Contacto</a></li>
+            <li class="nav-item nav-item-cta">
+              <a href="features/Yeray_Alonso_Reyes_CV.pdf" class="nav-link nav-link-cta" download>Descargar CV</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </nav>
+    </div>
   </header>
-
-  <!-- ====================================
-       SECCIÓN INTRO - PRESENTACIÓN PRINCIPAL
-       ====================================
-       Hero section con video de fondo, burbujas animadas,
-       presentación personal y avatar con efecto átomo
-  -->
-  <section id="intro" class="intro-section">
-    <video autoplay muted loop id="background-video">
-      <source src="https://cdn.coverr.co/videos/coverr-nasa-earth-particles-1651068576640" type="video/mp4">
-      Tu navegador no soporta el video de fondo.
-    </video>
-    <canvas id="bubbles"></canvas>
-    <div class="intro-content">
-      <div class="intro-layout">
-        <div class="intro-text">
-          <h1 class="animate__animated animate__fadeInLeft">¡Hola! Soy Yeray</h1>
-          <p class="animate__animated animate__fadeInLeft animate__delay-1s">Me dedico a automatizar procesos con Python y al desarrollo web.</p>
-        </div>
-        <div class="intro-avatar">
-          <div class="avatar-container">
-            <div class="atom">
-              <img src="features/profile.jpg" alt="Foto de Yeray" class="profile-photo">
-            </div>
+  <main id="hero" class="site-main">
+    <section class="hero-section section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Ingeniero inform&aacute;tico &middot; Especialista en automatizaci&oacute;n y desarrollo web</p>
+          <h1>Hola, soy Yeray Alonso Reyes</h1>
+          <p>Transformo procesos complejos en soluciones digitales eficientes. Colaboro con equipos que buscan automatizar con Python, optimizar su presencia web y tomar decisiones guiadas por datos.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Ver proyectos</a>
+            <a class="btn btn-outline" href="features/Yeray_Alonso_Reyes_CV.pdf" download>Descargar CV</a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================
-       SECCIÓN SOBRE MÍ - PRESENTACIÓN PERSONAL
-       ====================================
-       Información personal, formación y motivaciones.
-       Incluye burbujas animadas de fondo y contenido detallado.
-  -->
-  <section id="about" class="content-section" style="width: 90%; max-width: none;">
-    <canvas class="section-bubbles"></canvas>
-    <div class="section-content">
-    <h2>Sobre Mí</h2>
-    <p>¡Hola! Soy Yeray Alonso Reyes, un Ingeniero Informático apasionado por la tecnología y la programación. He finalizado mi grado en Ingeniería Informática en la Universitat Oberta de Catalunya (UOC), donde me especialicé en el desarrollo de aplicaciones web y móviles. Durante mi formación trabajé con diversas tecnologías como HTML, CSS, JavaScript, React, Python y Docker.</p>
-    <p>Actualmente me desarrollo profesionalmente en las áreas de automatización con Python, desarrollo web y análisis de datos, aplicando mis conocimientos para crear soluciones eficientes y basadas en datos.</p>
-    <p>Me considero una persona adaptable y con gran capacidad de aprendizaje. He aprendido rápidamente a manejar nuevas tecnologías y frameworks, aplicando metodologías ágiles (Scrum, Kanban) en proyectos colaborativos. Gran parte de mi experiencia proviene de proyectos personales y académicos que me han permitido mejorar en trabajo en equipo, resolución de problemas y gestión de proyectos.</p>
-    <p>Estoy entusiasmado por seguir creciendo como desarrollador y contribuir a proyectos innovadores que generen un impacto positivo. Busco activamente oportunidades para aplicar mis habilidades en entornos profesionales. ¡No dudes en contactarme si deseas saber más o colaborar en algún proyecto!</p>
-    </div>
-  </section>
-
-
-  <section id="experience" class="content-section" style="width: 80%; max-width: none;">
-    <canvas class="section-bubbles"></canvas>
-    <div class="section-content">
-    <h2>Experiencia Académica</h2>
-    <div class="experience-item">
-      <h3>2020 - 2024: Grado en Ingeniería Informática (UOC)</h3>
-      <p>Completé mis estudios universitarios especializándome en desarrollo web y móvil. Como proyecto de fin de grado desarrollé una aplicación móvil completa utilizando Android Studio y Firebase.</p>
-    </div>
-    <div class="experience-item">
-      <h3>2024: Proyecto Académico - ShieldLink</h3>
-      <p>Aplicación móvil diseñada para combatir el bullying en entornos educativos mediante recomendaciones personalizadas y evaluaciones anónimas. Este proyecto mejoró mis habilidades en Android (Java) y Firebase, y demostró el poder de la tecnología para impactar positivamente en la sociedad.</p>
-    </div>
-    <div class="experience-item">
-      <h3>2024 - Presente: Proyectos Personales</h3>
-      <p>Desarrollo de proyectos propios enfocados en automatización de tareas con Python (scripts para agilizar procesos repetitivos) y en análisis de datos (exploración y visualización de datasets) para seguir fortaleciendo mis habilidades en estas áreas.</p>
-    </div>
-    </div>
-  </section>
-
-
-  <section id="technologies" class="content-section" style="width: 80%; max-width: none;">
-    <canvas class="section-bubbles"></canvas>
-    <div class="section-content">
-    <h2>Tecnologías y Herramientas</h2>
-    <p>Estas son algunas de las tecnologías y herramientas con las que he trabajado:</p>
-    <div class="tech-list">
-      <span class="tech-item">🔵 HTML5</span>
-      <span class="tech-item">🎨 CSS3</span>
-      <span class="tech-item">✨ JavaScript (ES6+)</span>
-      <span class="tech-item">🐍 Python</span>
-      <span class="tech-item">☕ Java</span>
-      <span class="tech-item">⚛️ React</span>
-      <span class="tech-item">🐳 Docker</span>
-      <span class="tech-item">🔧 Git</span>
-      <span class="tech-item">🔥 Firebase</span>
-      <span class="tech-item">🗄️ SQL</span>
-      <span class="tech-item">📊 Sage</span>
-      <span class="tech-item">📈 Power BI</span>
-    </div>
-    </div>
-  </section>
-
-
-  <section id="services" class="content-section" style="width: 90%; max-width: none;">
-    <canvas class="section-bubbles"></canvas>
-    <div class="section-content">
-    <h2>Servicios</h2>
-    <div class="service-item">
-      <h3>Automatización con Python</h3>
-      <p>Desarrollo de scripts y herramientas para automatizar procesos repetitivos y optimizar flujos de trabajo, ahorrando tiempo y reduciendo errores.</p>
-    </div>
-    <div class="service-item">
-      <h3>Desarrollo Web</h3>
-      <p>Creación de sitios y aplicaciones web modernas, responsivas y eficientes, abarcando desde el diseño frontend hasta la lógica backend.</p>
-    </div>
-    <div class="service-item">
-      <h3>Análisis de Datos</h3>
-      <p>Procesamiento y análisis de datos para extraer insights accionables, acompañados de visualizaciones claras que apoyan la toma de decisiones.</p>
-    </div>
-    </div>
-  </section>
-
-
-  <section id="projects" class="content-section" style="width: 80%; max-width: none;">
-    <canvas class="section-bubbles"></canvas>
-    <div class="section-content">
-    <h2>Proyectos</h2>
-    <div class="project">
-      <h3>Proyecto de análisis de datos de ventas</h3>
-      <p>Procesamiento y limpieza de datos en Excel y Sage, asegurando su integridad. Aplicación de técnicas de análisis en Power BI para identificar tendencias y generar reportes contables detallados. Diseño de dashboards dinámicos para facilitar la toma de decisiones estratégicas, con recomendaciones basadas en datos.</p>
-    </div>
-    <div class="project">
-      <h3>Automatización de facturación</h3>
-      <p>Desarrollo de un sistema automatizado para la creación y envío de facturas, integrando reconocimiento óptico de caracteres (OCR) con Python para la extracción de datos desde documentos. Los datos procesados se almacenan en SQL Server, asegurando precisión y reducción de tareas manuales en la gestión de facturación.</p>
-    </div>
-    <div class="project">
-      <h3>Desarrollo de formulario avanzado y sitio web en WordPress</h3>
-      <p>Implementación de un formulario personalizado en WordPress utilizando plugins como Contact Form 7. El formulario permite recopilar información específica de usuarios y enviar notificaciones automáticas, mejorando la eficiencia en la gestión de solicitudes. Además, creación de un sitio web corporativo moderno y responsivo en WordPress.</p>
-    </div>
-    <div class="academic-projects">
-      <h3>Proyectos Académicos</h3>
-      <div class="project">
-        <h4>ShieldLink - App Móvil contra el Bullying</h4>
-        <p>Aplicación móvil desarrollada para abordar el problema del bullying en entornos educativos, ofreciendo recomendaciones personalizadas y evaluaciones anónimas para estudiantes.</p>
-        <p><a href="https://github.com/YerayAR/ShieldLink" target="_blank" rel="noopener">Ver código en GitHub</a></p>
-      </div>
-    </div>
-
-    <h3>Repositorios en GitHub</h3>
-    <div id="repo-list">
-        <svg class="social-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        
-    </div>
-    </div>
-  </section>
-
-
-  <section id="stats" class="content-section section-70" style="width: 70%; max-width: none;">
-    <canvas class="section-bubbles"></canvas>
-    <div class="section-content">
-    <h2>Estadísticas</h2>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <span class="stat-number">6+</span>
-        <p>Proyectos completados</p>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">1</span>
-        <p>Años de experiencia</p>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">100%</span>
-        <p>Éxito en los proyectos</p>
-      </div>
-    </div>
-    </div>
-  </section>
-
-
-  <section id="contact" class="content-section contact-section section-60" style="width: 60%; max-width: none;">
-    <canvas class="section-bubbles"></canvas>
-    <div class="section-content">
-    <h2>Contacto</h2>
-    <form id="contactForm">
-      <label for="name">Nombre:</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="email">Correo Electrónico:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="message">Mensaje:</label>
-      <textarea id="message" name="message" required></textarea>
-
-      <button type="submit">Enviar</button>
-    </form>
-    </div>
-  </section>
-
-
-  <section id="cv" class="content-section section-40" style="width: 40%; max-width: none;">
-    <canvas class="section-bubbles"></canvas>
-    <div class="section-content">
-    <h2>Descargar CV</h2>
-    <p>Descarga mi currículum vitae en el idioma de tu preferencia:</p>
-    <div class="cv-download-container">
-      <div class="cv-option">
-        <div class="cv-card">
-          <div class="cv-icon">ES</div>
-          <h3>CV en Español</h3>
-          <p>Currículum completo en español con toda mi experiencia.</p>
-          <a href="features/cv_spanish.pdf" download="Yeray_Alonso_CV_Español.pdf" class="cv-download-btn">
-            <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7,10 12,15 17,10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Descargar PDF
-          </a>
+        <div class="hero-media">
+          <figure class="hero-portrait">
+            <img src="features/profile.jpg" alt="Retrato de Yeray Alonso Reyes" width="480" height="560" loading="lazy" decoding="async">
+            <figcaption>Automatizaci&oacute;n &bull; Desarrollo web &bull; Ingenier&iacute;a inform&aacute;tica</figcaption>
+          </figure>
         </div>
       </div>
-      <div class="cv-option">
-        <div class="cv-card">
-          <div class="cv-icon">EN</div>
-          <h3>CV in English</h3>
-          <p>Complete resume in English with all my experience and skills.</p>
-          <a href="features/cv_english.pdf" download="Yeray_Alonso_CV_English.pdf" class="cv-download-btn">
-            <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7,10 12,15 17,10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download PDF
-          </a>
+    </section>
+    <section id="cv" class="section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="section-kicker">Curr&iacute;culum</span>
+          <h2>Descarga el CV actualizado</h2>
+          <p>Selecciona el idioma y obt&eacute;n el PDF con experiencia, proyectos y competencias.</p>
+        </div>
+        <div class="cv-download-container">
+          <article class="cv-option">
+            <div class="cv-card">
+              <div class="cv-icon" aria-hidden="true">ES</div>
+              <h3>CV en Espa&ntilde;ol</h3>
+              <p>Resumen profesional completo, formaci&oacute;n y proyectos destacados.</p>
+              <a href="features/cv_spanish.pdf" download="Yeray_Alonso_Reyes_CV_Espanol.pdf" class="cv-download-btn">
+                <span aria-hidden="true" class="download-icon"></span>
+                Descargar PDF
+              </a>
+            </div>
+          </article>
+          <article class="cv-option">
+            <div class="cv-card">
+              <div class="cv-icon" aria-hidden="true">EN</div>
+              <h3>CV in English</h3>
+              <p>Full resume translated for international teams and collaborations.</p>
+              <a href="features/cv_english.pdf" download="Yeray_Alonso_Reyes_CV_English.pdf" class="cv-download-btn">
+                <span aria-hidden="true" class="download-icon"></span>
+                Download PDF
+              </a>
+            </div>
+          </article>
         </div>
       </div>
-    </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-left">
-      <a href="https://github.com/YerayAR" aria-label="GitHub" class="social-link">
-        <svg class="social-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/yeray-alonso-reyes-ii/" aria-label="LinkedIn" class="social-link">
-        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-      </a>
-    </div>
-    <p class="footer-center">© 2025 Yeray Alonso Reyes. Todos los derechos reservados.</p>
-    <div class="footer-right" aria-label="Contador de visitas">
-      <span id="visitCount">0</span> visitas
+    </section>
+    <section id="about" class="section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="section-kicker">Sobre m&iacute;</span>
+          <h2>Perfil profesional</h2>
+          <p>Ingeniero inform&aacute;tico apasionado por automatizar flujos de trabajo, crear experiencias web accesibles y analizar datos con sentido estrat&eacute;gico.</p>
+        </div>
+        <div class="about-grid">
+          <article class="about-card">
+            <h3>Enfoque</h3>
+            <p>Trabajo con equipos que necesitan acelerar su evoluci&oacute;n digital. Desde scripts de automatizaci&oacute;n hasta dashboards interactivos, priorizo la claridad, la documentaci&oacute;n y la medici&oacute;n de resultados.</p>
+          </article>
+          <article class="about-card">
+            <h3>Experiencia destacada</h3>
+            <ul class="timeline">
+              <li>
+                <span class="timeline-date">2024 &mdash; Presente</span>
+                <p>Proyectos personales de automatizaci&oacute;n con Python y an&aacute;lisis de datos con Power BI para optimizar procesos de negocio.</p>
+              </li>
+              <li>
+                <span class="timeline-date">2024</span>
+                <p>ShieldLink: aplicaci&oacute;n m&oacute;vil contra el bullying con Android y Firebase, enfocada en recomendaciones personalizadas.</p>
+              </li>
+              <li>
+                <span class="timeline-date">2023</span>
+                <p>Transformaci&oacute;n digital en Sage y Power BI: dashboards financieros automatizados y reportes multi-fuente.</p>
+              </li>
+            </ul>
+          </article>
+          <article class="about-card">
+            <h3>Tecnolog&iacute;as</h3>
+            <ul class="tech-tags">
+              <li>Python</li>
+              <li>FastAPI</li>
+              <li>HTML5 &amp; CSS3</li>
+              <li>JavaScript</li>
+              <li>Power BI</li>
+              <li>SQL Server</li>
+              <li>Docker</li>
+              <li>Firebase</li>
+              <li>Git</li>
+              <li>WordPress</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="services" class="section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="section-kicker">Servicios</span>
+          <h2>Colaboraciones clave</h2>
+        </div>
+        <div class="card-grid">
+          <article class="service-card">
+            <h3>Automatizaci&oacute;n con Python</h3>
+            <p>Scripts robustos para eliminar tareas repetitivas, integraciones con APIs y pipelines de datos auditables.</p>
+          </article>
+          <article class="service-card">
+            <h3>Desarrollo web</h3>
+            <p>Interfaces accesibles, rendimiento optimizado y despliegues est&aacute;ticos listos para GitHub Pages o Vercel.</p>
+          </article>
+          <article class="service-card">
+            <h3>An&aacute;lisis y visualizaci&oacute;n de datos</h3>
+            <p>Cuadros de mando claros en Power BI y soluciones de reporting orientadas a decisiones accionables.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="projects" class="section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="section-kicker">Proyectos</span>
+          <h2>Casos de estudio recientes</h2>
+          <p>Una selecci&oacute;n de iniciativas que resumen mi forma de trabajar: objetivos claros, ejecuci&oacute;n medible y entregables mantenibles.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <h3>Automatizaci&oacute;n de facturaci&oacute;n</h3>
+            <p>Pipeline de OCR y Python para extraer datos de facturas, validarlos y sincronizarlos con SQL Server reduciendo errores manuales.</p>
+          </article>
+          <article class="project-card">
+            <h3>Dashboards financieros</h3>
+            <p>Consolidaci&oacute;n de datos desde Excel, Sage y Power BI para generar visualizaciones que aceleran las decisiones estrat&eacute;gicas.</p>
+          </article>
+          <article class="project-card">
+            <h3>Experiencias web a medida</h3>
+            <p>Dise&ntilde;o y desarrollo de sitios WordPress personalizados con formularios avanzados y automatizaciones de seguimiento.</p>
+          </article>
+        </div>
+        <div class="repos-wrapper">
+          <h3>Repositorios destacados</h3>
+          <p class="repos-intro">Listado generado desde GitHub para mantener el portfolio siempre actualizado.</p>
+          <div id="repo-list" class="repo-list" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+    <section id="gallery" class="section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="section-kicker">Galer&iacute;a</span>
+          <h2>Mockups y capturas</h2>
+          <p>Piezas visuales que muestran procesos, interfaces y resultados finales.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="features/gallery-automation.svg" alt="Panel de automatizaci&oacute;n con flujos de Python" loading="lazy" decoding="async" width="420" height="280">
+            <figcaption>
+              <strong>Automatizaci&oacute;n de procesos</strong>
+              <span>Script modular con registro y alertas.</span>
+              <a href="https://github.com/YerayAR" target="_blank" rel="noopener">Ver repositorio</a>
+            </figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="features/gallery-dashboard.svg" alt="Dashboard financiero en Power BI con indicadores clave" loading="lazy" decoding="async" width="420" height="280">
+            <figcaption>
+              <strong>Dashboard financiero</strong>
+              <span>KPIs clave y filtros personalizados.</span>
+              <a href="https://github.com/YerayAR" target="_blank" rel="noopener">Ver caso</a>
+            </figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="features/gallery-webapp.svg" alt="Interfaz web responsiva para servicios profesionales" loading="lazy" decoding="async" width="420" height="280">
+            <figcaption>
+              <strong>Web app responsiva</strong>
+              <span>Arquitectura escalable y accesible.</span>
+              <a href="https://yerayar.github.io/" target="_blank" rel="noopener">Ver proyecto</a>
+            </figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="features/gallery-mobile.svg" alt="Aplicaci&oacute;n m&oacute;vil educativa ShieldLink en modo claro" loading="lazy" decoding="async" width="420" height="280">
+            <figcaption>
+              <strong>ShieldLink</strong>
+              <span>App Android contra el bullying.</span>
+              <a href="https://github.com/YerayAR/shieldlink" target="_blank" rel="noopener">Ver detalles</a>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+    <section id="testimonials" class="section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="section-kicker">Testimonios</span>
+          <h2>Referencias</h2>
+        </div>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <p>&ldquo;Yeray identifica cuellos de botella en horas y entrega automatizaciones documentadas que el equipo puede mantener.&rdquo;</p>
+            <div class="testimonial-meta">
+              <strong>Cristina Mart&iacute;n</strong>
+              <span>COO en PymeLogix</span>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <p>&ldquo;Su enfoque en rendimiento web y accesibilidad elev&oacute; la tasa de conversi&oacute;n del proyecto desde el primer despliegue.&rdquo;</p>
+            <div class="testimonial-meta">
+              <strong>Alberto Garc&iacute;a</strong>
+              <span>L&iacute;der de Desarrollo, Agencia Nova</span>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <p>&ldquo;Combina conocimientos t&eacute;cnicos con una gran capacidad de comunicaci&oacute;n. Ideal para proyectos transversales.&rdquo;</p>
+            <div class="testimonial-meta">
+              <strong>Laura S&aacute;nchez</strong>
+              <span>Project Manager, DataCraft</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="blog" class="section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="section-kicker">Art&iacute;culos</span>
+          <h2>Insights t&eacute;cnicos</h2>
+          <p>An&aacute;lisis breves sobre herramientas y aprendizajes que aplico en proyectos reales.</p>
+        </div>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <span class="blog-date">16 sep 2024</span>
+            <h3>Automatizar auditor&iacute;as con Python y Excel</h3>
+            <p>Cómo estructurar scripts reutilizables que validan datos contables, generan reportes y env&iacute;an alertas autom&aacute;ticas.</p>
+            <a class="btn-text" href="https://medium.com/@yerayar" target="_blank" rel="noopener">Leer m&aacute;s</a>
+          </article>
+          <article class="blog-card">
+            <span class="blog-date">02 ago 2024</span>
+            <h3>Checklist de rendimiento para sitios est&aacute;ticos</h3>
+            <p>Optimizar assets, lazy loading y estrategias de cach&eacute; que hago por defecto en proyectos para GitHub Pages.</p>
+            <a class="btn-text" href="https://medium.com/@yerayar" target="_blank" rel="noopener">Leer m&aacute;s</a>
+          </article>
+          <article class="blog-card">
+            <span class="blog-date">14 jun 2024</span>
+            <h3>Dise&ntilde;ar interfaces accesibles desde el boceto</h3>
+            <p>Metodolog&iacute;a para asegurar contraste, jerarqu&iacute;a y patrones de navegaci&oacute;n consistentes en cualquier dispositivo.</p>
+            <a class="btn-text" href="https://medium.com/@yerayar" target="_blank" rel="noopener">Leer m&aacute;s</a>
+          </article>
+          <article class="blog-card">
+            <span class="blog-date">27 abr 2024</span>
+            <h3>Prototipado r&aacute;pido con SvelteKit y Tailwind</h3>
+            <p>Flujo de trabajo para levantar MVPs est&aacute;ticos que luego escalan sin fricci&oacute;n.</p>
+            <a class="btn-text" href="https://medium.com/@yerayar" target="_blank" rel="noopener">Leer m&aacute;s</a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="section has-bubbles">
+      <canvas class="bubble-layer" aria-hidden="true"></canvas>
+      <div class="section-inner contact-layout">
+        <div class="section-head">
+          <span class="section-kicker">Contacto</span>
+          <h2>Hablemos</h2>
+          <p>Cu&eacute;ntame tu reto y coordinamos la mejor forma de colaborar.</p>
+        </div>
+        <form id="contactForm" class="contact-form">
+          <label for="name">Nombre</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+          <label for="email">Correo electr&oacute;nico</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+        </form>
+        <aside class="contact-details" aria-label="Formas alternativas de contacto">
+          <div class="detail-card">
+            <h3>Disponible para</h3>
+            <ul>
+              <li>Consultor&iacute;as puntuales</li>
+              <li>Proyectos end-to-end</li>
+              <li>Mentor&iacute;as t&eacute;cnicas</li>
+            </ul>
+          </div>
+          <div class="detail-card">
+            <h3>Descargar CV</h3>
+            <p>Versi&oacute;n actualizada con experiencia, tecnolog&iacute;as y certificaciones.</p>
+            <a class="btn btn-outline" href="features/Yeray_Alonso_Reyes_CV.pdf" download>Descargar CV</a>
+          </div>
+          <div class="detail-card">
+            <h3>Redes</h3>
+            <ul class="contact-links">
+              <li><a href="https://github.com/YerayAR" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/yeray-alonso-reyes-ii/" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="mailto:yeray.ar.dev@gmail.com">yeray.ar.dev@gmail.com</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; <span id="currentYear"></span> Yeray Alonso Reyes. Hecho con accesibilidad, rendimiento y datos.</p>
+      <div class="footer-meta">
+        <span id="visitCount" aria-live="polite">0</span>
+        <span class="footer-dot" aria-hidden="true">&bull;</span>
+        <a href="features/Yeray_Alonso_Reyes_CV.pdf" download>CV en PDF</a>
+      </div>
     </div>
   </footer>
 </body>
