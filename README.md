@@ -20,4 +20,24 @@ Soy una persona **proactiva y organizada**, con una gran capacidad de aprendizaj
 
 ---
 
+## 🌐 Sitios Web Desplegados
+
+Además de este portfolio principal, he desarrollado y desplegado los siguientes proyectos:
+
+### 📊 Personal Dashboard
+**Dashboard financiero personal desarrollado con SvelteKit**
+- **URL**: https://personal-dashboard-rphbnyxpd-yerays-projects-0617076e.vercel.app
+- **Tecnologías**: SvelteKit, TypeScript, MongoDB, Tailwind CSS
+- **Características**: Gestión de finanzas personales, gráficos interactivos, reportes, modo oscuro/claro
+- **Seguridad**: Headers de seguridad implementados, rate limiting, validación de entrada
+
+### 📧 NeonBytes Newsletter
+**Newsletter tecnológica con diseño moderno y efectos neon**
+- **URL**: https://neon-bytes.vercel.app
+- **Tecnologías**: Next.js 14, TypeScript, MDX, Tailwind CSS
+- **Características**: Newsletter interactiva, suscripción de emails, diseño responsive, PWA
+- **Contenido**: Últimas tendencias tecnológicas, tutoriales y herramientas recomendadas
+
+---
+
 Si quieres saber más sobre mí, no dudes en echar un vistazo a mi portafolio o contactar conmigo.  
