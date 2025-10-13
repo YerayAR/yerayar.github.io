@@ -79,25 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-/* ====================================
-   ANIMACIONES DE SCROLL CON INTERSECTION OBSERVER
-   ====================================
-   Detecta cuando las secciones entran en el viewport
-   y aplica animaciones de entrada usando Animate.css
-*/
-const sections = document.querySelectorAll('.content-section');
-const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Añadir animación de entrada cuando la sección es visible
-            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-            obs.unobserve(entry.target); // Dejar de observar una vez animado
-        }
-    });
-}, { threshold: 0.1 }); // Activar cuando el 10% de la sección es visible
-sections.forEach(section => observer.observe(section));
-
-
 async function fetchRepos() {
     const username = 'YerayAR';
     const container = document.getElementById('repo-list');
@@ -241,8 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const offsetPosition = elementPosition - headerHeight - 20; // 20px de margen extra
                     
                     window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
+                        top: offsetPosition
                     });
                 }
             });
