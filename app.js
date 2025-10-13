@@ -79,32 +79,68 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function renderRepos(repos, container) {
+    container.innerHTML = '';
+    if (!repos.length) {
+        container.textContent = 'No hay repositorios públicos disponibles.';
+        return;
+    }
+    repos
+        .filter(repo => !repo.fork)
+        .slice(0, 12)
+        .forEach(repo => {
+            const div = document.createElement('div');
+            div.className = 'repo-item';
+            const description = repo.description ? repo.description : 'Sin descripción disponible.';
+            div.innerHTML = `
+                <h3><a href="${repo.html_url}" target="_blank" rel="noopener">${repo.name}</a></h3>
+                <p>${description}</p>
+            `;
+            container.appendChild(div);
+        });
+}
+
 async function fetchRepos() {
     const username = 'YerayAR';
     const container = document.getElementById('repo-list');
     if (!container) return;
+
+    const cacheKey = 'github-repos-cache';
+    const cacheTTL = 1000 * 60 * 60 * 6; // 6 horas
     try {
-        const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
-        if (!res.ok) throw new Error('request failed');
-        const repos = await res.json();
-        for (const repo of repos) {
-            let desc = repo.description || '';
-            try {
-                const readmeRes = await fetch(`https://api.github.com/repos/${username}/${repo.name}/readme`, {
-                    headers: { 'Accept': 'application/vnd.github.v3.raw' }
-                });
-                if (readmeRes.ok) {
-                    const text = await readmeRes.text();
-                    const first = text.split('\n')[0];
-                    if (first) desc = first;
-                }
-            } catch (e) {
-                console.error(e);
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < cacheTTL) {
+                renderRepos(parsed.data, container);
+                return;
             }
-            const div = document.createElement('div');
-            div.className = 'repo-item';
-            div.innerHTML = `<h3><a href="${repo.html_url}" target="_blank" rel="noopener">${repo.name}</a></h3><p>${desc}</p>`;
-            container.appendChild(div);
+        }
+    } catch (cacheError) {
+        console.warn('No se pudo leer la caché de repositorios', cacheError);
+    }
+
+    try {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=30&sort=updated`, {
+            headers: {
+                'Accept': 'application/vnd.github+json'
+            }
+        });
+
+        if (res.status === 403) {
+            container.textContent = 'Límite de peticiones a GitHub alcanzado. Intenta de nuevo más tarde.';
+            return;
+        }
+
+        if (!res.ok) throw new Error(`request failed (${res.status})`);
+
+        const repos = await res.json();
+        renderRepos(repos, container);
+
+        try {
+            localStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data: repos }));
+        } catch (cacheWriteError) {
+            console.warn('No se pudo guardar la caché de repositorios', cacheWriteError);
         }
     } catch (e) {
         console.error('Error al cargar los repositorios:', e);
@@ -138,10 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Cambiar el icono
             if (theme === 'light') {
-                themeIcon.className = 'bi bi-sun-fill';
+                themeIcon.className = 'bi bi-moon-fill';
                 console.log('☀️ Tema claro activado');
             } else {
-                themeIcon.className = 'bi bi-moon-fill';
+                themeIcon.className = 'bi bi-sun-fill';
                 console.log('🌙 Tema oscuro activado');
             }
         }
