@@ -28,15 +28,33 @@
    INICIALIZACIÓN DE EMAILJS
    ====================================
    Configura EmailJS para el formulario de contacto
-   usando la versión 4 de la biblioteca
+   usando la versión 4 de la biblioteca con validaciones de seguridad
 */
 document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+    
+    // Security: Verify we're running on the expected domain
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        console.warn('Security: Application should run over HTTPS');
+    }
+    
     // Inicializar EmailJS v4 con clave pública
     if (typeof emailjs !== 'undefined') {
-        emailjs.init({
-            publicKey: "lowkfjPI5RGmYIDmM",
-        });
-        console.log('EmailJS v4 initialized successfully');
+        try {
+            emailjs.init({
+                publicKey: "lowkfjPI5RGmYIDmM",
+                blockHeadless: true, // Block headless browsers
+                blockList: {
+                    list: ['foo@emailjs.com', 'bar@emailjs.com']
+                },
+                limitRate: {
+                    throttle: 10000 // 10 seconds between requests
+                }
+            });
+            console.log('EmailJS v4 initialized successfully with security options');
+        } catch (error) {
+            console.error('Failed to initialize EmailJS:', error);
+        }
     } else {
         console.warn('EmailJS library not loaded');
     }
