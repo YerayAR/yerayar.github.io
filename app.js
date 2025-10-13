@@ -46,12 +46,28 @@ document.addEventListener('DOMContentLoaded', function() {
        ====================================
        Procesa el envío del formulario usando EmailJS v4
        con validación y feedback al usuario
-    */
+     */
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(event) {
+        const serviceId = 'service_mk372rb';
+        const templateId = 'template_u3yoceu';
+        const publicKey = 'lowkfjPI5RGmYIDmM';
+
+        contactForm.addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevenir envío tradicional del formulario
-            
+            if (typeof emailjs === 'undefined') {
+                alert('El servicio de correo no está disponible en este momento. Intenta más tarde.');
+                return;
+            }
+
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton ? submitButton.textContent : '';
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.dataset.originalText = originalText;
+                submitButton.textContent = 'Enviando...';
+            }
+
             // Obtener datos del formulario
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
@@ -64,17 +80,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 message: message
             };
 
-            // Enviar correo usando EmailJS v4 API
-            emailjs.send('service_mk372rb', 'template_u3yoceu', templateParams)
-                .then(function(response) {
-                    console.log('Correo enviado con éxito', response.status, response.text);
-                    alert('Gracias por tu mensaje, ' + name + '! Me pondré en contacto contigo pronto.');
-                    contactForm.reset(); // Limpiar formulario
-                })
-                .catch(function(error) {
-                    console.error('Error al enviar el correo', error);
-                    alert('Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.');
-                });
+            try {
+                // Enviar correo usando EmailJS v4 API
+                const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+                console.log('Correo enviado con éxito', response.status, response.text);
+                alert(`Gracias por tu mensaje, ${name}! Me pondré en contacto contigo pronto.`);
+                contactForm.reset(); // Limpiar formulario
+            } catch (error) {
+                console.error('Error al enviar el correo', error);
+                const errorMessage = error?.status === 412
+                    ? 'No se pudo enviar tu mensaje porque se alcanzó el límite temporal del servicio. Intenta de nuevo más tarde.'
+                    : 'Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.';
+                alert(errorMessage);
+            } finally {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = submitButton.dataset.originalText || originalText || 'Enviar';
+                    delete submitButton.dataset.originalText;
+                }
+            }
         });
     }
 });
