@@ -214,12 +214,14 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
             
-            // Cambiar el icono
+            // Cambiar el icono usando emojis
             if (theme === 'light') {
-                themeIcon.className = 'bi bi-moon-fill';
+                themeIcon.textContent = '🌙';
+                themeIcon.title = 'Cambiar a modo oscuro';
                 console.log('☀️ Tema claro activado');
             } else {
-                themeIcon.className = 'bi bi-sun-fill';
+                themeIcon.textContent = '☀️';
+                themeIcon.title = 'Cambiar a modo claro';
                 console.log('🌙 Tema oscuro activado');
             }
         }

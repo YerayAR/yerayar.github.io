@@ -222,13 +222,16 @@ header {
   border-color: #00ccff;
 }
 
-.theme-toggle i {
-  font-size: 1.2rem;
+.theme-toggle .theme-icon {
+  font-size: 1.4rem;
   transition: all 0.3s ease;
+  display: inline-block;
+  filter: drop-shadow(0 0 3px rgba(0, 209, 178, 0.5));
 }
 
-.theme-toggle:hover i {
-  text-shadow: 0 0 10px var(--accent-color);
+.theme-toggle:hover .theme-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(0, 209, 178, 0.8));
 }
 
 .nav-menu {
