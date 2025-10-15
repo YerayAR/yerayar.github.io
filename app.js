@@ -38,20 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
         console.warn('Security: Application should run over HTTPS');
     }
     
-    // Inicializar EmailJS v4 con clave pública
+    // Inicializar EmailJS v3 con clave pública
     if (typeof emailjs !== 'undefined') {
         try {
-            emailjs.init({
-                publicKey: "lowkfjPI5RGmYIDmM",
-                blockHeadless: true, // Block headless browsers
-                blockList: {
-                    list: ['foo@emailjs.com', 'bar@emailjs.com']
-                },
-                limitRate: {
-                    throttle: 10000 // 10 seconds between requests
-                }
-            });
-            console.log('EmailJS v4 initialized successfully with security options');
+            emailjs.init("lowkfjPI5RGmYIDmM");
+            console.log('EmailJS v3 initialized successfully');
         } catch (error) {
             console.error('Failed to initialize EmailJS:', error);
         }
@@ -99,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             try {
-                // Enviar correo usando EmailJS v4 API
-                const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+                // Enviar correo usando EmailJS v3 API
+                const response = await emailjs.send(serviceId, templateId, templateParams);
                 console.log('Correo enviado con éxito', response.status, response.text);
                 alert(`Gracias por tu mensaje, ${name}! Me pondré en contacto contigo pronto.`);
                 contactForm.reset(); // Limpiar formulario
