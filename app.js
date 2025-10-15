@@ -187,21 +187,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
 
-        console.log('🔍 Theme toggle element:', themeToggle);
-        console.log('🔍 Theme icon element:', themeIcon);
-
         if (!themeToggle) {
-            console.error('❌ No se encontró el botón de cambio de tema');
             return;
         }
 
         if (!themeIcon) {
-            console.error('❌ No se encontró el icono del tema');
             return;
         }
 
         function setTheme(theme) {
-            console.log('🎨 Cambiando tema a:', theme);
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
             
@@ -209,18 +203,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (theme === 'light') {
                 themeIcon.textContent = '🌙';
                 themeIcon.title = 'Cambiar a modo oscuro';
-                console.log('☀️ Tema claro activado');
             } else {
                 themeIcon.textContent = '☀️';
                 themeIcon.title = 'Cambiar a modo claro';
-                console.log('🌙 Tema oscuro activado');
             }
         }
 
         // Establecer tema inicial
         const savedTheme = localStorage.getItem('theme');
         const initialTheme = savedTheme || 'dark';
-        console.log('📂 Tema guardado:', savedTheme, '| Tema inicial:', initialTheme);
         setTheme(initialTheme);
 
         // Event listener para el botón
@@ -228,16 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             event.stopPropagation();
             
-            console.log('🖱️ ¡Botón de tema clickeado!');
-            
             const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             
-            console.log('🔄 Cambiando de', currentTheme, 'a', newTheme);
             setTheme(newTheme);
         });
-
-        console.log('✅ Sistema de temas inicializado correctamente');
     }
 
     // Inicializar el sistema de temas
