@@ -209,10 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Establecer tema inicial
-        const savedTheme = localStorage.getItem('theme');
-        const initialTheme = savedTheme || 'light';
-        setTheme(initialTheme);
+        // Establecer tema inicial siempre en claro
+        setTheme('light');
 
         // Event listener para el botón
         themeToggle.addEventListener('click', function(event) {
