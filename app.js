@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        const serviceId = 'service_mk372rb';
+        const serviceId = 'service_1pve98d';
         const templateId = 'template_u3yoceu';
         const publicKey = 'lowkfjPI5RGmYIDmM';
 
