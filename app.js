@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Establecer tema inicial
         const savedTheme = localStorage.getItem('theme');
-        const initialTheme = savedTheme || 'dark';
+        const initialTheme = savedTheme || 'light';
         setTheme(initialTheme);
 
         // Event listener para el botón
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             event.stopPropagation();
             
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             
             setTheme(newTheme);
