@@ -113,9 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function renderRepos(repos, container) {
-    container.innerHTML = '';
+    // Remover loader
+    const loader = container.querySelector('.loader');
+    if (loader) loader.remove();
+    
     if (!repos.length) {
-        container.textContent = 'No hay repositorios públicos disponibles.';
+        container.innerHTML = '<p>No hay repositorios públicos disponibles.</p>';
         return;
     }
     repos
@@ -285,5 +288,192 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchRepos();
+    initThreeJS();
+    initMatrixRain();
 });
+
+// === Matrix Rain Effect ===
+function initMatrixRain() {
+    const canvases = [
+        { id: 'matrix-left', element: document.getElementById('matrix-left') },
+        { id: 'matrix-right', element: document.getElementById('matrix-right') }
+    ];
+
+    canvases.forEach(({ element: canvas }) => {
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        // Caracteres Matrix (katakana + números + símbolos)
+        const matrix = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
+        const fontSize = 12;
+        const columns = Math.floor(canvas.width / fontSize);
+        
+        // Array para almacenar la posición Y de cada columna con inicios aleatorios
+        const drops = Array(columns).fill(0).map(() => Math.floor(Math.random() * -50));
+
+        function draw() {
+            // Fondo completamente transparente sin capa oscura
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar múltiples caracteres por columna para mayor densidad
+            for (let i = 0; i < drops.length; i++) {
+                // Dibujar la cabeza de la columna más brillante
+                const text = matrix[Math.floor(Math.random() * matrix.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                // Caracter principal (más brillante con sombra)
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#00d1b2';
+                ctx.fillStyle = '#00ffcc';
+                ctx.font = `bold ${fontSize}px monospace`;
+                ctx.fillText(text, x, y);
+
+                // Dibujar estela de 5-8 caracteres detrás
+                const trailLength = 5 + Math.floor(Math.random() * 3);
+                for (let j = 1; j < trailLength; j++) {
+                    const trailY = y - (j * fontSize);
+                    if (trailY > 0) {
+                        const opacity = 1 - (j / trailLength);
+                        ctx.shadowBlur = 5;
+                        ctx.fillStyle = `rgba(0, 209, 178, ${opacity})`;
+                        ctx.font = `${fontSize}px monospace`;
+                        const trailText = matrix[Math.floor(Math.random() * matrix.length)];
+                        ctx.fillText(trailText, x, trailY);
+                    }
+                }
+
+                // Reset aleatorio cuando llega al final
+                if (y > canvas.height && Math.random() > 0.98) {
+                    drops[i] = Math.floor(Math.random() * -20);
+                }
+
+                drops[i]++;
+            }
+            
+            // Resetear sombra
+            ctx.shadowBlur = 0;
+        }
+
+        // Animar a 30 FPS
+        setInterval(draw, 33);
+
+        // Redimensionar canvas
+        window.addEventListener('resize', () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        });
+    });
+}
+
+// === Three.js Scene ===
+function initThreeJS() {
+    if (typeof THREE === 'undefined') {
+        console.warn('Three.js no está disponible');
+        return;
+    }
+
+    const canvas = document.getElementById('three-canvas');
+    if (!canvas) return;
+
+    // Configuración de la escena
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.setClearColor(0x000000, 0);
+
+    // Crear geometrías animadas
+    const geometries = [];
+    
+    // Partículas flotantes
+    const particleGeometry = new THREE.BufferGeometry();
+    const particleCount = 50;
+    const positions = new Float32Array(particleCount * 3);
+    
+    for (let i = 0; i < particleCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 10;
+        positions[i + 1] = (Math.random() - 0.5) * 10;
+        positions[i + 2] = (Math.random() - 0.5) * 10;
+    }
+    
+    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const particleMaterial = new THREE.PointsMaterial({ 
+        color: 0x00d1b2, 
+        size: 0.02,
+        transparent: true,
+        opacity: 0.6
+    });
+    
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
+    scene.add(particles);
+
+    // Esferas rotantes
+    for (let i = 0; i < 5; i++) {
+        const geometry = new THREE.SphereGeometry(0.1, 16, 16);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: i % 2 === 0 ? 0x00d1b2 : 0x8a2be2,
+            transparent: true,
+            opacity: 0.3
+        });
+        const sphere = new THREE.Mesh(geometry, material);
+        
+        sphere.position.set(
+            (Math.random() - 0.5) * 6,
+            (Math.random() - 0.5) * 6,
+            (Math.random() - 0.5) * 6
+        );
+        
+        geometries.push(sphere);
+        scene.add(sphere);
+    }
+
+    camera.position.z = 5;
+
+    // Animación
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        // Rotar partículas
+        particles.rotation.y += 0.002;
+        
+        // Rotar esferas
+        geometries.forEach((sphere, index) => {
+            sphere.rotation.x += 0.01 * (index + 1);
+            sphere.rotation.y += 0.01 * (index + 1);
+            sphere.position.y = Math.sin(Date.now() * 0.001 + index) * 0.5;
+        });
+        
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+    
+    // Redimensionar
+    function handleResize() {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+    }
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Observer para detectar cuando la sección entra en vista
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                canvas.style.opacity = '0.4';
+            }
+        });
+    });
+    
+    observer.observe(canvas.parentElement);
+}
 
