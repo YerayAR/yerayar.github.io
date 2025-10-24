@@ -592,14 +592,6 @@ h2 {
   text-shadow: 0 0 15px var(--accent-color);
 }
 
-/* ====================================
-   ESTILOS DE TESTIMONIALES ELIMINADOS
-   ====================================
-   Se han eliminado los estilos de testimoniales porque
-   no se usan en la versión actual del portafolio.
-   Si se necesitan en el futuro, se pueden re-implementar.
-*/
-
 #contactForm {
   display: flex;
   flex-direction: column;
