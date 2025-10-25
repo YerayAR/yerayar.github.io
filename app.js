@@ -496,7 +496,15 @@ const translations = {
         'about-p2': 'Actualmente me desarrollo profesionalmente en las áreas de automatización con Python, desarrollo web y análisis de datos, aplicando mis conocimientos para crear soluciones eficientes y basadas en datos.',
         'about-p3': 'Me considero una persona adaptable y con gran capacidad de aprendizaje. He aprendido rápidamente a manejar nuevas tecnologías y frameworks, aplicando metodologías ágiles (Scrum, Kanban) en proyectos colaborativos. Gran parte de mi experiencia proviene de proyectos personales y académicos que me han permitido mejorar en trabajo en equipo, resolución de problemas y gestión de proyectos.',
         'about-p4': 'Estoy entusiasmado por seguir creciendo como desarrollador y contribuir a proyectos innovadores que generen un impacto positivo. Busco activamente oportunidades para aplicar mis habilidades en entornos profesionales. ¡No dudes en contactarme si deseas saber más o colaborar en algún proyecto!',
-        'experience-title': 'Experiencia Académica'
+        'experience-title': 'Experiencia Académica',
+        'tech-title': 'Tecnologías y Herramientas',
+        'tech-intro': 'Estas son algunas de las tecnologías y herramientas con las que he trabajado:',
+        'services-title': 'Servicios',
+        'projects-title': 'Proyectos',
+        'stats-title': 'Estadísticas',
+        'contact-title': 'Contacto',
+        'cv-title': 'Descargar CV',
+        'cv-intro': 'Descarga mi currículum vitae en el idioma de tu preferencia:'
     },
     en: {
         'dev-banner': 'Site under development',
@@ -514,7 +522,15 @@ const translations = {
         'about-p2': 'I currently develop professionally in the areas of automation with Python, web development, and data analysis, applying my knowledge to create efficient data-driven solutions.',
         'about-p3': 'I consider myself an adaptable person with great learning capacity. I have quickly learned to handle new technologies and frameworks, applying agile methodologies (Scrum, Kanban) in collaborative projects. Much of my experience comes from personal and academic projects that have allowed me to improve in teamwork, problem-solving, and project management.',
         'about-p4': 'I am excited to continue growing as a developer and contribute to innovative projects that generate a positive impact. I am actively seeking opportunities to apply my skills in professional environments. Feel free to contact me if you want to know more or collaborate on a project!',
-        'experience-title': 'Academic Experience'
+        'experience-title': 'Academic Experience',
+        'tech-title': 'Technologies and Tools',
+        'tech-intro': 'These are some of the technologies and tools I have worked with:',
+        'services-title': 'Services',
+        'projects-title': 'Projects',
+        'stats-title': 'Statistics',
+        'contact-title': 'Contact',
+        'cv-title': 'Download CV',
+        'cv-intro': 'Download my resume in your preferred language:'
     }
 };
 
@@ -555,6 +571,40 @@ function translatePage(lang) {
     // Actualizar Experience title
     const expSection = document.querySelector('#experience .section-content h2');
     if (expSection) expSection.textContent = translations[lang]['experience-title'];
+    
+    // Actualizar Technologies section
+    const techSection = document.querySelector('#technologies .section-content');
+    if (techSection) {
+        const techH2 = techSection.querySelector('h2');
+        if (techH2) techH2.textContent = translations[lang]['tech-title'];
+        const techP = techSection.querySelector('p');
+        if (techP) techP.textContent = translations[lang]['tech-intro'];
+    }
+    
+    // Actualizar Services title
+    const servicesSection = document.querySelector('#services .section-content h2');
+    if (servicesSection) servicesSection.textContent = translations[lang]['services-title'];
+    
+    // Actualizar Projects title
+    const projectsSection = document.querySelector('#projects .section-content h2');
+    if (projectsSection) projectsSection.textContent = translations[lang]['projects-title'];
+    
+    // Actualizar Stats title
+    const statsSection = document.querySelector('#stats .section-content h2');
+    if (statsSection) statsSection.textContent = translations[lang]['stats-title'];
+    
+    // Actualizar Contact title
+    const contactSection = document.querySelector('#contact .section-content h2');
+    if (contactSection) contactSection.textContent = translations[lang]['contact-title'];
+    
+    // Actualizar CV section
+    const cvSection = document.querySelector('#cv .section-content');
+    if (cvSection) {
+        const cvH2 = cvSection.querySelector('h2');
+        if (cvH2) cvH2.textContent = translations[lang]['cv-title'];
+        const cvP = cvSection.querySelector('p');
+        if (cvP) cvP.textContent = translations[lang]['cv-intro'];
+    }
     
     // Actualizar botones activos
     document.querySelectorAll('.lang-btn').forEach(btn => {
