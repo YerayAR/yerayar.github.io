@@ -122,6 +122,7 @@ header {
   top: 0;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 /* Nueva barra de navegación superior */
@@ -301,6 +302,7 @@ header {
   font-weight: bold;
   text-shadow: 0 0 5px var(--dev-banner-bg);
   animation: neon-glow 1.5s ease-in-out infinite alternate;
+  width: 100%;
 }
 
 nav ul {
@@ -743,12 +745,14 @@ footer {
 
 /* === Navegación responsiva para móviles === */
 @media (max-width: 768px) {
-  * {
-    max-width: 100%;
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
   }
   
-  body {
-    overflow-x: hidden;
+  * {
+    max-width: 100%;
   }
   
   .nav-container {
