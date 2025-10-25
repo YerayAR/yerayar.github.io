@@ -172,18 +172,21 @@ header {
 }
 
 .lang-btn {
-  background: transparent;
+  background: rgba(0, 209, 178, 0.1);
   border: 2px solid transparent;
   border-radius: 8px;
   width: 44px;
   height: 44px;
-  font-size: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-color);
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.6;
+  font-family: var(--font-headings);
 }
 
 .lang-btn:hover {
@@ -813,7 +816,7 @@ footer {
   .lang-btn {
     width: 36px;
     height: 36px;
-    font-size: 1.2rem;
+    font-size: 0.75rem;
   }
   
   .theme-toggle {
