@@ -143,7 +143,7 @@
   </div>
   
   <header>
-    <div class="dev-banner">Sitio en desarrollo</div>
+    <div class="dev-banner" data-lang="dev-banner">Sitio en desarrollo</div>
     <!-- Banner de navegación superior -->
     <nav class="top-navbar">
       <div class="nav-container">
@@ -159,14 +159,14 @@
           <span class="theme-icon" id="theme-icon">🌙</span>
         </button>
         <ul class="nav-menu">
-          <li class="nav-item"><a href="#about" class="nav-link">Sobre Mí</a></li>
-          <li class="nav-item"><a href="#experience" class="nav-link">Experiencia</a></li>
-          <li class="nav-item"><a href="#technologies" class="nav-link">Tecnologías</a></li>
-          <li class="nav-item"><a href="#services" class="nav-link">Servicios</a></li>
-          <li class="nav-item"><a href="#projects" class="nav-link">Proyectos</a></li>
-          <li class="nav-item"><a href="#stats" class="nav-link">Estadísticas</a></li>
-          <li class="nav-item"><a href="#contact" class="nav-link">Contacto</a></li>
-          <li class="nav-item"><a href="#cv" class="nav-link">Descargar CV</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link" data-lang="nav-about">Sobre Mí</a></li>
+          <li class="nav-item"><a href="#experience" class="nav-link" data-lang="nav-experience">Experiencia</a></li>
+          <li class="nav-item"><a href="#technologies" class="nav-link" data-lang="nav-technologies">Tecnologías</a></li>
+          <li class="nav-item"><a href="#services" class="nav-link" data-lang="nav-services">Servicios</a></li>
+          <li class="nav-item"><a href="#projects" class="nav-link" data-lang="nav-projects">Proyectos</a></li>
+          <li class="nav-item"><a href="#stats" class="nav-link" data-lang="nav-stats">Estadísticas</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link" data-lang="nav-contact">Contacto</a></li>
+          <li class="nav-item"><a href="#cv" class="nav-link" data-lang="nav-cv">Descargar CV</a></li>
         </ul>
         <button id="menu-toggle" aria-label="Abrir menú" class="hamburger">
           <span class="bar"></span>
@@ -200,7 +200,7 @@
             </div>
           </div>
           <p class="intro-name animate__animated animate__fadeInLeft animate__delay-1s">Yeray AR</p>
-          <p class="intro-description">Me dedico a automatizar procesos con Python y al desarrollo web.</p>
+          <p class="intro-description" data-lang="intro-description">Me dedico a automatizar procesos con Python y al desarrollo web.</p>
         </div>
       </div>
     </section>
@@ -213,18 +213,18 @@
     -->
     <section id="about" class="content-section">
       <div class="section-content">
-      <h2>Sobre Mí</h2>
-      <p>¡Hola! Soy Yeray Alonso Reyes, un Ingeniero Informático apasionado por la tecnología y la programación. He finalizado mi grado en Ingeniería Informática en la Universitat Oberta de Catalunya (UOC), donde me especialicé en el desarrollo de aplicaciones web y móviles. Durante mi formación trabajé con diversas tecnologías como HTML, CSS, JavaScript, React, Python y Docker.</p>
-      <p>Actualmente me desarrollo profesionalmente en las áreas de automatización con Python, desarrollo web y análisis de datos, aplicando mis conocimientos para crear soluciones eficientes y basadas en datos.</p>
-      <p>Me considero una persona adaptable y con gran capacidad de aprendizaje. He aprendido rápidamente a manejar nuevas tecnologías y frameworks, aplicando metodologías ágiles (Scrum, Kanban) en proyectos colaborativos. Gran parte de mi experiencia proviene de proyectos personales y académicos que me han permitido mejorar en trabajo en equipo, resolución de problemas y gestión de proyectos.</p>
-      <p>Estoy entusiasmado por seguir creciendo como desarrollador y contribuir a proyectos innovadores que generen un impacto positivo. Busco activamente oportunidades para aplicar mis habilidades en entornos profesionales. ¡No dudes en contactarme si deseas saber más o colaborar en algún proyecto!</p>
+      <h2 data-lang="about-title">Sobre Mí</h2>
+      <p data-lang="about-p1">¡Hola! Soy Yeray Alonso Reyes, un Ingeniero Informático apasionado por la tecnología y la programación. He finalizado mi grado en Ingeniería Informática en la Universitat Oberta de Catalunya (UOC), donde me especialicé en el desarrollo de aplicaciones web y móviles. Durante mi formación trabajé con diversas tecnologías como HTML, CSS, JavaScript, React, Python y Docker.</p>
+      <p data-lang="about-p2">Actualmente me desarrollo profesionalmente en las áreas de automatización con Python, desarrollo web y análisis de datos, aplicando mis conocimientos para crear soluciones eficientes y basadas en datos.</p>
+      <p data-lang="about-p3">Me considero una persona adaptable y con gran capacidad de aprendizaje. He aprendido rápidamente a manejar nuevas tecnologías y frameworks, aplicando metodologías ágiles (Scrum, Kanban) en proyectos colaborativos. Gran parte de mi experiencia proviene de proyectos personales y académicos que me han permitido mejorar en trabajo en equipo, resolución de problemas y gestión de proyectos.</p>
+      <p data-lang="about-p4">Estoy entusiasmado por seguir creciendo como desarrollador y contribuir a proyectos innovadores que generen un impacto positivo. Busco activamente oportunidades para aplicar mis habilidades en entornos profesionales. ¡No dudes en contactarme si deseas saber más o colaborar en algún proyecto!</p>
       </div>
     </section>
   </div>
 
   <section id="experience" class="content-section">
     <div class="section-content">
-    <h2>Experiencia Académica</h2>
+    <h2 data-lang="experience-title">Experiencia Académica</h2>
     <div class="experience-item">
       <h3 data-lang="exp1-title">2020 - 2025: Grado en Ingeniería Informática (UOC)</h3>
       <p data-lang="exp1-desc">Completé mis estudios universitarios especializándome en desarrollo web y móvil. Como proyecto de fin de grado desarrollé una aplicación móvil completa utilizando Android Studio y Firebase.</p>
@@ -247,8 +247,8 @@
 
   <section id="technologies" class="content-section">
     <div class="section-content">
-    <h2>Tecnologías y Herramientas</h2>
-    <p>Estas son algunas de las tecnologías y herramientas con las que he trabajado:</p>
+    <h2 data-lang="tech-title">Tecnologías y Herramientas</h2>
+    <p data-lang="tech-intro">Estas son algunas de las tecnologías y herramientas con las que he trabajado:</p>
     <div class="tech-list">
       <span class="tech-item">🔵 HTML5</span>
       <span class="tech-item">🎨 CSS3</span>
@@ -269,7 +269,7 @@
 
   <section id="services" class="content-section">
     <div class="section-content">
-    <h2>Servicios</h2>
+    <h2 data-lang="services-title">Servicios</h2>
     <div class="service-item">
       <h3 data-lang="serv1-title">Automatización con Python</h3>
       <p data-lang="serv1-desc">Desarrollo de scripts y herramientas para automatizar procesos repetitivos y optimizar flujos de trabajo, ahorrando tiempo y reduciendo errores.</p>
@@ -296,7 +296,7 @@
 
   <section id="projects" class="content-section">
     <div class="section-content">
-    <h2>Proyectos</h2>
+    <h2 data-lang="projects-title">Proyectos</h2>
     <div class="project">
       <h3 data-lang="proj1-title">Proyecto de análisis de datos de ventas</h3>
       <p data-lang="proj1-desc">Procesamiento y limpieza de datos en Excel y Sage, asegurando su integridad. Aplicación de técnicas de análisis en Power BI para identificar tendencias y generar reportes contables detallados. Diseño de dashboards dinámicos para facilitar la toma de decisiones estratégicas, con recomendaciones basadas en datos.</p>
@@ -328,7 +328,7 @@
 
   <section id="stats" class="content-section">
     <div class="section-content">
-    <h2>Estadísticas</h2>
+    <h2 data-lang="stats-title">Estadísticas</h2>
     <div class="stats-grid">
       <div class="stat-card">
         <span class="stat-number">6+</span>
@@ -349,7 +349,7 @@
 
   <section id="contact" class="content-section">
     <div class="section-content">
-    <h2>Contacto</h2>
+    <h2 data-lang="contact-title">Contacto</h2>
     <form id="contactForm">
       <label for="name" data-lang="contact-name">Nombre:</label>
       <input type="text" id="name" name="name" required>
@@ -368,7 +368,7 @@
 
   <section id="cv" class="content-section">
     <div class="section-content">
-    <h2>Descargar CV</h2>
+    <h2 data-lang="cv-title">Descargar CV</h2>
     <p data-lang="cv-intro">Descarga mi currículum vitae en el idioma de tu preferencia:</p>
     <div class="cv-with-animation">
       <div class="cv-download-container">
