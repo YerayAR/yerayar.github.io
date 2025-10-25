@@ -290,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchRepos();
     initThreeJS();
     initMatrixRain();
+    initLanguageToggle();
 });
 
 // === Matrix Rain Effect ===
@@ -475,5 +476,104 @@ function initThreeJS() {
     });
     
     observer.observe(canvas.parentElement);
+}
+
+// === Sistema de Traducción ===
+const translations = {
+    es: {
+        'dev-banner': 'Sitio en desarrollo',
+        'nav-about': 'Sobre Mí',
+        'nav-experience': 'Experiencia',
+        'nav-technologies': 'Tecnologías',
+        'nav-services': 'Servicios',
+        'nav-projects': 'Proyectos',
+        'nav-stats': 'Estadísticas',
+        'nav-contact': 'Contacto',
+        'nav-cv': 'Descargar CV',
+        'intro-description': 'Me dedico a automatizar procesos con Python y al desarrollo web.',
+        'about-title': 'Sobre Mí',
+        'about-p1': '¡Hola! Soy Yeray Alonso Reyes, un Ingeniero Informático apasionado por la tecnología y la programación. He finalizado mi grado en Ingeniería Informática en la Universitat Oberta de Catalunya (UOC), donde me especialicé en el desarrollo de aplicaciones web y móviles. Durante mi formación trabajé con diversas tecnologías como HTML, CSS, JavaScript, React, Python y Docker.',
+        'about-p2': 'Actualmente me desarrollo profesionalmente en las áreas de automatización con Python, desarrollo web y análisis de datos, aplicando mis conocimientos para crear soluciones eficientes y basadas en datos.',
+        'about-p3': 'Me considero una persona adaptable y con gran capacidad de aprendizaje. He aprendido rápidamente a manejar nuevas tecnologías y frameworks, aplicando metodologías ágiles (Scrum, Kanban) en proyectos colaborativos. Gran parte de mi experiencia proviene de proyectos personales y académicos que me han permitido mejorar en trabajo en equipo, resolución de problemas y gestión de proyectos.',
+        'about-p4': 'Estoy entusiasmado por seguir creciendo como desarrollador y contribuir a proyectos innovadores que generen un impacto positivo. Busco activamente oportunidades para aplicar mis habilidades en entornos profesionales. ¡No dudes en contactarme si deseas saber más o colaborar en algún proyecto!',
+        'experience-title': 'Experiencia Académica'
+    },
+    en: {
+        'dev-banner': 'Site under development',
+        'nav-about': 'About Me',
+        'nav-experience': 'Experience',
+        'nav-technologies': 'Technologies',
+        'nav-services': 'Services',
+        'nav-projects': 'Projects',
+        'nav-stats': 'Statistics',
+        'nav-contact': 'Contact',
+        'nav-cv': 'Download CV',
+        'intro-description': 'I dedicate myself to automating processes with Python and web development.',
+        'about-title': 'About Me',
+        'about-p1': 'Hello! I\'m Yeray Alonso Reyes, a Computer Engineer passionate about technology and programming. I have completed my degree in Computer Engineering at the Universitat Oberta de Catalunya (UOC), where I specialized in web and mobile application development. During my training, I worked with various technologies such as HTML, CSS, JavaScript, React, Python, and Docker.',
+        'about-p2': 'I currently develop professionally in the areas of automation with Python, web development, and data analysis, applying my knowledge to create efficient data-driven solutions.',
+        'about-p3': 'I consider myself an adaptable person with great learning capacity. I have quickly learned to handle new technologies and frameworks, applying agile methodologies (Scrum, Kanban) in collaborative projects. Much of my experience comes from personal and academic projects that have allowed me to improve in teamwork, problem-solving, and project management.',
+        'about-p4': 'I am excited to continue growing as a developer and contribute to innovative projects that generate a positive impact. I am actively seeking opportunities to apply my skills in professional environments. Feel free to contact me if you want to know more or collaborate on a project!',
+        'experience-title': 'Academic Experience'
+    }
+};
+
+let currentLang = 'es';
+
+function translatePage(lang) {
+    currentLang = lang;
+    
+    // Actualizar banner
+    const devBanner = document.querySelector('.dev-banner');
+    if (devBanner) devBanner.textContent = translations[lang]['dev-banner'];
+    
+    // Actualizar navegación
+    document.querySelectorAll('.nav-link').forEach((link, index) => {
+        const keys = ['nav-about', 'nav-experience', 'nav-technologies', 'nav-services', 'nav-projects', 'nav-stats', 'nav-contact', 'nav-cv'];
+        if (keys[index]) {
+            link.textContent = translations[lang][keys[index]];
+        }
+    });
+    
+    // Actualizar intro
+    const introDesc = document.querySelector('.intro-description');
+    if (introDesc) introDesc.textContent = translations[lang]['intro-description'];
+    
+    // Actualizar About section
+    const aboutSection = document.querySelector('#about .section-content');
+    if (aboutSection) {
+        const h2 = aboutSection.querySelector('h2');
+        if (h2) h2.textContent = translations[lang]['about-title'];
+        
+        const paragraphs = aboutSection.querySelectorAll('p');
+        if (paragraphs[0]) paragraphs[0].textContent = translations[lang]['about-p1'];
+        if (paragraphs[1]) paragraphs[1].textContent = translations[lang]['about-p2'];
+        if (paragraphs[2]) paragraphs[2].textContent = translations[lang]['about-p3'];
+        if (paragraphs[3]) paragraphs[3].textContent = translations[lang]['about-p4'];
+    }
+    
+    // Actualizar Experience title
+    const expSection = document.querySelector('#experience .section-content h2');
+    if (expSection) expSection.textContent = translations[lang]['experience-title'];
+    
+    // Actualizar botones activos
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.getElementById(`lang-${lang}`).classList.add('active');
+}
+
+// Event listeners para botones de idioma
+function initLanguageToggle() {
+    const langEs = document.getElementById('lang-es');
+    const langEn = document.getElementById('lang-en');
+    
+    if (langEs) {
+        langEs.addEventListener('click', () => translatePage('es'));
+    }
+    
+    if (langEn) {
+        langEn.addEventListener('click', () => translatePage('en'));
+    }
 }
 
