@@ -838,9 +838,23 @@ footer {
   
   #intro {
     padding: 2rem 1rem;
+    width: 100%;
   }
+  
   .content-section {
     padding: 1rem;
+    width: 100%;
+  }
+  
+  .intro-about-layout {
+    width: 100%;
+    padding: 0;
+  }
+  
+  .intro-about-layout > #intro,
+  .intro-about-layout > .content-section {
+    width: 100%;
+    margin: 0;
   }
   h2 {
     font-size: 1.5rem;
