@@ -916,7 +916,10 @@ footer {
   font-size: clamp(2rem, 4vw, 3rem);
   color: #1a1a1a;
   margin: 0;
-  text-shadow: none;
+  text-shadow: -1px -1px 0 #000,
+               1px -1px 0 #000,
+               -1px 1px 0 #000,
+               1px 1px 0 #000;
   font-weight: 700;
   position: relative;
   z-index: 2;
@@ -932,6 +935,10 @@ footer {
   z-index: 2;
   line-height: 1.6;
   letter-spacing: 0.5px;
+  text-shadow: -1px -1px 0 #000,
+               1px -1px 0 #000,
+               -1px 1px 0 #000,
+               1px 1px 0 #000;
 }
 
 .atom {
