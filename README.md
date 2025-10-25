@@ -26,7 +26,7 @@ Además de este portfolio principal, he desarrollado y desplegado los siguientes
 
 ### 📊 Personal Dashboard
 **Dashboard financiero personal desarrollado con SvelteKit**
-- **URL**: https://personal-dashboard-rphbnyxpd-yerays-projects-0617076e.vercel.app
+- **URL**: https://pd-findash.vercel.app
 - **Tecnologías**: SvelteKit, TypeScript, MongoDB, Tailwind CSS
 - **Características**: Gestión de finanzas personales, gráficos interactivos, reportes, modo oscuro/claro
 - **Seguridad**: Headers de seguridad implementados, rate limiting, validación de entrada
