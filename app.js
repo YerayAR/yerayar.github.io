@@ -497,14 +497,56 @@ const translations = {
         'about-p3': 'Me considero una persona adaptable y con gran capacidad de aprendizaje. He aprendido rápidamente a manejar nuevas tecnologías y frameworks, aplicando metodologías ágiles (Scrum, Kanban) en proyectos colaborativos. Gran parte de mi experiencia proviene de proyectos personales y académicos que me han permitido mejorar en trabajo en equipo, resolución de problemas y gestión de proyectos.',
         'about-p4': 'Estoy entusiasmado por seguir creciendo como desarrollador y contribuir a proyectos innovadores que generen un impacto positivo. Busco activamente oportunidades para aplicar mis habilidades en entornos profesionales. ¡No dudes en contactarme si deseas saber más o colaborar en algún proyecto!',
         'experience-title': 'Experiencia Académica',
+        'exp1-title': '2020 - 2025: Grado en Ingeniería Informática (UOC)',
+        'exp1-desc': 'Completé mis estudios universitarios especializándome en desarrollo web y móvil. Como proyecto de fin de grado desarrollé una aplicación móvil completa utilizando Android Studio y Firebase.',
+        'exp2-title': '2024: Proyecto Académico - ShieldLink',
+        'exp2-desc': 'Aplicación móvil diseñada para combatir el bullying en entornos educativos mediante recomendaciones personalizadas y evaluaciones anónimas. Este proyecto mejoró mis habilidades en Android (Java) y Firebase, y demostró el poder de la tecnología para impactar positivamente en la sociedad.',
+        'exp3-title': '2024 - 2025: Proyectos Personales',
+        'exp3-desc': 'Desarrollo de proyectos propios enfocados en automatización de tareas con Python (scripts para agilizar procesos repetitivos) y en análisis de datos (exploración y visualización de datasets) para seguir fortaleciendo mis habilidades en estas áreas.',
+        'exp4-title': '2025 - Presente: Servicios Profesionales',
+        'exp4-desc': 'Desarrollo de páginas web estáticas para comercios y portfolios personales, creando soluciones web modernas y responsivas. También imparto clases particulares de fundamentos de la programación, ayudando a estudiantes a comenzar su camino en el desarrollo de software.',
         'tech-title': 'Tecnologías y Herramientas',
         'tech-intro': 'Estas son algunas de las tecnologías y herramientas con las que he trabajado:',
         'services-title': 'Servicios',
+        'serv1-title': 'Automatización con Python',
+        'serv1-desc': 'Desarrollo de scripts y herramientas para automatizar procesos repetitivos y optimizar flujos de trabajo, ahorrando tiempo y reduciendo errores.',
+        'serv2-title': 'Páginas Web para Comercios',
+        'serv2-desc': 'Desarrollo de sitios web estáticos modernos y responsivos para pequeños comercios y negocios locales, optimizados para mostrar productos y servicios de forma profesional.',
+        'serv3-title': 'Portfolios Personales',
+        'serv3-desc': 'Creación de portfolios personalizados para profesionales y creativos que buscan mostrar su trabajo de forma atractiva y profesional en línea.',
+        'serv4-title': 'Clases de Programación',
+        'serv4-desc': 'Enseñanza de fundamentos de la programación mediante clases particulares, adaptadas al nivel y ritmo de cada estudiante para facilitar su aprendizaje.',
+        'serv5-title': 'Análisis de Datos',
+        'serv5-desc': 'Procesamiento y análisis de datos para extraer insights accionables, acompañados de visualizaciones claras que apoyan la toma de decisiones.',
         'projects-title': 'Proyectos',
+        'proj1-title': 'Proyecto de análisis de datos de ventas',
+        'proj1-desc': 'Procesamiento y limpieza de datos en Excel y Sage, asegurando su integridad. Aplicación de técnicas de análisis en Power BI para identificar tendencias y generar reportes contables detallados. Diseño de dashboards dinámicos para facilitar la toma de decisiones estratégicas, con recomendaciones basadas en datos.',
+        'proj2-title': 'Automatización de facturación',
+        'proj2-desc': 'Desarrollo de un sistema automatizado para la creación y envío de facturas, integrando reconocimiento óptico de caracteres (OCR) con Python para la extracción de datos desde documentos. Los datos procesados se almacenan en SQL Server, asegurando precisión y reducción de tareas manuales en la gestión de facturación.',
+        'proj3-title': 'Desarrollo de formulario avanzado y sitio web en WordPress',
+        'proj3-desc': 'Implementación de un formulario personalizado en WordPress utilizando plugins como Contact Form 7. El formulario permite recopilar información específica de usuarios y enviar notificaciones automáticas, mejorando la eficiencia en la gestión de solicitudes. Además, creación de un sitio web corporativo moderno y responsivo en WordPress.',
+        'academic-proj-title': 'Proyectos Académicos',
+        'shield-title': 'ShieldLink - App Móvil contra el Bullying',
+        'shield-desc': 'Aplicación móvil desarrollada para abordar el problema del bullying en entornos educativos, ofreciendo recomendaciones personalizadas y evaluaciones anónimas para estudiantes.',
+        'github-link': 'Ver código en GitHub',
+        'repos-title': 'Repositorios en GitHub',
         'stats-title': 'Estadísticas',
+        'stat-projects': 'Proyectos completados',
+        'stat-years': 'Años de experiencia',
+        'stat-success': 'Éxito en los proyectos',
         'contact-title': 'Contacto',
+        'contact-name': 'Nombre:',
+        'contact-email': 'Correo Electrónico:',
+        'contact-message': 'Mensaje:',
+        'contact-submit': 'Enviar',
         'cv-title': 'Descargar CV',
-        'cv-intro': 'Descarga mi currículum vitae en el idioma de tu preferencia:'
+        'cv-intro': 'Descarga mi currículum vitae en el idioma de tu preferencia:',
+        'cv-es-title': 'CV en Español',
+        'cv-es-desc': 'Currículum completo en español con toda mi experiencia.',
+        'cv-en-title': 'CV in English',
+        'cv-en-desc': 'Complete resume in English with all my experience and skills.',
+        'cv-download-es': 'Descargar PDF',
+        'cv-download-en': 'Download PDF'
     },
     en: {
         'dev-banner': 'Site under development',
@@ -523,14 +565,56 @@ const translations = {
         'about-p3': 'I consider myself an adaptable person with great learning capacity. I have quickly learned to handle new technologies and frameworks, applying agile methodologies (Scrum, Kanban) in collaborative projects. Much of my experience comes from personal and academic projects that have allowed me to improve in teamwork, problem-solving, and project management.',
         'about-p4': 'I am excited to continue growing as a developer and contribute to innovative projects that generate a positive impact. I am actively seeking opportunities to apply my skills in professional environments. Feel free to contact me if you want to know more or collaborate on a project!',
         'experience-title': 'Academic Experience',
+        'exp1-title': '2020 - 2025: Computer Engineering Degree (UOC)',
+        'exp1-desc': 'I completed my university studies specializing in web and mobile development. As my final degree project, I developed a complete mobile application using Android Studio and Firebase.',
+        'exp2-title': '2024: Academic Project - ShieldLink',
+        'exp2-desc': 'Mobile application designed to combat bullying in educational environments through personalized recommendations and anonymous evaluations. This project improved my skills in Android (Java) and Firebase, and demonstrated the power of technology to positively impact society.',
+        'exp3-title': '2024 - 2025: Personal Projects',
+        'exp3-desc': 'Development of my own projects focused on task automation with Python (scripts to streamline repetitive processes) and data analysis (exploration and visualization of datasets) to continue strengthening my skills in these areas.',
+        'exp4-title': '2025 - Present: Professional Services',
+        'exp4-desc': 'Development of static websites for businesses and personal portfolios, creating modern and responsive web solutions. I also teach private programming fundamentals classes, helping students begin their journey in software development.',
         'tech-title': 'Technologies and Tools',
         'tech-intro': 'These are some of the technologies and tools I have worked with:',
         'services-title': 'Services',
+        'serv1-title': 'Python Automation',
+        'serv1-desc': 'Development of scripts and tools to automate repetitive processes and optimize workflows, saving time and reducing errors.',
+        'serv2-title': 'Business Websites',
+        'serv2-desc': 'Development of modern and responsive static websites for small businesses and local shops, optimized to showcase products and services professionally.',
+        'serv3-title': 'Personal Portfolios',
+        'serv3-desc': 'Creation of customized portfolios for professionals and creatives looking to showcase their work in an attractive and professional way online.',
+        'serv4-title': 'Programming Classes',
+        'serv4-desc': 'Teaching programming fundamentals through private lessons, adapted to each student\'s level and pace to facilitate their learning.',
+        'serv5-title': 'Data Analysis',
+        'serv5-desc': 'Data processing and analysis to extract actionable insights, accompanied by clear visualizations that support decision-making.',
         'projects-title': 'Projects',
+        'proj1-title': 'Sales Data Analysis Project',
+        'proj1-desc': 'Processing and cleaning data in Excel and Sage, ensuring its integrity. Application of analysis techniques in Power BI to identify trends and generate detailed accounting reports. Design of dynamic dashboards to facilitate strategic decision-making, with data-driven recommendations.',
+        'proj2-title': 'Billing Automation',
+        'proj2-desc': 'Development of an automated system for creating and sending invoices, integrating optical character recognition (OCR) with Python for data extraction from documents. Processed data is stored in SQL Server, ensuring accuracy and reducing manual tasks in billing management.',
+        'proj3-title': 'Advanced Form and WordPress Website Development',
+        'proj3-desc': 'Implementation of a custom form in WordPress using plugins like Contact Form 7. The form allows collecting specific user information and sending automatic notifications, improving efficiency in request management. Additionally, creation of a modern and responsive corporate website in WordPress.',
+        'academic-proj-title': 'Academic Projects',
+        'shield-title': 'ShieldLink - Anti-Bullying Mobile App',
+        'shield-desc': 'Mobile application developed to address the bullying problem in educational environments, offering personalized recommendations and anonymous evaluations for students.',
+        'github-link': 'View code on GitHub',
+        'repos-title': 'GitHub Repositories',
         'stats-title': 'Statistics',
+        'stat-projects': 'Completed projects',
+        'stat-years': 'Years of experience',
+        'stat-success': 'Project success rate',
         'contact-title': 'Contact',
+        'contact-name': 'Name:',
+        'contact-email': 'Email:',
+        'contact-message': 'Message:',
+        'contact-submit': 'Send',
         'cv-title': 'Download CV',
-        'cv-intro': 'Download my resume in your preferred language:'
+        'cv-intro': 'Download my resume in your preferred language:',
+        'cv-es-title': 'CV in Spanish',
+        'cv-es-desc': 'Complete resume in Spanish with all my experience.',
+        'cv-en-title': 'CV in English',
+        'cv-en-desc': 'Complete resume in English with all my experience and skills.',
+        'cv-download-es': 'Download PDF',
+        'cv-download-en': 'Download PDF'
     }
 };
 
@@ -539,72 +623,13 @@ let currentLang = 'es';
 function translatePage(lang) {
     currentLang = lang;
     
-    // Actualizar banner
-    const devBanner = document.querySelector('.dev-banner');
-    if (devBanner) devBanner.textContent = translations[lang]['dev-banner'];
-    
-    // Actualizar navegación
-    document.querySelectorAll('.nav-link').forEach((link, index) => {
-        const keys = ['nav-about', 'nav-experience', 'nav-technologies', 'nav-services', 'nav-projects', 'nav-stats', 'nav-contact', 'nav-cv'];
-        if (keys[index]) {
-            link.textContent = translations[lang][keys[index]];
+    // Traducción genérica: buscar todos los elementos con data-lang
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        if (translations[lang][key]) {
+            element.textContent = translations[lang][key];
         }
     });
-    
-    // Actualizar intro
-    const introDesc = document.querySelector('.intro-description');
-    if (introDesc) introDesc.textContent = translations[lang]['intro-description'];
-    
-    // Actualizar About section
-    const aboutSection = document.querySelector('#about .section-content');
-    if (aboutSection) {
-        const h2 = aboutSection.querySelector('h2');
-        if (h2) h2.textContent = translations[lang]['about-title'];
-        
-        const paragraphs = aboutSection.querySelectorAll('p');
-        if (paragraphs[0]) paragraphs[0].textContent = translations[lang]['about-p1'];
-        if (paragraphs[1]) paragraphs[1].textContent = translations[lang]['about-p2'];
-        if (paragraphs[2]) paragraphs[2].textContent = translations[lang]['about-p3'];
-        if (paragraphs[3]) paragraphs[3].textContent = translations[lang]['about-p4'];
-    }
-    
-    // Actualizar Experience title
-    const expSection = document.querySelector('#experience .section-content h2');
-    if (expSection) expSection.textContent = translations[lang]['experience-title'];
-    
-    // Actualizar Technologies section
-    const techSection = document.querySelector('#technologies .section-content');
-    if (techSection) {
-        const techH2 = techSection.querySelector('h2');
-        if (techH2) techH2.textContent = translations[lang]['tech-title'];
-        const techP = techSection.querySelector('p');
-        if (techP) techP.textContent = translations[lang]['tech-intro'];
-    }
-    
-    // Actualizar Services title
-    const servicesSection = document.querySelector('#services .section-content h2');
-    if (servicesSection) servicesSection.textContent = translations[lang]['services-title'];
-    
-    // Actualizar Projects title
-    const projectsSection = document.querySelector('#projects .section-content h2');
-    if (projectsSection) projectsSection.textContent = translations[lang]['projects-title'];
-    
-    // Actualizar Stats title
-    const statsSection = document.querySelector('#stats .section-content h2');
-    if (statsSection) statsSection.textContent = translations[lang]['stats-title'];
-    
-    // Actualizar Contact title
-    const contactSection = document.querySelector('#contact .section-content h2');
-    if (contactSection) contactSection.textContent = translations[lang]['contact-title'];
-    
-    // Actualizar CV section
-    const cvSection = document.querySelector('#cv .section-content');
-    if (cvSection) {
-        const cvH2 = cvSection.querySelector('h2');
-        if (cvH2) cvH2.textContent = translations[lang]['cv-title'];
-        const cvP = cvSection.querySelector('p');
-        if (cvP) cvP.textContent = translations[lang]['cv-intro'];
-    }
     
     // Actualizar botones activos
     document.querySelectorAll('.lang-btn').forEach(btn => {
