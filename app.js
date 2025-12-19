@@ -354,7 +354,72 @@ document.addEventListener('DOMContentLoaded', () => {
     initThreeJS();
     initMatrixRain();
     initLanguageToggle();
+    initStatsCountUp();
 });
+
+function initStatsCountUp() {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = document.querySelectorAll('#stats .stat-card');
+    if (!cards.length) return;
+
+    const parseTarget = (text) => {
+        const isPercent = text.includes('%');
+        const plus = text.includes('+');
+        const num = parseFloat(text.replace(/[^\d.]/g, '')) || 0;
+        return { num, isPercent, plus, original: text };
+    };
+
+    const format = (value, target) => {
+        const rounded = Math.round(value);
+        return `${rounded}${target.isPercent ? '%' : ''}${target.plus ? '+' : ''}`;
+    };
+
+    const animateOne = (el) => {
+        const original = el.textContent.trim();
+        const target = parseTarget(original);
+
+        if (prefersReduced) {
+            el.textContent = target.original;
+            return;
+        }
+
+        const duration = 900;
+        const start = performance.now();
+
+        const tick = (t) => {
+            const p = Math.min(1, (t - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+            const val = target.num * eased;
+            el.textContent = format(val, target);
+            if (p < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                // mantener el formato exacto original (por ejemplo, 6+)
+                el.textContent = target.original;
+            }
+        };
+
+        requestAnimationFrame(tick);
+    };
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const card = e.target;
+            if (card.dataset.animated === '1') return;
+
+            card.dataset.animated = '1';
+            card.classList.add('is-revealed');
+
+            const numEl = card.querySelector('.stat-number');
+            if (numEl) animateOne(numEl);
+
+            io.unobserve(card);
+        });
+    }, { threshold: 0.35 });
+
+    cards.forEach((c) => io.observe(c));
+}
 
 // === Matrix Rain Effect ===
 function initMatrixRain() {
@@ -581,6 +646,8 @@ const translations = {
         'serv4-desc': 'Enseñanza de fundamentos de la programación mediante clases particulares, adaptadas al nivel y ritmo de cada estudiante para facilitar su aprendizaje.',
         'serv5-title': 'Análisis de Datos',
         'serv5-desc': 'Procesamiento y análisis de datos para extraer insights accionables, acompañados de visualizaciones claras que apoyan la toma de decisiones.',
+        'serv6-title': 'ETL, RPA y Data Pipelines (Python + SQL Server)',
+        'serv6-desc': 'Automatización de procesos (RPA) y construcción de pipelines ETL con Python, pandas y dataframes, integrando SQL Server y orquestación con Airflow para flujos robustos y mantenibles.',
         'projects-title': 'Proyectos',
         'proj1-title': 'Proyecto de análisis de datos de ventas',
         'proj1-desc': 'Procesamiento y limpieza de datos en Excel y Sage, asegurando su integridad. Aplicación de técnicas de análisis en Power BI para identificar tendencias y generar reportes contables detallados. Diseño de dashboards dinámicos para facilitar la toma de decisiones estratégicas, con recomendaciones basadas en datos.',
@@ -588,6 +655,8 @@ const translations = {
         'proj2-desc': 'Desarrollo de un sistema automatizado para la creación y envío de facturas, integrando reconocimiento óptico de caracteres (OCR) con Python para la extracción de datos desde documentos. Los datos procesados se almacenan en SQL Server, asegurando precisión y reducción de tareas manuales en la gestión de facturación.',
         'proj3-title': 'Desarrollo de formulario avanzado y sitio web en WordPress',
         'proj3-desc': 'Implementación de un formulario personalizado en WordPress utilizando plugins como Contact Form 7. El formulario permite recopilar información específica de usuarios y enviar notificaciones automáticas, mejorando la eficiencia en la gestión de solicitudes. Además, creación de un sitio web corporativo moderno y responsivo en WordPress.',
+        'proj4-title': 'Marketplace (Flutter + Django) - Desarrollo Full Stack',
+        'proj4-desc': 'Participación en la elaboración de un marketplace para una aplicación móvil en Flutter, con backend en Django, contribuyendo tanto a la capa de interfaz como a endpoints y lógica del servidor.',
         'academic-proj-title': 'Proyectos Académicos',
         'shield-title': 'ShieldLink - App Móvil contra el Bullying',
         'shield-desc': 'Aplicación móvil desarrollada para abordar el problema del bullying en entornos educativos, ofreciendo recomendaciones personalizadas y evaluaciones anónimas para estudiantes.',
@@ -653,6 +722,8 @@ const translations = {
         'serv4-desc': 'Teaching programming fundamentals through private lessons, adapted to each student\'s level and pace to facilitate their learning.',
         'serv5-title': 'Data Analysis',
         'serv5-desc': 'Data processing and analysis to extract actionable insights, accompanied by clear visualizations that support decision-making.',
+        'serv6-title': 'ETL, RPA & Data Pipelines (Python + SQL Server)',
+        'serv6-desc': 'Process automation (RPA) and ETL pipeline development with Python, pandas and dataframes, integrating SQL Server and Airflow orchestration for robust, maintainable workflows.',
         'projects-title': 'Projects',
         'proj1-title': 'Sales Data Analysis Project',
         'proj1-desc': 'Processing and cleaning data in Excel and Sage, ensuring its integrity. Application of analysis techniques in Power BI to identify trends and generate detailed accounting reports. Design of dynamic dashboards to facilitate strategic decision-making, with data-driven recommendations.',
@@ -660,6 +731,8 @@ const translations = {
         'proj2-desc': 'Development of an automated system for creating and sending invoices, integrating optical character recognition (OCR) with Python for data extraction from documents. Processed data is stored in SQL Server, ensuring accuracy and reducing manual tasks in billing management.',
         'proj3-title': 'Advanced Form and WordPress Website Development',
         'proj3-desc': 'Implementation of a custom form in WordPress using plugins like Contact Form 7. The form allows collecting specific user information and sending automatic notifications, improving efficiency in request management. Additionally, creation of a modern and responsive corporate website in WordPress.',
+        'proj4-title': 'Marketplace (Flutter + Django) - Full Stack Development',
+        'proj4-desc': 'Contributed to building a marketplace for a Flutter mobile app with a Django backend, working across UI features as well as server endpoints and business logic.',
         'academic-proj-title': 'Academic Projects',
         'shield-title': 'ShieldLink - Anti-Bullying Mobile App',
         'shield-desc': 'Mobile application developed to address the bullying problem in educational environments, offering personalized recommendations and anonymous evaluations for students.',
