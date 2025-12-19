@@ -116,18 +116,32 @@ function renderRepos(repos, container) {
     // Remover loader
     const loader = container.querySelector('.loader');
     if (loader) loader.remove();
-    
+
+    const t = (key, fallback) => {
+        try {
+            return translations?.[currentLang]?.[key] || fallback;
+        } catch (_) {
+            return fallback;
+        }
+    };
+
     if (!repos.length) {
-        container.innerHTML = '<p>No hay repositorios públicos disponibles.</p>';
+        container.innerHTML = `<p>${t('repo-empty', 'No public repositories available.')}</p>`;
         return;
     }
+
     repos
         .filter(repo => !repo.fork)
         .slice(0, 12)
         .forEach(repo => {
             const div = document.createElement('div');
             div.className = 'repo-item';
-            const description = repo.description ? repo.description : 'Sin descripción disponible.';
+
+            const override = repoDescriptionOverrides?.[repo.name]?.[currentLang];
+            const description = override
+                ? override
+                : (repo.description ? repo.description : t('repo-no-desc', 'No description available.'));
+
             div.innerHTML = `
                 <h3><a href="${repo.html_url}" target="_blank" rel="noopener">${repo.name}</a></h3>
                 <p>${description}</p>
@@ -164,7 +178,7 @@ async function fetchRepos() {
         });
 
         if (res.status === 403) {
-            container.textContent = 'Límite de peticiones a GitHub alcanzado. Intenta de nuevo más tarde.';
+            container.textContent = translations?.[currentLang]?.['repo-rate-limit'] || 'GitHub API rate limit reached. Please try again later.';
             return;
         }
 
@@ -180,7 +194,7 @@ async function fetchRepos() {
         }
     } catch (e) {
         console.error('Error al cargar los repositorios:', e);
-        container.textContent = 'No se pudieron cargar los repositorios.';
+        container.textContent = translations?.[currentLang]?.['repo-load-failed'] || 'Could not load repositories.';
     }
 }
 // === Contador de visitas local ===
@@ -190,20 +204,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
 
-        if (!themeToggle) {
+        if (!themeToggle || !themeIcon) {
             return;
         }
 
-        if (!themeIcon) {
-            return;
+        const media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+        function resolveTheme(theme) {
+            if (theme === 'auto') {
+                return media && media.matches ? 'dark' : 'light';
+            }
+            return theme;
         }
 
-        function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            
-            // Cambiar el icono usando emojis
-            if (theme === 'light') {
+        function setIcon(resolvedTheme) {
+            // Icono indica el "siguiente" modo
+            if (resolvedTheme === 'light') {
                 themeIcon.textContent = '🌙';
                 themeIcon.title = 'Cambiar a modo oscuro';
             } else {
@@ -212,18 +228,40 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Establecer tema inicial siempre en claro
-        setTheme('light');
+        function setTheme(theme, { persist = true } = {}) {
+            document.documentElement.setAttribute('data-theme', theme);
+            if (persist) {
+                localStorage.setItem('theme', theme);
+            }
+            setIcon(resolveTheme(theme));
+        }
 
-        // Event listener para el botón
+        // Tema inicial: localStorage -> atributo en HTML -> auto
+        const stored = localStorage.getItem('theme');
+        const initial = stored === 'light' || stored === 'dark' || stored === 'auto'
+            ? stored
+            : (document.documentElement.getAttribute('data-theme') || 'auto');
+
+        setTheme(initial, { persist: false });
+
+        // Si estamos en auto, actualizar icono cuando cambie el sistema
+        if (media && media.addEventListener) {
+            media.addEventListener('change', () => {
+                const current = document.documentElement.getAttribute('data-theme') || 'auto';
+                if (current === 'auto') {
+                    setIcon(resolveTheme('auto'));
+                }
+            });
+        }
+
         themeToggle.addEventListener('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
-            
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            setTheme(newTheme);
+
+            const current = document.documentElement.getAttribute('data-theme') || 'auto';
+            const resolved = resolveTheme(current);
+            const next = resolved === 'light' ? 'dark' : 'light';
+            setTheme(next);
         });
     }
 
@@ -244,28 +282,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     
     if (menuToggle && navMenu) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+
+        const closeMenu = () => {
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('nav-open');
+        };
+
+        const openMenu = () => {
+            navMenu.classList.add('active');
+            menuToggle.classList.add('active');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('nav-open');
+        };
+
         menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
+            const isOpen = navMenu.classList.contains('active');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
-    
+
         // Cerrar menú al hacer clic en un enlace
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
+                closeMenu();
             });
         });
-    
+
         // Cerrar menú al hacer clic fuera de él
         document.addEventListener('click', (e) => {
             if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
+                closeMenu();
             }
         });
-    
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
         // Smooth scroll para los enlaces de navegación con offset para mostrar títulos
         const navLinksAll = document.querySelectorAll('.nav-link');
         navLinksAll.forEach(link => {
@@ -274,13 +337,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetId = link.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
                 if (targetSection) {
-                    // Calcular offset para compensar el header sticky
                     const headerHeight = document.querySelector('header').offsetHeight;
                     const elementPosition = targetSection.offsetTop;
-                    const offsetPosition = elementPosition - headerHeight - 20; // 20px de margen extra
-                    
+                    const offsetPosition = elementPosition - headerHeight - 20;
+
                     window.scrollTo({
-                        top: offsetPosition
+                        top: offsetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -530,6 +593,10 @@ const translations = {
         'shield-desc': 'Aplicación móvil desarrollada para abordar el problema del bullying en entornos educativos, ofreciendo recomendaciones personalizadas y evaluaciones anónimas para estudiantes.',
         'github-link': 'Ver código en GitHub',
         'repos-title': 'Repositorios en GitHub',
+        'repo-empty': 'No hay repositorios públicos disponibles.',
+        'repo-no-desc': 'Sin descripción disponible.',
+        'repo-rate-limit': 'Límite de peticiones a GitHub alcanzado. Intenta de nuevo más tarde.',
+        'repo-load-failed': 'No se pudieron cargar los repositorios.',
         'stats-title': 'Estadísticas',
         'stat-projects': 'Proyectos completados',
         'stat-years': 'Años de experiencia',
@@ -598,6 +665,10 @@ const translations = {
         'shield-desc': 'Mobile application developed to address the bullying problem in educational environments, offering personalized recommendations and anonymous evaluations for students.',
         'github-link': 'View code on GitHub',
         'repos-title': 'GitHub Repositories',
+        'repo-empty': 'No public repositories available.',
+        'repo-no-desc': 'No description available.',
+        'repo-rate-limit': 'GitHub API rate limit reached. Please try again later.',
+        'repo-load-failed': 'Could not load repositories.',
         'stats-title': 'Statistics',
         'stat-projects': 'Completed projects',
         'stat-years': 'Years of experience',
@@ -616,6 +687,17 @@ const translations = {
         'cv-download-es': 'Download PDF',
         'cv-download-en': 'Download PDF'
     }
+};
+
+// Optional: local overrides for GitHub repo descriptions per language.
+// Key MUST match repo.name exactly as returned by GitHub.
+// If an override exists for the active language, it will be shown instead of repo.description.
+const repoDescriptionOverrides = {
+    // Example:
+    // "my-repo": {
+    //     es: "Descripción en español...",
+    //     en: "English description..."
+    // }
 };
 
 let currentLang = 'es';
