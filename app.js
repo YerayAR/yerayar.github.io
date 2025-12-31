@@ -354,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initThreeJS();
     initMatrixRain();
     initLanguageToggle();
+    initChat();
     initPythonViz();
     initStatsCountUp();
 });
@@ -695,6 +696,16 @@ const translations = {
         'viz-caption-binary': 'Comparacion de coste para busqueda binaria (ejemplo).',
         'viz-caption-fibonacci': 'Comparacion de coste para busqueda Fibonacci (ejemplo).',
         'viz-caption-interpolation': 'Comparacion de coste para busqueda por interpolacion (ejemplo).',
+        'chat-title': 'Asistente de CV',
+        'chat-subtitle': 'Respuestas rapidas basadas en mi portfolio y experiencia.',
+        'chat-send': 'Enviar',
+        'chat-clear': 'Limpiar',
+        'chat-placeholder': 'Escribe una pregunta...',
+        'chat-chip-1': 'Experiencia',
+        'chat-chip-2': 'Tecnologias',
+        'chat-chip-3': 'Contacto',
+        'chat-greeting': 'Hola, soy el asistente del CV. Pregunta lo que quieras sobre mi experiencia, proyectos o contacto.',
+        'chat-fallback': 'Puedo ayudarte con experiencia, proyectos, tecnologias o contacto. Prueba con una pregunta mas concreta.',
         'contact-title': 'Contacto',
         'contact-name': 'Nombre:',
         'contact-email': 'Correo Electrónico:',
@@ -795,6 +806,16 @@ const translations = {
         'viz-caption-binary': 'Cost comparison for binary search (example).',
         'viz-caption-fibonacci': 'Cost comparison for Fibonacci search (example).',
         'viz-caption-interpolation': 'Cost comparison for interpolation search (example).',
+        'chat-title': 'CV Assistant',
+        'chat-subtitle': 'Quick answers based on my portfolio and experience.',
+        'chat-send': 'Send',
+        'chat-clear': 'Clear',
+        'chat-placeholder': 'Ask a question...',
+        'chat-chip-1': 'Experience',
+        'chat-chip-2': 'Technologies',
+        'chat-chip-3': 'Contact',
+        'chat-greeting': 'Hi, I am the CV assistant. Ask about my experience, projects, or contact info.',
+        'chat-fallback': 'I can help with experience, projects, technologies, or contact. Try a more specific question.',
         'contact-title': 'Contact',
         'contact-name': 'Name:',
         'contact-email': 'Email:',
@@ -834,6 +855,13 @@ function translatePage(lang) {
             element.textContent = translations[lang][key];
         }
     });
+
+    document.querySelectorAll('[data-lang-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-lang-placeholder');
+        if (translations[lang][key]) {
+            element.setAttribute('placeholder', translations[lang][key]);
+        }
+    });
     
     // Actualizar botones activos
     document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -843,6 +871,10 @@ function translatePage(lang) {
 
     if (typeof updatePythonVizText === 'function') {
         updatePythonVizText();
+    }
+
+    if (typeof updateChatText === 'function') {
+        updateChatText();
     }
 }
 
@@ -857,6 +889,133 @@ function initLanguageToggle() {
     
     if (langEn) {
         langEn.addEventListener('click', () => translatePage('en'));
+    }
+}
+
+function initChat() {
+    const section = document.getElementById('ai-chat');
+    if (!section) return;
+
+    const messages = section.querySelector('#chat-messages');
+    const input = section.querySelector('#chat-input');
+    const sendBtn = section.querySelector('#chat-send');
+    const clearBtn = section.querySelector('#chat-clear');
+    const chips = Array.from(section.querySelectorAll('.chat-chip'));
+
+    if (!messages || !input || !sendBtn || !clearBtn) return;
+
+    const qa = {
+        es: [
+            {
+                keywords: ['experiencia', 'trayectoria', 'años', 'academica'],
+                answer: 'Soy Ingeniero Informatico graduado en la UOC con enfoque en automatizacion con Python, desarrollo web y analisis de datos. He trabajado en proyectos academicos y personales donde optimizo procesos, creo dashboards y desarrollo soluciones web modernas.'
+            },
+            {
+                keywords: ['python', 'automatizacion', 'rpa', 'etl', 'datos'],
+                answer: 'Trabajo con Python para automatizar tareas repetitivas, construir pipelines ETL y generar reportes con datos limpios. En mis proyectos uso pandas, dataframes y SQL para integrar informacion y crear insights accionables.'
+            },
+            {
+                keywords: ['proyectos', 'shieldlink', 'bullying'],
+                answer: 'Proyecto destacado: ShieldLink, una app movil contra el bullying con recomendaciones personalizadas y evaluaciones anonimas. Fue un proyecto academico que reforzo mis habilidades en Android y Firebase.'
+            },
+            {
+                keywords: ['web', 'wordpress', 'frontend'],
+                answer: 'Desarrollo sitios web modernos y responsivos, incluyendo proyectos en WordPress y portfolios personalizados. Me enfoco en performance, diseño limpio y formularios avanzados que mejoran la gestion de solicitudes.'
+            },
+            {
+                keywords: ['contacto', 'email', 'linkedin', 'github'],
+                answer: 'Puedes contactarme por LinkedIn o revisar mis proyectos en GitHub. En el portfolio tienes los enlaces directos y tambien puedes usar el formulario de contacto para escribir un mensaje.'
+            }
+        ],
+        en: [
+            {
+                keywords: ['experience', 'background', 'years', 'academic'],
+                answer: 'I am a Computer Engineer graduated from UOC, focused on Python automation, web development, and data analysis. I have built academic and personal projects that optimize workflows, create dashboards, and deliver modern web experiences.'
+            },
+            {
+                keywords: ['python', 'automation', 'rpa', 'etl', 'data'],
+                answer: 'I use Python to automate repetitive workflows, build ETL pipelines, and deliver data driven reports. I work with pandas, dataframes, and SQL to integrate information and extract actionable insights.'
+            },
+            {
+                keywords: ['projects', 'shieldlink', 'bullying'],
+                answer: 'Highlighted project: ShieldLink, a mobile app to fight bullying with personalized recommendations and anonymous evaluations. It strengthened my skills in Android and Firebase.'
+            },
+            {
+                keywords: ['web', 'wordpress', 'frontend'],
+                answer: 'I build modern, responsive websites, including WordPress projects and custom portfolios. I focus on performance, clean design, and advanced forms that improve request handling.'
+            },
+            {
+                keywords: ['contact', 'email', 'linkedin', 'github'],
+                answer: 'You can reach me on LinkedIn or check my GitHub. The portfolio includes direct links and a contact form for quick messages.'
+            }
+        ]
+    };
+
+    const normalize = (text) => text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+
+    const addMessage = (text, who) => {
+        const div = document.createElement('div');
+        div.className = `chat-msg chat-msg--${who}`;
+        div.textContent = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+    };
+
+    const getAnswer = (message) => {
+        const cleaned = normalize(message);
+        const set = qa[currentLang] || qa.es;
+        for (const item of set) {
+            if (item.keywords.some(key => cleaned.includes(key))) {
+                return item.answer;
+            }
+        }
+        return translations?.[currentLang]?.['chat-fallback'] || 'Puedo ayudarte con experiencia, proyectos o contacto.';
+    };
+
+    const send = (text) => {
+        const value = text || input.value.trim();
+        if (!value) return;
+        addMessage(value, 'user');
+        input.value = '';
+
+        const response = getAnswer(value);
+        setTimeout(() => addMessage(response, 'bot'), 150);
+    };
+
+    const greeting = translations?.[currentLang]?.['chat-greeting'] || 'Hola, soy el asistente del CV.';
+    addMessage(greeting, 'bot');
+
+    sendBtn.addEventListener('click', () => send());
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            send();
+        }
+    });
+    clearBtn.addEventListener('click', () => {
+        messages.innerHTML = '';
+        addMessage(translations?.[currentLang]?.['chat-greeting'] || greeting, 'bot');
+    });
+    chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+            send(chip.textContent.trim());
+        });
+    });
+}
+
+function updateChatText() {
+    const section = document.getElementById('ai-chat');
+    if (!section) return;
+
+    const input = section.querySelector('#chat-input');
+    if (input) {
+        const key = input.getAttribute('data-lang-placeholder');
+        if (key && translations?.[currentLang]?.[key]) {
+            input.setAttribute('placeholder', translations[currentLang][key]);
+        }
     }
 }
 
