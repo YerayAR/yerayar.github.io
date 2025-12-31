@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Python Viz - Unit Tests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <section id="python-viz" class="content-section">
+      <div class="section-content">
+        <div class="viz-toggle-header">
+          <h2 data-lang="viz-title">Visualizacion interactiva</h2>
+          <button
+            id="viz-toggle"
+            class="viz-run"
+            type="button"
+            data-open-text-key="viz-toggle-hide"
+            data-closed-text-key="viz-toggle-show"
+          >
+            Mostrar visualizacion
+          </button>
+        </div>
+        <div id="viz-wrapper" class="viz-collapsible is-open">
+          <div class="viz-layout">
+            <div class="viz-text">
+              <div class="viz-controls" role="tablist" aria-label="Algoritmos de busqueda">
+                <button
+                  class="viz-btn active"
+                  type="button"
+                  data-lang="viz-btn-linear"
+                  data-dataset="linear"
+                  data-caption-key="viz-caption-linear"
+                  data-color="#ef4444"
+                >
+                  Busqueda lineal
+                </button>
+                <button
+                  class="viz-btn"
+                  type="button"
+                  data-lang="viz-btn-jump"
+                  data-dataset="jump"
+                  data-caption-key="viz-caption-jump"
+                  data-color="#f97316"
+                >
+                  Busqueda por saltos
+                </button>
+                <button
+                  class="viz-btn"
+                  type="button"
+                  data-lang="viz-btn-exponential"
+                  data-dataset="exponential"
+                  data-caption-key="viz-caption-exponential"
+                  data-color="#f59e0b"
+                >
+                  Busqueda exponencial
+                </button>
+                <button
+                  class="viz-btn"
+                  type="button"
+                  data-lang="viz-btn-binary"
+                  data-dataset="binary"
+                  data-caption-key="viz-caption-binary"
+                  data-color="#84cc16"
+                >
+                  Busqueda binaria
+                </button>
+                <button
+                  class="viz-btn"
+                  type="button"
+                  data-lang="viz-btn-fibonacci"
+                  data-dataset="fibonacci"
+                  data-caption-key="viz-caption-fibonacci"
+                  data-color="#22c55e"
+                >
+                  Busqueda Fibonacci
+                </button>
+                <button
+                  class="viz-btn"
+                  type="button"
+                  data-lang="viz-btn-interpolation"
+                  data-dataset="interpolation"
+                  data-caption-key="viz-caption-interpolation"
+                  data-color="#16a34a"
+                >
+                  Busqueda por interpolacion
+                </button>
+              </div>
+              <div class="viz-search">
+                <label for="viz-target" class="viz-label" data-lang="viz-target-label">Buscar valor</label>
+                <input
+                  id="viz-target"
+                  class="viz-input"
+                  type="number"
+                  min="1"
+                  max="50"
+                  value="20"
+                  inputmode="numeric"
+                >
+                <button id="viz-run" class="viz-run" type="button" data-lang="viz-run-btn">
+                  Iniciar busqueda
+                </button>
+              </div>
+              <p class="viz-note" data-lang="viz-note">
+                Pulsa cada boton para cambiar la visualizacion interactiva.
+              </p>
+            </div>
+            <div class="viz-figure">
+              <canvas
+                id="viz-canvas"
+                width="1000"
+                height="420"
+                aria-label="Grafico de barras interactivo"
+                role="img"
+              ></canvas>
+              <p
+                id="viz-caption"
+                class="viz-caption"
+                data-lang="viz-caption-linear"
+              >
+                Comparacion de coste para busqueda lineal (ejemplo).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <pre id="test-results" aria-live="polite"></pre>
+    </section>
+
+    <script src="app.js"></script>
+    <script src="python-viz.test.js"></script>
+  </body>
+</html>
