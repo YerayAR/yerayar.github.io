@@ -354,7 +354,73 @@ document.addEventListener('DOMContentLoaded', () => {
     initThreeJS();
     initMatrixRain();
     initLanguageToggle();
+    initPythonViz();
+    initStatsCountUp();
 });
+
+function initStatsCountUp() {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = document.querySelectorAll('#stats .stat-card');
+    if (!cards.length) return;
+
+    const parseTarget = (text) => {
+        const isPercent = text.includes('%');
+        const plus = text.includes('+');
+        const num = parseFloat(text.replace(/[^\d.]/g, '')) || 0;
+        return { num, isPercent, plus, original: text };
+    };
+
+    const format = (value, target) => {
+        const rounded = Math.round(value);
+        return `${rounded}${target.isPercent ? '%' : ''}${target.plus ? '+' : ''}`;
+    };
+
+    const animateOne = (el) => {
+        const original = el.textContent.trim();
+        const target = parseTarget(original);
+
+        if (prefersReduced) {
+            el.textContent = target.original;
+            return;
+        }
+
+        const duration = 900;
+        const start = performance.now();
+
+        const tick = (t) => {
+            const p = Math.min(1, (t - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+            const val = target.num * eased;
+            el.textContent = format(val, target);
+            if (p < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                // mantener el formato exacto original (por ejemplo, 6+)
+                el.textContent = target.original;
+            }
+        };
+
+        requestAnimationFrame(tick);
+    };
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const card = e.target;
+            if (card.dataset.animated === '1') return;
+
+            card.dataset.animated = '1';
+            card.classList.add('is-revealed');
+
+            const numEl = card.querySelector('.stat-number');
+            if (numEl) animateOne(numEl);
+
+            io.unobserve(card);
+        });
+    }, { threshold: 0.35 });
+
+    cards.forEach((c) => io.observe(c));
+}
 
 // === Matrix Rain Effect ===
 function initMatrixRain() {
@@ -581,6 +647,8 @@ const translations = {
         'serv4-desc': 'Enseñanza de fundamentos de la programación mediante clases particulares, adaptadas al nivel y ritmo de cada estudiante para facilitar su aprendizaje.',
         'serv5-title': 'Análisis de Datos',
         'serv5-desc': 'Procesamiento y análisis de datos para extraer insights accionables, acompañados de visualizaciones claras que apoyan la toma de decisiones.',
+        'serv6-title': 'ETL, RPA y Data Pipelines (Python + SQL Server)',
+        'serv6-desc': 'Automatización de procesos (RPA) y construcción de pipelines ETL con Python, pandas y dataframes, integrando SQL Server y orquestación con Airflow para flujos robustos y mantenibles.',
         'projects-title': 'Proyectos',
         'proj1-title': 'Proyecto de análisis de datos de ventas',
         'proj1-desc': 'Procesamiento y limpieza de datos en Excel y Sage, asegurando su integridad. Aplicación de técnicas de análisis en Power BI para identificar tendencias y generar reportes contables detallados. Diseño de dashboards dinámicos para facilitar la toma de decisiones estratégicas, con recomendaciones basadas en datos.',
@@ -588,6 +656,8 @@ const translations = {
         'proj2-desc': 'Desarrollo de un sistema automatizado para la creación y envío de facturas, integrando reconocimiento óptico de caracteres (OCR) con Python para la extracción de datos desde documentos. Los datos procesados se almacenan en SQL Server, asegurando precisión y reducción de tareas manuales en la gestión de facturación.',
         'proj3-title': 'Desarrollo de formulario avanzado y sitio web en WordPress',
         'proj3-desc': 'Implementación de un formulario personalizado en WordPress utilizando plugins como Contact Form 7. El formulario permite recopilar información específica de usuarios y enviar notificaciones automáticas, mejorando la eficiencia en la gestión de solicitudes. Además, creación de un sitio web corporativo moderno y responsivo en WordPress.',
+        'proj4-title': 'Marketplace (Flutter + Django) - Desarrollo Full Stack',
+        'proj4-desc': 'Participación en la elaboración de un marketplace para una aplicación móvil en Flutter, con backend en Django, contribuyendo tanto a la capa de interfaz como a endpoints y lógica del servidor.',
         'academic-proj-title': 'Proyectos Académicos',
         'shield-title': 'ShieldLink - App Móvil contra el Bullying',
         'shield-desc': 'Aplicación móvil desarrollada para abordar el problema del bullying en entornos educativos, ofreciendo recomendaciones personalizadas y evaluaciones anónimas para estudiantes.',
@@ -601,6 +671,30 @@ const translations = {
         'stat-projects': 'Proyectos completados',
         'stat-years': 'Años de experiencia',
         'stat-success': 'Éxito en los proyectos',
+        'viz-title': 'Visualizacion interactiva',
+                'viz-note': 'Pulsa cada boton para cambiar el algoritmo antes de ejecutar la busqueda.',
+        'viz-target-label': 'Buscar valor',
+        'viz-run-btn': 'Iniciar busqueda',
+        'viz-toggle-show': 'Mostrar visualizacion',
+        'viz-toggle-hide': 'Ocultar visualizacion',
+        'viz-status-idle': 'Listo para buscar.',
+        'viz-status-searching': 'Buscando',
+        'viz-status-found': 'Encontrado',
+        'viz-status-not-found': 'No encontrado',
+        'viz-step': 'Paso',
+        'viz-at': 'en',
+        'viz-btn-linear': 'Busqueda lineal',
+        'viz-btn-jump': 'Busqueda por saltos',
+        'viz-btn-exponential': 'Busqueda exponencial',
+        'viz-btn-binary': 'Busqueda binaria',
+        'viz-btn-fibonacci': 'Busqueda Fibonacci',
+        'viz-btn-interpolation': 'Busqueda por interpolacion',
+        'viz-caption-linear': 'Comparacion de coste para busqueda lineal (ejemplo).',
+        'viz-caption-jump': 'Comparacion de coste para busqueda por saltos (ejemplo).',
+        'viz-caption-exponential': 'Comparacion de coste para busqueda exponencial (ejemplo).',
+        'viz-caption-binary': 'Comparacion de coste para busqueda binaria (ejemplo).',
+        'viz-caption-fibonacci': 'Comparacion de coste para busqueda Fibonacci (ejemplo).',
+        'viz-caption-interpolation': 'Comparacion de coste para busqueda por interpolacion (ejemplo).',
         'contact-title': 'Contacto',
         'contact-name': 'Nombre:',
         'contact-email': 'Correo Electrónico:',
@@ -653,6 +747,8 @@ const translations = {
         'serv4-desc': 'Teaching programming fundamentals through private lessons, adapted to each student\'s level and pace to facilitate their learning.',
         'serv5-title': 'Data Analysis',
         'serv5-desc': 'Data processing and analysis to extract actionable insights, accompanied by clear visualizations that support decision-making.',
+        'serv6-title': 'ETL, RPA & Data Pipelines (Python + SQL Server)',
+        'serv6-desc': 'Process automation (RPA) and ETL pipeline development with Python, pandas and dataframes, integrating SQL Server and Airflow orchestration for robust, maintainable workflows.',
         'projects-title': 'Projects',
         'proj1-title': 'Sales Data Analysis Project',
         'proj1-desc': 'Processing and cleaning data in Excel and Sage, ensuring its integrity. Application of analysis techniques in Power BI to identify trends and generate detailed accounting reports. Design of dynamic dashboards to facilitate strategic decision-making, with data-driven recommendations.',
@@ -660,6 +756,8 @@ const translations = {
         'proj2-desc': 'Development of an automated system for creating and sending invoices, integrating optical character recognition (OCR) with Python for data extraction from documents. Processed data is stored in SQL Server, ensuring accuracy and reducing manual tasks in billing management.',
         'proj3-title': 'Advanced Form and WordPress Website Development',
         'proj3-desc': 'Implementation of a custom form in WordPress using plugins like Contact Form 7. The form allows collecting specific user information and sending automatic notifications, improving efficiency in request management. Additionally, creation of a modern and responsive corporate website in WordPress.',
+        'proj4-title': 'Marketplace (Flutter + Django) - Full Stack Development',
+        'proj4-desc': 'Contributed to building a marketplace for a Flutter mobile app with a Django backend, working across UI features as well as server endpoints and business logic.',
         'academic-proj-title': 'Academic Projects',
         'shield-title': 'ShieldLink - Anti-Bullying Mobile App',
         'shield-desc': 'Mobile application developed to address the bullying problem in educational environments, offering personalized recommendations and anonymous evaluations for students.',
@@ -673,6 +771,30 @@ const translations = {
         'stat-projects': 'Completed projects',
         'stat-years': 'Years of experience',
         'stat-success': 'Project success rate',
+        'viz-title': 'Interactive Visualization',
+                'viz-note': 'Click each button to switch algorithms before running the search.',
+        'viz-target-label': 'Search value',
+        'viz-run-btn': 'Run search',
+        'viz-toggle-show': 'Show visualization',
+        'viz-toggle-hide': 'Hide visualization',
+        'viz-status-idle': 'Ready to search.',
+        'viz-status-searching': 'Searching',
+        'viz-status-found': 'Found',
+        'viz-status-not-found': 'Not found',
+        'viz-step': 'Step',
+        'viz-at': 'at',
+        'viz-btn-linear': 'Linear search',
+        'viz-btn-jump': 'Jump search',
+        'viz-btn-exponential': 'Exponential search',
+        'viz-btn-binary': 'Binary search',
+        'viz-btn-fibonacci': 'Fibonacci search',
+        'viz-btn-interpolation': 'Interpolation search',
+        'viz-caption-linear': 'Cost comparison for linear search (example).',
+        'viz-caption-jump': 'Cost comparison for jump search (example).',
+        'viz-caption-exponential': 'Cost comparison for exponential search (example).',
+        'viz-caption-binary': 'Cost comparison for binary search (example).',
+        'viz-caption-fibonacci': 'Cost comparison for Fibonacci search (example).',
+        'viz-caption-interpolation': 'Cost comparison for interpolation search (example).',
         'contact-title': 'Contact',
         'contact-name': 'Name:',
         'contact-email': 'Email:',
@@ -718,6 +840,10 @@ function translatePage(lang) {
         btn.classList.remove('active');
     });
     document.getElementById(`lang-${lang}`).classList.add('active');
+
+    if (typeof updatePythonVizText === 'function') {
+        updatePythonVizText();
+    }
 }
 
 // Event listeners para botones de idioma
@@ -732,5 +858,419 @@ function initLanguageToggle() {
     if (langEn) {
         langEn.addEventListener('click', () => translatePage('en'));
     }
+}
+
+function updatePythonVizText() {
+    const section = document.getElementById('python-viz');
+    if (!section) return;
+
+    const active = section.querySelector('.viz-btn.active') || section.querySelector('.viz-btn');
+    const caption = section.querySelector('#viz-caption');
+    const canvas = section.querySelector('#viz-canvas');
+    const toggleBtn = section.querySelector('#viz-toggle');
+    const wrapper = section.querySelector('#viz-wrapper');
+
+    if (!active || !caption || !canvas) return;
+
+    const captionKey = active.getAttribute('data-caption-key');
+
+    if (captionKey && translations?.[currentLang]?.[captionKey]) {
+        caption.textContent = translations[currentLang][captionKey];
+    }
+
+    canvas.setAttribute('aria-label', caption.textContent);
+
+    if (toggleBtn && wrapper) {
+        const isOpen = wrapper.classList.contains('is-open');
+        const openKey = toggleBtn.getAttribute('data-open-text-key');
+        const closedKey = toggleBtn.getAttribute('data-closed-text-key');
+        const key = isOpen ? openKey : closedKey;
+        if (key && translations?.[currentLang]?.[key]) {
+            toggleBtn.textContent = translations[currentLang][key];
+        }
+    }
+}
+
+function initPythonViz() {
+    const section = document.getElementById('python-viz');
+    if (!section) return;
+
+    const buttons = Array.from(section.querySelectorAll('.viz-btn'));
+    const caption = section.querySelector('#viz-caption');
+    const canvas = section.querySelector('#viz-canvas');
+    const targetInput = section.querySelector('#viz-target');
+    const runButton = section.querySelector('#viz-run');
+    const toggleBtn = section.querySelector('#viz-toggle');
+    const wrapper = section.querySelector('#viz-wrapper');
+
+    if (!buttons.length || !caption || !canvas || !targetInput || !runButton || !toggleBtn || !wrapper) return;
+
+    const values = Array.from({ length: 50 }, (_, i) => i + 1);
+
+    const chart = {
+        values,
+        max: 50,
+        highlightIndex: null,
+        foundIndex: null,
+        visited: new Set(),
+        sequence: [],
+        step: 0,
+        running: false,
+        timer: null,
+        algorithm: 'linear',
+        color: '#ef4444'
+    };
+
+    const ctx = canvas.getContext('2d');
+
+    const setCanvasSize = () => {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+        canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        draw();
+    };
+
+    const t = (key, fallback) => translations?.[currentLang]?.[key] || fallback;
+
+    const drawGrid = (width, height, padding) => {
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        ctx.fillStyle = '#64748b';
+        ctx.font = '12px Segoe UI, Arial, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+
+        for (let step = 0; step <= chart.max; step += 20) {
+            const y = padding + (1 - step / chart.max) * (height - padding * 2);
+            ctx.beginPath();
+            ctx.moveTo(padding, y);
+            ctx.lineTo(width - padding, y);
+            ctx.stroke();
+            ctx.fillText(step.toString(), padding - 10, y);
+        }
+    };
+
+    const toRgba = (hex, alpha) => {
+        const clean = hex.replace('#', '');
+        if (clean.length !== 6) return `rgba(59, 130, 246, ${alpha})`;
+        const r = parseInt(clean.slice(0, 2), 16);
+        const g = parseInt(clean.slice(2, 4), 16);
+        const b = parseInt(clean.slice(4, 6), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    };
+
+    const draw = () => {
+        const values = chart.values;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const padding = 48;
+        const barCount = values.length;
+        const plotW = width - padding * 2;
+        const plotH = height - padding * 2;
+        const barGap = Math.max(1, Math.round(plotW / (barCount * 6)));
+        const barW = (plotW - barGap * (barCount - 1)) / barCount;
+
+        ctx.clearRect(0, 0, width, height);
+        drawGrid(width, height, padding);
+
+        values.forEach((val, i) => {
+            const x = padding + i * (barW + barGap);
+            const h = (val / chart.max) * plotH;
+            const y = padding + plotH - h;
+
+            if (chart.foundIndex === i) {
+                ctx.fillStyle = '#22c55e';
+            } else if (chart.highlightIndex === i) {
+                ctx.fillStyle = '#f59e0b';
+            } else if (chart.visited.has(i)) {
+                ctx.fillStyle = toRgba(chart.color, 0.3);
+            } else {
+                const gradient = ctx.createLinearGradient(0, y, 0, y + h);
+                gradient.addColorStop(0, toRgba(chart.color, 0.85));
+                gradient.addColorStop(1, chart.color);
+                ctx.fillStyle = gradient;
+            }
+            ctx.fillRect(x, y, barW, h);
+
+            if ((i + 1) % 10 === 0) {
+                ctx.fillStyle = '#64748b';
+                ctx.font = '11px Segoe UI, Arial, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                ctx.fillText((i + 1).toString(), x + barW / 2, padding + plotH + 8);
+            }
+        });
+    };
+
+    const pushUnique = (seq, index) => {
+        if (seq[seq.length - 1] !== index) seq.push(index);
+    };
+
+    const buildLinearSequence = () => values.map((_, i) => i);
+
+    const buildBinarySequence = (target) => {
+        let low = 0;
+        let high = values.length - 1;
+        const seq = [];
+        while (low <= high) {
+            const mid = Math.floor((low + high) / 2);
+            pushUnique(seq, mid);
+            if (values[mid] === target) break;
+            if (values[mid] < target) low = mid + 1;
+            else high = mid - 1;
+        }
+        return seq;
+    };
+
+    const buildJumpSequence = (target) => {
+        const n = values.length;
+        const step = Math.floor(Math.sqrt(n)) || 1;
+        const seq = [];
+        let prev = 0;
+        let curr = 0;
+
+        while (curr < n && values[curr] < target) {
+            pushUnique(seq, curr);
+            prev = curr;
+            curr = Math.min(n - 1, curr + step);
+        }
+
+        for (let i = prev; i <= curr; i += 1) {
+            pushUnique(seq, i);
+            if (values[i] >= target) break;
+        }
+
+        return seq;
+    };
+
+    const buildExponentialSequence = (target) => {
+        const n = values.length;
+        const seq = [];
+        let bound = 1;
+        pushUnique(seq, 0);
+
+        while (bound < n && values[bound] < target) {
+            pushUnique(seq, bound);
+            bound *= 2;
+        }
+
+        let low = Math.floor(bound / 2);
+        let high = Math.min(bound, n - 1);
+
+        while (low <= high) {
+            const mid = Math.floor((low + high) / 2);
+            pushUnique(seq, mid);
+            if (values[mid] === target) break;
+            if (values[mid] < target) low = mid + 1;
+            else high = mid - 1;
+        }
+
+        return seq;
+    };
+
+    const buildInterpolationSequence = (target) => {
+        let low = 0;
+        let high = values.length - 1;
+        const seq = [];
+
+        while (low <= high && target >= values[low] && target <= values[high]) {
+            if (values[high] === values[low]) {
+                pushUnique(seq, low);
+                break;
+            }
+            const pos = low + Math.floor(((target - values[low]) * (high - low)) / (values[high] - values[low]));
+            pushUnique(seq, pos);
+            if (values[pos] === target) break;
+            if (values[pos] < target) {
+                low = pos + 1;
+            } else {
+                high = pos - 1;
+            }
+        }
+        return seq;
+    };
+
+    const buildFibonacciSequence = (target) => {
+        const n = values.length;
+        let fibMm2 = 0;
+        let fibMm1 = 1;
+        let fibM = fibMm2 + fibMm1;
+
+        while (fibM < n) {
+            fibMm2 = fibMm1;
+            fibMm1 = fibM;
+            fibM = fibMm2 + fibMm1;
+        }
+
+        let offset = -1;
+        const seq = [];
+
+        while (fibM > 1) {
+            const i = Math.min(offset + fibMm2, n - 1);
+            pushUnique(seq, i);
+
+            if (values[i] < target) {
+                fibM = fibMm1;
+                fibMm1 = fibMm2;
+                fibMm2 = fibM - fibMm1;
+                offset = i;
+            } else if (values[i] > target) {
+                fibM = fibMm2;
+                fibMm1 = fibMm1 - fibMm2;
+                fibMm2 = fibM - fibMm1;
+            } else {
+                break;
+            }
+        }
+
+        if (fibMm1 && offset + 1 < n) {
+            pushUnique(seq, offset + 1);
+        }
+
+        return seq;
+    };
+
+    const getTarget = () => {
+        const raw = parseInt(targetInput.value, 10);
+        if (Number.isNaN(raw)) return 1;
+        return Math.min(50, Math.max(1, raw));
+    };
+
+    const stopRun = () => {
+        if (chart.timer) {
+            clearInterval(chart.timer);
+            chart.timer = null;
+        }
+        chart.running = false;
+    };
+
+    const updateCaption = (status) => {
+        const active = section.querySelector('.viz-btn.active') || buttons[0];
+        const captionKey = active.getAttribute('data-caption-key');
+        const base = captionKey ? t(captionKey, '') : '';
+        const target = getTarget();
+        let extra = '';
+
+        if (status === 'searching') {
+            extra = `${t('viz-status-searching', 'Buscando')} ${target}. ${t('viz-step', 'Paso')} ${chart.step}/${chart.sequence.length}.`;
+        } else if (status === 'found') {
+            extra = `${t('viz-status-found', 'Encontrado')} ${target} ${t('viz-at', 'en')} ${chart.foundIndex + 1}.`;
+        } else if (status === 'not-found') {
+            extra = `${t('viz-status-not-found', 'No encontrado')} ${target}.`;
+        } else {
+            extra = t('viz-status-idle', 'Listo para buscar.');
+        }
+
+        caption.textContent = base ? `${base} ${extra}` : extra;
+        canvas.setAttribute('aria-label', caption.textContent);
+    };
+
+    const runSearch = () => {
+        stopRun();
+        chart.visited.clear();
+        chart.foundIndex = null;
+        chart.highlightIndex = null;
+        chart.step = 0;
+        chart.sequence = [];
+
+        const target = getTarget();
+        if (chart.algorithm === 'jump') {
+            chart.sequence = buildJumpSequence(target);
+        } else if (chart.algorithm === 'exponential') {
+            chart.sequence = buildExponentialSequence(target);
+        } else if (chart.algorithm === 'binary') {
+            chart.sequence = buildBinarySequence(target);
+        } else if (chart.algorithm === 'fibonacci') {
+            chart.sequence = buildFibonacciSequence(target);
+        } else if (chart.algorithm === 'interpolation') {
+            chart.sequence = buildInterpolationSequence(target);
+        } else {
+            chart.sequence = buildLinearSequence();
+        }
+
+        updateCaption('searching');
+        draw();
+
+        chart.running = true;
+        chart.timer = setInterval(() => {
+            if (chart.step >= chart.sequence.length) {
+                stopRun();
+                updateCaption('not-found');
+                chart.highlightIndex = null;
+                draw();
+                return;
+            }
+
+            const idx = chart.sequence[chart.step];
+            chart.highlightIndex = idx;
+            chart.visited.add(idx);
+            chart.step += 1;
+
+            if (values[idx] === target) {
+                chart.foundIndex = idx;
+                stopRun();
+                updateCaption('found');
+            } else {
+                updateCaption('searching');
+            }
+
+            draw();
+        }, 420);
+    };
+
+    const setActive = (button) => {
+        buttons.forEach(btn => {
+            const isActive = btn === button;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        const key = button.getAttribute('data-dataset');
+        chart.algorithm = key || 'linear';
+        chart.color = button.getAttribute('data-color') || '#ef4444';
+        button.style.setProperty('--viz-btn-color', chart.color);
+        buttons.forEach((btn) => {
+            const color = btn.getAttribute('data-color');
+            if (color) btn.style.setProperty('--viz-btn-color', color);
+        });
+        stopRun();
+        chart.visited.clear();
+        chart.foundIndex = null;
+        chart.highlightIndex = null;
+        chart.step = 0;
+        chart.sequence = [];
+        updateCaption('idle');
+        draw();
+
+        updatePythonVizText();
+    };
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => setActive(btn));
+    });
+
+    toggleBtn.addEventListener('click', () => {
+        const willOpen = !wrapper.classList.contains('is-open');
+        wrapper.classList.toggle('is-open', willOpen);
+        updatePythonVizText();
+        if (willOpen) {
+            setCanvasSize();
+            draw();
+        }
+    });
+
+    runButton.addEventListener('click', runSearch);
+    targetInput.addEventListener('change', () => {
+        if (!chart.running) updateCaption('idle');
+    });
+
+    window.addEventListener('resize', setCanvasSize);
+    wrapper.classList.remove('is-open');
+    setCanvasSize();
+    setActive(section.querySelector('.viz-btn.active') || buttons[0]);
+    updateCaption('idle');
+    updatePythonVizText();
 }
 
