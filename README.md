@@ -1,59 +1,59 @@
-﻿# ?? Hola, soy Yeray Alonso Reyes
-### ????? Ingeniero Inform?tico | Automatizaci?n, Web & Datos
+﻿# 👋 Hola, soy Yeray Alonso Reyes
+### 💻 Ingeniero Informático | Automatización, Web & Datos
 
 [![CoverPage](./features/CoverPage.png)](https://yerayar.github.io)
 
 ---
 
-## ?? Sobre m?
-- ?? Especialista en **automatizaci?n de procesos** con Python.
-- ?? Desarrollo de **sitios web modernos** (HTML, CSS, JavaScript, WordPress).
-- ?? Experiencia en **an?lisis de datos** y visualizaci?n.
-- ?? Enfoque en soluciones pr?cticas y optimizaci?n de flujos de trabajo.
+## 🧑‍💻 Sobre mí
+- 🐍 Especialista en **automatización de procesos** con Python.
+- 🌐 Desarrollo de **sitios web modernos** (HTML, CSS, JavaScript, WordPress).
+- 📊 Experiencia en **análisis de datos** y visualización.
+- 🚀 Enfoque en soluciones prácticas y optimización de flujos de trabajo.
 
 ---
 
-## ?? Tecnolog?as
+## 🛠️ Tecnologías
 
 **Lenguajes y Web**
-- ?? Python
-- ?? HTML5 / CSS3 / JavaScript
-- ?? React / SvelteKit
+- 🐍 Python
+- 🖥️ HTML5 / CSS3 / JavaScript
+- ⚛️ React / SvelteKit
 
 **Datos y Backend**
-- ??? SQL, MySQL, PostgreSQL, Firestore
-- ?? ETL, OCR, automatizaci?n administrativa
+- 🗄️ SQL, MySQL, PostgreSQL, Firestore
+- 🔄 ETL, OCR, automatización administrativa
 
 **Herramientas**
-- ?? Docker
-- ?? Git & GitHub
+- 🐳 Docker
+- 🐙 Git & GitHub
 
 ---
 
-## ?? Proyectos destacados
-- ??? **ShieldLink**: app m?vil para combatir bullying con recomendaciones personalizadas.
-- ?? **Automatizaci?n de facturaci?n**: OCR + Python + SQL Server.
-- ?? **Visualizaci?n interactiva**: comparador de algoritmos de b?squeda en el portfolio.
+## 🚩 Proyectos destacados
+- 🛡️ **ShieldLink**: app móvil para combatir bullying con recomendaciones personalizadas.
+- 🤖 **Automatización de facturación**: OCR + Python + SQL Server.
+- 📈 **Visualización interactiva**: comparador de algoritmos de búsqueda en el portfolio.
 
 ---
 
-## ?? Sitios web desplegados
-- ?? **Personal Dashboard** (SvelteKit)
-  - ?? https://pd-findash.vercel.app
-- ?? **NeonBytes Newsletter** (Next.js)
-  - ?? https://neon-bytes.vercel.app
+## 🌍 Sitios web desplegados
+- 🖥️ **Personal Dashboard** (SvelteKit)
+  - https://pd-findash.vercel.app
+- 📰 **NeonBytes Newsletter** (Next.js)
+  - https://neon-bytes.vercel.app
 
 ---
 
-## ?? Portfolio
-- ?? https://yerayar.github.io
+## 📁 Portfolio
+- https://yerayar.github.io
 
 ---
 
-## ?? Contacto
-- ?? LinkedIn: https://www.linkedin.com/in/yeray-alonso-reyes-ii/
-- ????? GitHub: https://github.com/YerayAR
+## 📬 Contacto
+- 💼 LinkedIn: https://www.linkedin.com/in/yeray-alonso-reyes-ii/
+- 🐱 GitHub: https://github.com/YerayAR
 
 ---
 
-? Gracias por visitar mi perfil. ?Hablemos de proyectos!
+¡Gracias por visitar mi perfil! ¡Hablemos de proyectos!
