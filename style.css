@@ -865,6 +865,10 @@ p {
   margin-top: var(--space-4);
 }
 
+#projects h3[data-lang="repos-title"] {
+  margin-top: var(--space-6);
+}
+
 /* Stats */
 .stats-grid {
   display: grid;
