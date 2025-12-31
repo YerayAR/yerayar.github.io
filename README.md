@@ -1,43 +1,59 @@
-# ¡Hola, soy Yeray! 👋  
-### Ingeniero Informático | Especialista en Automatización  
+﻿# ?? Hola, soy Yeray Alonso Reyes
+### ????? Ingeniero Inform?tico | Automatizaci?n, Web & Datos
 
-[![CoverPage](./features/CoverPage.png)](https://yerayar.github.io)  
-
-Soy **Yeray Alonso Reyes**, ingeniero informático con experiencia en **automatización de procesos administrativos** y desarrollo web. Me especializo en la optimización de flujos de trabajo mediante **Python, HTML, CSS, JavaScript, frameworks modernos y CMS como WordPress**.  
-
-A lo largo de mi trayectoria, he trabajado en **automatización de tareas**, incluyendo la generación automática de catálogos, la gestión de asignaciones y la lectura de facturas mediante OCR. También cuento con conocimientos sólidos en bases de datos (**SQL, MySQL, PostgreSQL, Firestore**) y en tecnologías como **Docker, React y Bootstrap**.  
-
-Uno de mis proyectos más destacados es **ShieldLink: Secure Connection Against Bullying**, una aplicación diseñada para apoyar a víctimas de acoso con recomendaciones personalizadas.  
-
-Soy una persona **proactiva y organizada**, con una gran capacidad de aprendizaje, siempre dispuesto a afrontar nuevos retos en entornos dinámicos. Me interesa especialmente el **trabajo remoto**, ya que permite aplicar mis conocimientos en automatización y atención al cliente en un entorno flexible y eficiente.  
+[![CoverPage](./features/CoverPage.png)](https://yerayar.github.io)
 
 ---
 
-## 🚀 **Portfolio & Contacto**  
-📌 **Portafolio:** [Visítalo aquí](https://yerayar.github.io)  
-💼 **LinkedIn:** [Perfil Profesional](https://www.linkedin.com/in/yeray-alonso-reyes-ii/)  
-🐙 **GitHub:** [Mis Proyectos](https://github.com/YerayAR)
+## ?? Sobre m?
+- ?? Especialista en **automatizaci?n de procesos** con Python.
+- ?? Desarrollo de **sitios web modernos** (HTML, CSS, JavaScript, WordPress).
+- ?? Experiencia en **an?lisis de datos** y visualizaci?n.
+- ?? Enfoque en soluciones pr?cticas y optimizaci?n de flujos de trabajo.
 
 ---
 
-## 🌐 Sitios Web Desplegados
+## ?? Tecnolog?as
 
-Además de este portfolio principal, he desarrollado y desplegado los siguientes proyectos:
+**Lenguajes y Web**
+- ?? Python
+- ?? HTML5 / CSS3 / JavaScript
+- ?? React / SvelteKit
 
-### 📊 Personal Dashboard
-**Dashboard financiero personal desarrollado con SvelteKit**
-- **URL**: https://pd-findash.vercel.app
-- **Tecnologías**: SvelteKit, TypeScript, MongoDB, Tailwind CSS
-- **Características**: Gestión de finanzas personales, gráficos interactivos, reportes, modo oscuro/claro
-- **Seguridad**: Headers de seguridad implementados, rate limiting, validación de entrada
+**Datos y Backend**
+- ??? SQL, MySQL, PostgreSQL, Firestore
+- ?? ETL, OCR, automatizaci?n administrativa
 
-### 📧 NeonBytes Newsletter
-**Newsletter tecnológica con diseño moderno y efectos neon**
-- **URL**: https://neon-bytes.vercel.app
-- **Tecnologías**: Next.js 14, TypeScript, MDX, Tailwind CSS
-- **Características**: Newsletter interactiva, suscripción de emails, diseño responsive, PWA
-- **Contenido**: Últimas tendencias tecnológicas, tutoriales y herramientas recomendadas
+**Herramientas**
+- ?? Docker
+- ?? Git & GitHub
 
 ---
 
-Si quieres saber más sobre mí, no dudes en echar un vistazo a mi portafolio o contactar conmigo.  
+## ?? Proyectos destacados
+- ??? **ShieldLink**: app m?vil para combatir bullying con recomendaciones personalizadas.
+- ?? **Automatizaci?n de facturaci?n**: OCR + Python + SQL Server.
+- ?? **Visualizaci?n interactiva**: comparador de algoritmos de b?squeda en el portfolio.
+
+---
+
+## ?? Sitios web desplegados
+- ?? **Personal Dashboard** (SvelteKit)
+  - ?? https://pd-findash.vercel.app
+- ?? **NeonBytes Newsletter** (Next.js)
+  - ?? https://neon-bytes.vercel.app
+
+---
+
+## ?? Portfolio
+- ?? https://yerayar.github.io
+
+---
+
+## ?? Contacto
+- ?? LinkedIn: https://www.linkedin.com/in/yeray-alonso-reyes-ii/
+- ????? GitHub: https://github.com/YerayAR
+
+---
+
+? Gracias por visitar mi perfil. ?Hablemos de proyectos!

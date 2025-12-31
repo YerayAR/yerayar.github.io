@@ -1267,7 +1267,7 @@ function initPythonViz() {
     });
 
     window.addEventListener('resize', setCanvasSize);
-    wrapper.classList.remove('is-open');
+    wrapper.classList.add('is-open');
     setCanvasSize();
     setActive(section.querySelector('.viz-btn.active') || buttons[0]);
     updateCaption('idle');
