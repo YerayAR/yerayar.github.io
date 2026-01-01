@@ -305,7 +305,7 @@ header {
 .dev-banner {
   position: absolute;
   top: 10px;
-  right: 14px;
+  left: 14px;
   z-index: calc(var(--z-header) + 2);
 
   padding: 6px 10px;
@@ -325,6 +325,12 @@ header {
   :root[data-theme="auto"] .dev-banner {
     background: rgba(2, 6, 23, 0.55);
     border-color: var(--nav-border);
+  }
+}
+
+@media (max-width: 720px) {
+  .dev-banner {
+    display: none;
   }
 }
 
@@ -466,7 +472,7 @@ header {
 }
 
 .nav-dropdown-toggle::after {
-  content: "▾";
+  content: "v";
   font-size: 0.7rem;
   margin-left: 6px;
   opacity: 0.7;
@@ -502,6 +508,14 @@ header {
 .nav-dropdown:hover .nav-dropdown-menu,
 .nav-dropdown:focus-within .nav-dropdown-menu {
   display: block;
+}
+
+.nav-dropdown.open .nav-dropdown-menu {
+  display: block;
+}
+
+.nav-dropdown.open .nav-dropdown-toggle::after {
+  transform: rotate(180deg);
 }
 
 /* Hamburger (already in HTML) */
@@ -542,19 +556,16 @@ header {
   }
 
   .nav-menu {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: var(--header-h);
-
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-
-    padding: 10px;
-    background: var(--nav-bg);
-    border-bottom: 1px solid var(--nav-border);
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    background: transparent;
+    border-bottom: 0;
+    max-height: none;
+    overflow: visible;
   }
 
   .nav-menu.active {
@@ -562,25 +573,108 @@ header {
   }
 
   .nav-item {
-    border-top: 1px solid var(--nav-border);
+    border-top: 0;
   }
 
   .nav-link {
-    width: 100%;
-    justify-content: flex-start;
-    height: 44px;
+    width: auto;
+    justify-content: center;
+    height: 36px;
     padding: 0 12px;
   }
 
   .nav-dropdown-menu {
-    position: static;
-    border-radius: 10px;
-    box-shadow: none;
-    margin: 6px 0 10px;
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    top: calc(var(--header-h) + 8px);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    margin: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+    display: none;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    display: none;
+  }
+
+  .nav-dropdown.open .nav-dropdown-menu {
+    display: block;
+  }
+
+  .nav-dropdown-toggle {
+    width: auto;
+    justify-content: center;
   }
 
   .hamburger {
-    display: inline-flex;
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-container {
+    gap: var(--space-2);
+    padding: 0 12px;
+  }
+
+  .logo-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav-logo {
+    min-width: 0;
+    gap: 8px;
+    padding-left: 4px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .lang-btn {
+    width: 32px;
+    height: 30px;
+  }
+
+  .theme-toggle {
+    width: 32px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav-container {
+    padding-left: 14px;
+    padding-right: 10px;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+  }
+
+  .logo-img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .lang-toggle {
+    margin: 0 auto;
+    transform: scale(0.92);
+    transform-origin: center;
+  }
+
+  .theme-toggle {
+    display: none;
+  }
+
+  .hamburger {
+    margin-left: auto;
   }
 }
 
@@ -591,6 +685,10 @@ header {
 /* anchor offset for sticky header */
 section[id] {
   scroll-margin-top: calc(var(--header-h) + var(--space-6));
+}
+
+html {
+  scroll-padding-top: calc(var(--header-h) + var(--space-6));
 }
 
 .intro-about-layout {

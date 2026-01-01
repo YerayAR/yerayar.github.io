@@ -280,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle menu en móviles - Nuevo banner de navegación
     const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
+    const navDropdowns = Array.from(document.querySelectorAll('.nav-dropdown'));
     
     if (menuToggle && navMenu) {
         menuToggle.setAttribute('aria-expanded', 'false');
@@ -289,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
             menuToggle.classList.remove('active');
             menuToggle.setAttribute('aria-expanded', 'false');
             document.body.classList.remove('nav-open');
+            navDropdowns.forEach(dropdown => dropdown.classList.remove('open'));
         };
 
         const openMenu = () => {
@@ -308,10 +310,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Cerrar menú al hacer clic en un enlace
-        const navLinks = document.querySelectorAll('.nav-link');
+        const navLinks = document.querySelectorAll('.nav-link, .nav-dropdown-link');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 closeMenu();
+            });
+        });
+
+        navDropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+            if (!toggle) return;
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                dropdown.classList.toggle('open');
             });
         });
 
@@ -346,6 +358,46 @@ document.addEventListener('DOMContentLoaded', () => {
                         behavior: 'smooth'
                     });
                 }
+            });
+        });
+    }
+
+    if (!menuToggle && navDropdowns.length) {
+        navDropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+            const menu = dropdown.querySelector('.nav-dropdown-menu');
+            if (!toggle) return;
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                dropdown.classList.toggle('open');
+            });
+            if (menu) {
+                menu.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            const target = event.target;
+            navDropdowns.forEach(dropdown => {
+                if (!dropdown.contains(target)) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                navDropdowns.forEach(dropdown => dropdown.classList.remove('open'));
+            }
+        });
+
+        const dropdownLinks = document.querySelectorAll('.nav-dropdown-link');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navDropdowns.forEach(dropdown => dropdown.classList.remove('open'));
             });
         });
     }
