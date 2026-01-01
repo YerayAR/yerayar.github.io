@@ -1,4 +1,6 @@
-﻿# frozen_string_literal: true
+# frozen_string_literal: true
 
-gem 'jekyll'
+source 'https://rubygems.org'
+
+gem 'jekyll', '~> 4.4.1'
 gem 'logger'
