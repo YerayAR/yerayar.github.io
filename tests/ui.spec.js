@@ -2,7 +2,9 @@
 const path = require('path');
 
 function fileUrl(fileName) {
-  const filePath = path.resolve(__dirname, '..', fileName);
+  const built = path.resolve(__dirname, '..', '_site', fileName);
+  const src = path.resolve(__dirname, '..', fileName);
+  const filePath = require('fs').existsSync(built) ? built : src;
   return 'file://' + filePath;
 }
 

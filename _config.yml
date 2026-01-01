@@ -1,0 +1,9 @@
+﻿source: .
+destination: _site
+exclude:
+  - node_modules
+  - tests
+  - package.json
+  - package-lock.json
+  - playwright.config.js
+  - README.md
