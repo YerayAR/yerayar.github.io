@@ -54,7 +54,6 @@ Sistema de preguntas y respuestas automático con:
 - **Multiidioma**: español e inglés con traducciones completas
 - **Animaciones**: Matrix rain effect, spotlight interactivo, Three.js 3D
 - **Responsivo**: diseño adaptativo mobile-first
-- **PWA**: instalable como app progresiva
 
 ### 📊 Visualización Interactiva Python
 Comparador de algoritmos de búsqueda con:
