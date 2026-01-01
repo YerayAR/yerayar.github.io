@@ -354,6 +354,33 @@ header {
   gap: var(--space-4);
 }
 
+.nav-logo,
+.lang-toggle,
+.theme-toggle,
+.nav-dropdown-toggle {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-sm);
+  padding: 4px 8px;
+}
+
+.nav-dropdown-toggle {
+  height: 36px;
+}
+
+.nav-logo {
+  padding: 4px 10px;
+}
+
+.lang-toggle {
+  padding: 3px;
+}
+
+.theme-toggle {
+  background: var(--surface-2);
+}
+
 .nav-logo {
   display: flex;
   align-items: center;
