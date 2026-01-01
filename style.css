@@ -670,7 +670,7 @@ header {
   }
 
   .theme-toggle {
-    display: none;
+    display: grid;
   }
 
   .hamburger {
