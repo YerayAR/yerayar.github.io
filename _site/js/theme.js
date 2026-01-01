@@ -17,10 +17,12 @@
 
     function setIcon(resolvedTheme) {
       if (resolvedTheme === 'light') {
-        themeIcon.textContent = 'O';
+        themeIcon.textContent = '';
+        themeIcon.className = 'bi bi-moon-stars theme-icon';
         themeIcon.title = 'Cambiar a modo oscuro';
       } else {
-        themeIcon.textContent = '?';
+        themeIcon.textContent = '';
+        themeIcon.className = 'bi bi-sun theme-icon';
         themeIcon.title = 'Cambiar a modo claro';
       }
     }
