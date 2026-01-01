@@ -45,7 +45,7 @@ Ingeniero Informático graduado en la UOC, especializado en crear soluciones pr�
 
 ### 🤖 Chat CV Inteligente
 Sistema de preguntas y respuestas automático con:
-- Base de conocimiento expandida (+15 temas)
+- Base de conocimiento expandida
 - Soporte bilingüe (ES/EN)
 - Respuestas contextuales sobre experiencia, stack, metodología, disponibilidad
 
