@@ -87,7 +87,7 @@ Pipeline ETL completo para procesamiento de facturas.
 ### 📊 Portfolio Interactivo
 Este mismo sitio web con funcionalidades avanzadas.
 - **Tech**: HTML5, CSS3, JavaScript, Jekyll, Three.js, Playwright
-- **Features**: chat CV, visualización Python, PWA, multiidioma, tema dual
+- **Features**: chat CV, visualización Python, multiidioma, tema dual
 - **Testing**: suite automatizada con Playwright
 
 ---
