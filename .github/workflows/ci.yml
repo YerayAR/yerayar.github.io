@@ -14,25 +14,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.2"
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
 
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+
       - name: Install dependencies
         run: npm install
 
-      - name: Install Jekyll
-        run: gem install jekyll
+      - name: Install dependencies (Ruby)
+        run: bundle install
 
-      - name: Build site
-        run: npm run build
+      - name: Build site with Jekyll
+        run: bundle exec jekyll build
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
