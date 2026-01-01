@@ -303,9 +303,7 @@ header {
 
 /* "Sitio en desarrollo" -> Beta badge (visual-only, keeps text) */
 .dev-banner {
-  position: absolute;
-  top: 10px;
-  left: 14px;
+  position: static;
   z-index: calc(var(--z-header) + 2);
 
   padding: 6px 10px;
